@@ -12,19 +12,20 @@ The CDDL integer space is not limited to model properties. `label.*` entries are
 
 Total assignments: **725**.
 
-| Category | Count | Meaning | Metadata `Nature` | Metadata `Instantiability` |
-|---|---:|---|---|---|
-| Model property | 160 | SPDX model properties encoded as `label.<property>` map keys. | DataProperty (97), ObjectProperty (63) | Not present / not applicable |
-| JSON-LD structural key | 3 | JSON-LD syntax keys encoded as labels. | Not present / not applicable | Not present / not applicable |
-| Object/class term | 55 | Concrete SPDX object or relationship classes encoded as `const.<class>` values. | Not present / not applicable | Concrete (49); blank/not present for 6 |
-| Vocabulary/type class | 23 | Controlled-vocabulary classes such as `HashAlgorithm` or `RelationshipType`. | Not present / not applicable | Not present / not applicable |
-| Fully-qualified vocabulary member | 254 | Canonical vocabulary values with `spdx_<Profile>_<Type>_<value>` names. | Not present / not applicable | Not present / not applicable |
-| Local vocabulary member alias | 216 | Short aliases for vocabulary values used in compact property values. | Not present / not applicable | Not present / not applicable |
-| Profile/namespace alias | 9 | Profile identifiers used in profile conformance values. | Not present / not applicable | Not present / not applicable |
-| Special singleton term | 5 | Singleton/non-object constants such as `NoneElement` or `NoAssertionElement`. | Not present / not applicable | Not present / not applicable |
+| Category | Count | Model directory | Meaning | Metadata `Nature` | Metadata `Instantiability` |
+|---|---:|---|---|---|---|
+| Model property | 160 | `model/*/Properties/` | SPDX model properties encoded as `label.<property>` map keys. | DataProperty (97), ObjectProperty (63) | Not present / not applicable |
+| JSON-LD structural key | 3 | None | JSON-LD syntax keys encoded as labels. | Not present / not applicable | Not present / not applicable |
+| Object/class term | 55 | `model/*/Classes/` | Concrete SPDX object or relationship classes encoded as `const.<class>` values. | Not present / not applicable | Concrete (49); blank/not present for 6 |
+| Vocabulary/type class | 23 | `model/*/Vocabularies/` | Controlled-vocabulary classes such as `HashAlgorithm` or `RelationshipType`. | Not present / not applicable | Not present / not applicable |
+| Fully-qualified vocabulary member | 254 | `model/*/Vocabularies/` entries | Canonical vocabulary values with `spdx_<Profile>_<Type>_<value>` names. | Not present / not applicable | Not present / not applicable |
+| Local vocabulary member alias | 216 | `model/*/Vocabularies/` entries | Short aliases for vocabulary values used in compact property values. | Not present / not applicable | Not present / not applicable |
+| Profile/namespace alias | 9 | `model/Core/Vocabularies/ProfileIdentifierType.md` entries | Profile identifiers used in profile conformance values. | Not present / not applicable | Not present / not applicable |
+| Special singleton term | 5 | `model/*/Individuals/` | Singleton/non-object constants such as `NoneElement` or `NoAssertionElement`. | Not present / not applicable | Not present / not applicable |
 
 Notes:
 
+- The model directory is the primary way to recognize the model kind in Markdown: properties live under `Properties/`, classes under `Classes/`, vocabularies under `Vocabularies/`, and singleton values under `Individuals/`.
 - `Nature` is defined for property metadata and is either `DataProperty` or `ObjectProperty` in the mapped SPDX 3.0.1 model files.
 - `Instantiability` is only defined in class metadata files. Properties, vocabularies, vocabulary entries, individuals, and JSON-LD syntax keys do not carry that metadata field.
 - Local vocabulary member aliases are compact names used in property value positions. Some aliases, such as `build`, `other`, `source`, `noAssertion`, and `no`, can refer to entries in more than one vocabulary depending on the property context.
