@@ -143,6 +143,20 @@ def write_tsv(concepts: list[Concept]) -> None:
         writer.writerow(asdict(concept))
 
 
+def markdown_cell(value: object) -> str:
+    text = str(value)
+    return text.replace("\\", "\\\\").replace("|", "\\|").replace("\n", "<br>")
+
+
+def write_markdown(concepts: list[Concept]) -> None:
+    fieldnames = [field.name for field in fields(Concept)]
+    print("| " + " | ".join(fieldnames) + " |")
+    print("|" + "|".join("---" for _ in fieldnames) + "|")
+    for concept in concepts:
+        row = asdict(concept)
+        print("| " + " | ".join(markdown_cell(row[field]) for field in fieldnames) + " |")
+
+
 def write_json(concepts: list[Concept]) -> None:
     json.dump([asdict(concept) for concept in concepts], sys.stdout, indent=2)
     sys.stdout.write("\n")
@@ -163,9 +177,9 @@ def main() -> int:
     )
     parser.add_argument(
         "--format",
-        choices=("tsv", "json"),
-        default="tsv",
-        help="Output format. Defaults to TSV.",
+        choices=("markdown", "tsv", "json"),
+        default="markdown",
+        help="Output format. Defaults to Markdown.",
     )
     args = parser.parse_args()
 
@@ -173,8 +187,10 @@ def main() -> int:
 
     if args.format == "json":
         write_json(concepts)
-    else:
+    elif args.format == "tsv":
         write_tsv(concepts)
+    else:
+        write_markdown(concepts)
     return 0
 
 
