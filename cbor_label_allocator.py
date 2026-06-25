@@ -36,7 +36,7 @@ DIRECTORY_CATEGORIES = {
 }
 
 
-@dataclass(frozen=True)
+@dataclass
 class Concept:
     path: str
     profile: str
@@ -51,6 +51,8 @@ class Concept:
     iri: str
     entry_count: int
     entries: str
+    frequency: str = ""
+    cbor_label: int = 0
 
 
 def metadata_block(markdown: str) -> str:
@@ -135,8 +137,43 @@ def iter_concepts(model_dir: Path) -> list[Concept]:
     return concepts
 
 
-def write_tsv(concepts: list[Concept]) -> None:
+def parse_frequency_table(path: Path) -> dict[str, int]:
+    if not path.exists():
+        return {}
+
+    frequencies: dict[str, int] = {}
+    for line in path.read_text(encoding="utf-8").splitlines():
+        match = re.match(r"^\|\s*(\d+)\s*\|\s*`([^`]+)`\s*\|", line)
+        if match:
+            frequency, concept_path = match.groups()
+            frequencies[concept_path] = int(frequency)
+    return frequencies
+
+
+def assign_cbor_labels(concepts: list[Concept], frequencies: dict[str, int]) -> list[Concept]:
+    concepts_with_frequency = [concept for concept in concepts if concept.path in frequencies]
+    concepts_without_frequency = [concept for concept in concepts if concept.path not in frequencies]
+    ordered_concepts = sorted(
+        concepts_with_frequency,
+        key=lambda concept: (-frequencies[concept.path], concept.path),
+    ) + sorted(concepts_without_frequency, key=lambda concept: concept.path)
+
+    for index, concept in enumerate(ordered_concepts, start=1):
+        concept.cbor_label = index
+        if concept.path in frequencies:
+            concept.frequency = str(frequencies[concept.path])
+    return ordered_concepts
+
+
+def output_fieldnames() -> list[str]:
     fieldnames = [field.name for field in fields(Concept)]
+    return ["cbor_label", "frequency"] + [
+        fieldname for fieldname in fieldnames if fieldname not in {"cbor_label", "frequency"}
+    ]
+
+
+def write_tsv(concepts: list[Concept]) -> None:
+    fieldnames = output_fieldnames()
     writer = csv.DictWriter(sys.stdout, fieldnames=fieldnames, dialect="excel-tab")
     writer.writeheader()
     for concept in concepts:
@@ -149,7 +186,7 @@ def markdown_cell(value: object) -> str:
 
 
 def write_markdown(concepts: list[Concept]) -> None:
-    fieldnames = [field.name for field in fields(Concept)]
+    fieldnames = output_fieldnames()
     print("| " + " | ".join(fieldnames) + " |")
     print("|" + "|".join("---" for _ in fieldnames) + "|")
     for concept in concepts:
@@ -181,9 +218,20 @@ def main() -> int:
         default="markdown",
         help="Output format. Defaults to Markdown.",
     )
+    parser.add_argument(
+        "--frequency-table",
+        default=Path("docs/spdx-example-concept-frequencies.md"),
+        type=Path,
+        help=(
+            "Markdown frequency table to use for CBOR label ordering. "
+            "Defaults to docs/spdx-example-concept-frequencies.md when present."
+        ),
+    )
     args = parser.parse_args()
 
     concepts = iter_concepts(args.model_dir)
+    frequencies = parse_frequency_table(args.frequency_table)
+    concepts = assign_cbor_labels(concepts, frequencies)
 
     if args.format == "json":
         write_json(concepts)
