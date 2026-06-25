@@ -1,9 +1,10 @@
 # CoSPDX integer mapping
 
-This document summarizes the integer assignments in `cospdx.cddl` and how they relate to the SPDX 3.0.1 JSON-LD context. It was generated from:
+This document summarizes the integer assignments in `cospdx.cddl` and how they relate to the SPDX 3.0.1 JSON-LD context and the model Markdown metadata. It was generated from:
 
 - `https://github.com/achamayou/draft-chamayou-cospdx/blob/main/cospdx.cddl`
 - `https://spdx.github.io/spdx-spec/v3.0.1/rdf/spdx-context.jsonld`
+- `model/*/{Classes,Individuals,Properties,Vocabularies}/*.md`
 
 ## Summary
 
@@ -11,16 +12,21 @@ The CDDL integer space is not limited to model properties. `label.*` entries are
 
 Total assignments: **725**.
 
-| Category | Count | Meaning |
-|---|---:|---|
-| Model property | 160 | SPDX model properties encoded as `label.<property>` map keys. |
-| JSON-LD structural key | 3 | JSON-LD syntax keys encoded as labels. |
-| Object/class term | 55 | Concrete SPDX object or relationship classes encoded as `const.<class>` values. |
-| Vocabulary/type class | 23 | Controlled-vocabulary classes such as `HashAlgorithm` or `RelationshipType`. |
-| Fully-qualified vocabulary member | 254 | Canonical vocabulary values with `spdx_<Profile>_<Type>_<value>` names. |
-| Local vocabulary member alias | 216 | Short aliases for vocabulary values used in compact property values. |
-| Profile/namespace alias | 9 | Profile identifiers used in profile conformance values. |
-| Special singleton term | 5 | Singleton/non-object constants such as `NoneElement` or `NoAssertionElement`. |
+| Category | Count | Meaning | Metadata `name` | Metadata `Instantiability` |
+|---|---:|---|---|---|
+| Model property | 160 | SPDX model properties encoded as `label.<property>` map keys. | Property metadata `name` values (160 distinct) | Not present / not applicable |
+| JSON-LD structural key | 3 | JSON-LD syntax keys encoded as labels. | None | Not present / not applicable |
+| Object/class term | 55 | Concrete SPDX object or relationship classes encoded as `const.<class>` values. | Class metadata `name` values (55 distinct) | Concrete; blank/not present for 6 |
+| Vocabulary/type class | 23 | Controlled-vocabulary classes such as `HashAlgorithm` or `RelationshipType`. | Vocabulary metadata `name` values (23 distinct) | Not present / not applicable |
+| Fully-qualified vocabulary member | 254 | Canonical vocabulary values with `spdx_<Profile>_<Type>_<value>` names. | Vocabulary entry names (254 values) | Not present / not applicable |
+| Local vocabulary member alias | 216 | Short aliases for vocabulary values used in compact property values. | Vocabulary entry names (216 distinct local aliases; some reused) | Not present / not applicable |
+| Profile/namespace alias | 9 | Profile identifiers used in profile conformance values. | ProfileIdentifierType entry names | Not present / not applicable |
+| Special singleton term | 5 | Singleton/non-object constants such as `NoneElement` or `NoAssertionElement`. | Individual metadata `name` values | Not present / not applicable |
+
+Notes:
+
+- `Instantiability` is only defined in class metadata files. Properties, vocabularies, vocabulary entries, individuals, and JSON-LD syntax keys do not carry that metadata field.
+- Local vocabulary member aliases are compact names used in property value positions. Some aliases, such as `build`, `other`, `source`, `noAssertion`, and `no`, can refer to entries in more than one vocabulary depending on the property context.
 
 ## Context terms without integer assignments
 
@@ -44,730 +50,730 @@ The following top-level JSON-LD context terms do not have a `const.` or `label.`
 
 ## Complete integer mapping
 
-| Integer | CDDL name | Category | Source | JSON-LD/model URL | CDDL line |
-|---:|---|---|---|---|---:|
-| 1 | `label.@graph` | JSON-LD structural key | CDDL-only or derived alias | `` | 642 |
-| 2 | `label.type` | JSON-LD structural key | JSON-LD string term | `@type` | 643 |
-| 3 | `label.@id` | JSON-LD structural key | CDDL-only or derived alias | `` | 644 |
-| 4 | `label.software_contentIdentifierType` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Software/Properties/contentIdentifierType/` | 646 |
-| 5 | `label.software_contentIdentifierValue` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Software/Properties/contentIdentifierValue/` | 648 |
-| 6 | `label.software_additionalPurpose` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Software/Properties/additionalPurpose/` | 650 |
-| 7 | `label.software_attributionText` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Software/Properties/attributionText/` | 652 |
-| 8 | `label.software_contentIdentifier` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Software/Properties/contentIdentifier/` | 654 |
-| 9 | `label.software_copyrightText` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Software/Properties/copyrightText/` | 656 |
-| 10 | `label.software_primaryPurpose` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Software/Properties/primaryPurpose/` | 658 |
-| 11 | `label.spdxId` | Model property | JSON-LD string term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/spdxId/` | 660 |
-| 12 | `label.contentType` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/contentType/` | 662 |
-| 13 | `label.software_fileKind` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Software/Properties/fileKind/` | 664 |
-| 14 | `label.software_downloadLocation` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Software/Properties/downloadLocation/` | 666 |
-| 15 | `label.software_homePage` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Software/Properties/homePage/` | 668 |
-| 16 | `label.software_packageUrl` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Software/Properties/packageUrl/` | 670 |
-| 17 | `label.software_packageVersion` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Software/Properties/packageVersion/` | 672 |
-| 18 | `label.software_sourceInfo` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Software/Properties/sourceInfo/` | 674 |
-| 19 | `label.software_sbomType` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Software/Properties/sbomType/` | 676 |
-| 20 | `label.software_byteRange` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Software/Properties/byteRange/` | 678 |
-| 21 | `label.software_lineRange` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Software/Properties/lineRange/` | 680 |
-| 22 | `label.software_snippetFromFile` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Software/Properties/snippetFromFile/` | 682 |
-| 23 | `label.suppliedBy` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/suppliedBy/` | 684 |
-| 24 | `label.security_assessedElement` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Security/Properties/assessedElement/` | 686 |
-| 25 | `label.security_modifiedTime` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Security/Properties/modifiedTime/` | 688 |
-| 26 | `label.security_publishedTime` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Security/Properties/publishedTime/` | 690 |
-| 27 | `label.security_withdrawnTime` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Security/Properties/withdrawnTime/` | 692 |
-| 28 | `label.security_score` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Security/Properties/score/` | 694 |
-| 29 | `label.security_vectorString` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Security/Properties/vectorString/` | 696 |
-| 30 | `label.security_severity` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Security/Properties/severity/` | 698 |
-| 31 | `label.security_percentile` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Security/Properties/percentile/` | 700 |
-| 32 | `label.security_probability` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Security/Properties/probability/` | 702 |
-| 33 | `label.security_catalogType` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Security/Properties/catalogType/` | 704 |
-| 34 | `label.security_exploited` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Security/Properties/exploited/` | 706 |
-| 35 | `label.security_locator` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Security/Properties/locator/` | 708 |
-| 36 | `label.security_decisionType` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Security/Properties/decisionType/` | 710 |
-| 37 | `label.security_statusNotes` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Security/Properties/statusNotes/` | 712 |
-| 38 | `label.security_vexVersion` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Security/Properties/vexVersion/` | 714 |
-| 39 | `label.security_actionStatement` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Security/Properties/actionStatement/` | 716 |
-| 40 | `label.security_actionStatementTime` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Security/Properties/actionStatementTime/` | 718 |
-| 41 | `label.security_impactStatement` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Security/Properties/impactStatement/` | 720 |
-| 42 | `label.security_impactStatementTime` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Security/Properties/impactStatementTime/` | 722 |
-| 43 | `label.security_justificationType` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Security/Properties/justificationType/` | 724 |
-| 44 | `label.simplelicensing_customIdToUri` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/SimpleLicensing/Properties/customIdToUri/` | 726 |
-| 45 | `label.simplelicensing_licenseExpression` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/SimpleLicensing/Properties/licenseExpression/` | 728 |
-| 46 | `label.simplelicensing_licenseListVersion` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/SimpleLicensing/Properties/licenseListVersion/` | 730 |
-| 47 | `label.simplelicensing_licenseText` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/SimpleLicensing/Properties/licenseText/` | 732 |
-| 48 | `label.expandedlicensing_additionText` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/ExpandedLicensing/Properties/additionText/` | 734 |
-| 49 | `label.expandedlicensing_isDeprecatedAdditionId` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/ExpandedLicensing/Properties/isDeprecatedAdditionId/` | 736 |
-| 50 | `label.expandedlicensing_licenseXml` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/ExpandedLicensing/Properties/licenseXml/` | 738 |
-| 51 | `label.expandedlicensing_obsoletedBy` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/ExpandedLicensing/Properties/obsoletedBy/` | 740 |
-| 52 | `label.expandedlicensing_seeAlso` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/ExpandedLicensing/Properties/seeAlso/` | 742 |
-| 53 | `label.expandedlicensing_standardAdditionTemplate` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/ExpandedLicensing/Properties/standardAdditionTemplate/` | 744 |
-| 54 | `label.expandedlicensing_deprecatedVersion` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/ExpandedLicensing/Properties/deprecatedVersion/` | 746 |
-| 55 | `label.expandedlicensing_listVersionAdded` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/ExpandedLicensing/Properties/listVersionAdded/` | 748 |
-| 56 | `label.expandedlicensing_member` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/ExpandedLicensing/Properties/member/` | 750 |
-| 57 | `label.expandedlicensing_isDeprecatedLicenseId` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/ExpandedLicensing/Properties/isDeprecatedLicenseId/` | 752 |
-| 58 | `label.expandedlicensing_isFsfLibre` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/ExpandedLicensing/Properties/isFsfLibre/` | 754 |
-| 59 | `label.expandedlicensing_isOsiApproved` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/ExpandedLicensing/Properties/isOsiApproved/` | 756 |
-| 60 | `label.expandedlicensing_standardLicenseHeader` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/ExpandedLicensing/Properties/standardLicenseHeader/` | 758 |
-| 61 | `label.expandedlicensing_standardLicenseTemplate` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/ExpandedLicensing/Properties/standardLicenseTemplate/` | 760 |
-| 62 | `label.expandedlicensing_subjectLicense` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/ExpandedLicensing/Properties/subjectLicense/` | 762 |
-| 63 | `label.expandedlicensing_subjectAddition` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/ExpandedLicensing/Properties/subjectAddition/` | 764 |
-| 64 | `label.expandedlicensing_subjectExtendableLicense` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/ExpandedLicensing/Properties/subjectExtendableLicense/` | 766 |
-| 65 | `label.dataset_anonymizationMethodUsed` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Dataset/Properties/anonymizationMethodUsed/` | 768 |
-| 66 | `label.dataset_confidentialityLevel` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Dataset/Properties/confidentialityLevel/` | 770 |
-| 67 | `label.dataset_dataCollectionProcess` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Dataset/Properties/dataCollectionProcess/` | 772 |
-| 68 | `label.dataset_dataPreprocessing` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Dataset/Properties/dataPreprocessing/` | 774 |
-| 69 | `label.dataset_datasetAvailability` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Dataset/Properties/datasetAvailability/` | 776 |
-| 70 | `label.dataset_datasetNoise` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Dataset/Properties/datasetNoise/` | 778 |
-| 71 | `label.dataset_datasetSize` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Dataset/Properties/datasetSize/` | 780 |
-| 72 | `label.dataset_datasetType` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Dataset/Properties/datasetType/` | 782 |
-| 73 | `label.dataset_datasetUpdateMechanism` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Dataset/Properties/datasetUpdateMechanism/` | 784 |
-| 74 | `label.dataset_hasSensitivePersonalInformation` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Dataset/Properties/hasSensitivePersonalInformation/` | 786 |
-| 75 | `label.dataset_intendedUse` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Dataset/Properties/intendedUse/` | 788 |
-| 76 | `label.dataset_knownBias` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Dataset/Properties/knownBias/` | 790 |
-| 77 | `label.dataset_sensor` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Dataset/Properties/sensor/` | 792 |
-| 78 | `label.ai_finetuningEnergyConsumption` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/AI/Properties/finetuningEnergyConsumption/` | 794 |
-| 79 | `label.ai_inferenceEnergyConsumption` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/AI/Properties/inferenceEnergyConsumption/` | 796 |
-| 80 | `label.ai_trainingEnergyConsumption` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/AI/Properties/trainingEnergyConsumption/` | 798 |
-| 81 | `label.ai_energyQuantity` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/AI/Properties/energyQuantity/` | 800 |
-| 82 | `label.ai_energyUnit` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/AI/Properties/energyUnit/` | 802 |
-| 83 | `label.ai_autonomyType` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/AI/Properties/autonomyType/` | 804 |
-| 84 | `label.ai_domain` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/AI/Properties/domain/` | 806 |
-| 85 | `label.ai_energyConsumption` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/AI/Properties/energyConsumption/` | 808 |
-| 86 | `label.ai_hyperparameter` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/AI/Properties/hyperparameter/` | 810 |
-| 87 | `label.ai_informationAboutApplication` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/AI/Properties/informationAboutApplication/` | 812 |
-| 88 | `label.ai_informationAboutTraining` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/AI/Properties/informationAboutTraining/` | 814 |
-| 89 | `label.ai_limitation` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/AI/Properties/limitation/` | 816 |
-| 90 | `label.ai_metric` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/AI/Properties/metric/` | 818 |
-| 91 | `label.ai_metricDecisionThreshold` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/AI/Properties/metricDecisionThreshold/` | 820 |
-| 92 | `label.ai_modelDataPreprocessing` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/AI/Properties/modelDataPreprocessing/` | 822 |
-| 93 | `label.ai_modelExplainability` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/AI/Properties/modelExplainability/` | 824 |
-| 94 | `label.ai_safetyRiskAssessment` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/AI/Properties/safetyRiskAssessment/` | 826 |
-| 95 | `label.ai_standardCompliance` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/AI/Properties/standardCompliance/` | 828 |
-| 96 | `label.ai_typeOfModel` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/AI/Properties/typeOfModel/` | 830 |
-| 97 | `label.ai_useSensitivePersonalInformation` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/AI/Properties/useSensitivePersonalInformation/` | 832 |
-| 98 | `label.build_buildEndTime` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Build/Properties/buildEndTime/` | 834 |
-| 99 | `label.build_buildId` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Build/Properties/buildId/` | 836 |
-| 100 | `label.build_buildStartTime` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Build/Properties/buildStartTime/` | 838 |
-| 101 | `label.build_buildType` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Build/Properties/buildType/` | 840 |
-| 102 | `label.build_configSourceDigest` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Build/Properties/configSourceDigest/` | 842 |
-| 103 | `label.build_configSourceEntrypoint` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Build/Properties/configSourceEntrypoint/` | 844 |
-| 104 | `label.build_configSourceUri` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Build/Properties/configSourceUri/` | 846 |
-| 105 | `label.build_environment` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Build/Properties/environment/` | 848 |
-| 106 | `label.build_parameter` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Build/Properties/parameter/` | 850 |
-| 107 | `label.extension_cdxPropName` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Extension/Properties/cdxPropName/` | 852 |
-| 108 | `label.extension_cdxPropValue` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Extension/Properties/cdxPropValue/` | 854 |
-| 109 | `label.extension_cdxProperty` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Extension/Properties/cdxProperty/` | 856 |
-| 110 | `label.comment` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/comment/` | 858 |
-| 111 | `label.created` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/created/` | 860 |
-| 112 | `label.createdBy` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/createdBy/` | 862 |
-| 113 | `label.createdUsing` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/createdUsing/` | 864 |
-| 114 | `label.specVersion` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/specVersion/` | 866 |
-| 115 | `label.key` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/key/` | 868 |
-| 116 | `label.value` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/value/` | 870 |
-| 117 | `label.creationInfo` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/creationInfo/` | 872 |
-| 118 | `label.description` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/description/` | 874 |
-| 119 | `label.extension` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/extension/` | 876 |
-| 120 | `label.externalIdentifier` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/externalIdentifier/` | 878 |
-| 121 | `label.externalRef` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/externalRef/` | 880 |
-| 122 | `label.name` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/name/` | 882 |
-| 123 | `label.summary` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/summary/` | 884 |
-| 124 | `label.verifiedUsing` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/verifiedUsing/` | 886 |
-| 125 | `label.element` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/element/` | 888 |
-| 126 | `label.profileConformance` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/profileConformance/` | 890 |
-| 127 | `label.rootElement` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/rootElement/` | 892 |
-| 128 | `label.externalIdentifierType` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/externalIdentifierType/` | 894 |
-| 129 | `label.identifier` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/identifier/` | 896 |
-| 130 | `label.identifierLocator` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/identifierLocator/` | 898 |
-| 131 | `label.issuingAuthority` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/issuingAuthority/` | 900 |
-| 132 | `label.definingArtifact` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/definingArtifact/` | 902 |
-| 133 | `label.externalSpdxId` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/externalSpdxId/` | 904 |
-| 134 | `label.locationHint` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/locationHint/` | 906 |
-| 135 | `label.externalRefType` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/externalRefType/` | 908 |
-| 136 | `label.locator` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/locator/` | 910 |
-| 137 | `label.namespace` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/namespace/` | 912 |
-| 138 | `label.prefix` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/prefix/` | 914 |
-| 139 | `label.algorithm` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/algorithm/` | 916 |
-| 140 | `label.hashValue` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/hashValue/` | 918 |
-| 141 | `label.packageVerificationCodeExcludedFile` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/packageVerificationCodeExcludedFile/` | 920 |
-| 142 | `label.beginIntegerRange` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/beginIntegerRange/` | 922 |
-| 143 | `label.endIntegerRange` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/endIntegerRange/` | 924 |
-| 144 | `label.completeness` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/completeness/` | 926 |
-| 145 | `label.endTime` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/endTime/` | 928 |
-| 146 | `label.from` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/from/` | 930 |
-| 147 | `label.relationshipType` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/relationshipType/` | 932 |
-| 148 | `label.startTime` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/startTime/` | 934 |
-| 149 | `label.to` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/to/` | 936 |
-| 150 | `label.dataLicense` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/dataLicense/` | 938 |
-| 151 | `label.import` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/import/` | 940 |
-| 152 | `label.namespaceMap` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/namespaceMap/` | 942 |
-| 153 | `label.annotationType` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/annotationType/` | 944 |
-| 154 | `label.statement` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/statement/` | 946 |
-| 155 | `label.subject` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/subject/` | 948 |
-| 156 | `label.builtTime` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/builtTime/` | 950 |
-| 157 | `label.originatedBy` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/originatedBy/` | 952 |
-| 158 | `label.releaseTime` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/releaseTime/` | 954 |
-| 159 | `label.standardName` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/standardName/` | 956 |
-| 160 | `label.supportLevel` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/supportLevel/` | 958 |
-| 161 | `label.validUntilTime` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/validUntilTime/` | 960 |
-| 162 | `label.context` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/context/` | 962 |
-| 163 | `label.scope` | Model property | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/scope/` | 964 |
-| 1001 | `const.software_ContentIdentifier` | Object/class term | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Software/ContentIdentifier` | 967 |
-| 1002 | `const.gitoid` | Local vocabulary member alias | CDDL-only or derived alias | `` | 968 |
-| 1003 | `const.swhid` | Local vocabulary member alias | CDDL-only or derived alias | `` | 969 |
-| 1004 | `const.software_ContentIdentifierType` | Vocabulary/type class | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Software/ContentIdentifierType` | 970 |
-| 1005 | `const.spdx_Software_ContentIdentifierType_gitoid` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 971 |
-| 1006 | `const.spdx_Software_ContentIdentifierType_swhid` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 972 |
-| 1007 | `const.software_FileKindType` | Vocabulary/type class | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Software/FileKindType` | 973 |
-| 1008 | `const.spdx_Software_FileKindType_directory` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 974 |
-| 1009 | `const.spdx_Software_FileKindType_file` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 975 |
-| 1010 | `const.software_SbomType` | Vocabulary/type class | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Software/SbomType` | 976 |
-| 1011 | `const.spdx_Software_SbomType_analyzed` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 977 |
-| 1012 | `const.spdx_Software_SbomType_build` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 978 |
-| 1013 | `const.spdx_Software_SbomType_deployed` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 979 |
-| 1014 | `const.spdx_Software_SbomType_design` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 980 |
-| 1015 | `const.spdx_Software_SbomType_runtime` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 981 |
-| 1016 | `const.spdx_Software_SbomType_source` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 982 |
-| 1017 | `const.software_SoftwarePurpose` | Vocabulary/type class | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Software/SoftwarePurpose` | 983 |
-| 1018 | `const.spdx_Software_SoftwarePurpose_application` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 984 |
-| 1019 | `const.spdx_Software_SoftwarePurpose_archive` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 985 |
-| 1020 | `const.spdx_Software_SoftwarePurpose_bom` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 986 |
-| 1021 | `const.spdx_Software_SoftwarePurpose_configuration` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 987 |
-| 1022 | `const.spdx_Software_SoftwarePurpose_container` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 988 |
-| 1023 | `const.spdx_Software_SoftwarePurpose_data` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 989 |
-| 1024 | `const.spdx_Software_SoftwarePurpose_device` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 990 |
-| 1025 | `const.spdx_Software_SoftwarePurpose_deviceDriver` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 991 |
-| 1026 | `const.spdx_Software_SoftwarePurpose_diskImage` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 992 |
-| 1027 | `const.spdx_Software_SoftwarePurpose_documentation` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 993 |
-| 1028 | `const.spdx_Software_SoftwarePurpose_evidence` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 994 |
-| 1029 | `const.spdx_Software_SoftwarePurpose_executable` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 995 |
-| 1030 | `const.spdx_Software_SoftwarePurpose_file` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 996 |
-| 1031 | `const.spdx_Software_SoftwarePurpose_filesystemImage` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 997 |
-| 1032 | `const.spdx_Software_SoftwarePurpose_firmware` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 998 |
-| 1033 | `const.spdx_Software_SoftwarePurpose_framework` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 999 |
-| 1034 | `const.spdx_Software_SoftwarePurpose_install` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1000 |
-| 1035 | `const.spdx_Software_SoftwarePurpose_library` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1001 |
-| 1036 | `const.spdx_Software_SoftwarePurpose_manifest` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1002 |
-| 1037 | `const.spdx_Software_SoftwarePurpose_model` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1003 |
-| 1038 | `const.spdx_Software_SoftwarePurpose_module` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1004 |
-| 1039 | `const.spdx_Software_SoftwarePurpose_operatingSystem` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1005 |
-| 1040 | `const.spdx_Software_SoftwarePurpose_other` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1006 |
-| 1041 | `const.spdx_Software_SoftwarePurpose_patch` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1007 |
-| 1042 | `const.spdx_Software_SoftwarePurpose_platform` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1008 |
-| 1043 | `const.spdx_Software_SoftwarePurpose_requirement` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1009 |
-| 1044 | `const.spdx_Software_SoftwarePurpose_source` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1010 |
-| 1045 | `const.spdx_Software_SoftwarePurpose_specification` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1011 |
-| 1046 | `const.spdx_Software_SoftwarePurpose_test` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1012 |
-| 1047 | `const.application` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1013 |
-| 1048 | `const.archive` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1014 |
-| 1049 | `const.bom` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1015 |
-| 1050 | `const.configuration` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1016 |
-| 1051 | `const.container` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1017 |
-| 1052 | `const.data` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1018 |
-| 1053 | `const.device` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1019 |
-| 1054 | `const.deviceDriver` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1020 |
-| 1055 | `const.diskImage` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1021 |
-| 1056 | `const.documentation` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1022 |
-| 1057 | `const.evidence` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1023 |
-| 1058 | `const.executable` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1024 |
-| 1059 | `const.file` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1025 |
-| 1060 | `const.filesystemImage` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1026 |
-| 1061 | `const.firmware` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1027 |
-| 1062 | `const.framework` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1028 |
-| 1063 | `const.install` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1029 |
-| 1064 | `const.library` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1030 |
-| 1065 | `const.manifest` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1031 |
-| 1066 | `const.model` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1032 |
-| 1067 | `const.module` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1033 |
-| 1068 | `const.operatingSystem` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1034 |
-| 1069 | `const.other` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1035 |
-| 1070 | `const.patch` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1036 |
-| 1071 | `const.platform` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1037 |
-| 1072 | `const.requirement` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1038 |
-| 1073 | `const.source` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1039 |
-| 1074 | `const.specification` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1040 |
-| 1075 | `const.test` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1041 |
-| 1076 | `const.software_File` | Object/class term | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Software/File` | 1042 |
-| 1077 | `const.directory` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1043 |
-| 1078 | `const.software_Package` | Object/class term | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Software/Package` | 1044 |
-| 1079 | `const.software_Sbom` | Object/class term | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Software/Sbom` | 1045 |
-| 1080 | `const.analyzed` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1046 |
-| 1081 | `const.build` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1047 |
-| 1082 | `const.deployed` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1048 |
-| 1083 | `const.design` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1049 |
-| 1084 | `const.runtime` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1050 |
-| 1085 | `const.software_Snippet` | Object/class term | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Software/Snippet` | 1051 |
-| 1086 | `const.security_CvssSeverityType` | Vocabulary/type class | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Security/CvssSeverityType` | 1052 |
-| 1087 | `const.spdx_Security_CvssSeverityType_critical` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1053 |
-| 1088 | `const.spdx_Security_CvssSeverityType_high` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1054 |
-| 1089 | `const.spdx_Security_CvssSeverityType_low` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1055 |
-| 1090 | `const.spdx_Security_CvssSeverityType_medium` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1056 |
-| 1091 | `const.spdx_Security_CvssSeverityType_none` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1057 |
-| 1092 | `const.security_ExploitCatalogType` | Vocabulary/type class | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Security/ExploitCatalogType` | 1058 |
-| 1093 | `const.spdx_Security_ExploitCatalogType_kev` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1059 |
-| 1094 | `const.spdx_Security_ExploitCatalogType_other` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1060 |
-| 1095 | `const.security_SsvcDecisionType` | Vocabulary/type class | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Security/SsvcDecisionType` | 1061 |
-| 1096 | `const.spdx_Security_SsvcDecisionType_act` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1062 |
-| 1097 | `const.spdx_Security_SsvcDecisionType_attend` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1063 |
-| 1098 | `const.spdx_Security_SsvcDecisionType_track` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1064 |
-| 1099 | `const.spdx_Security_SsvcDecisionType_trackStar` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1065 |
-| 1100 | `const.security_VexJustificationType` | Vocabulary/type class | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Security/VexJustificationType` | 1066 |
-| 1101 | `const.spdx_Security_VexJustificationType_componentNotPresent` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1067 |
-| 1102 | `const.spdx_Security_VexJustificationType_inlineMitigationsAlreadyExist` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1068 |
-| 1103 | `const.spdx_Security_VexJustificationType_vulnerableCodeCannotBeControlledByAdversary` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1069 |
-| 1104 | `const.spdx_Security_VexJustificationType_vulnerableCodeNotInExecutePath` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1070 |
-| 1105 | `const.spdx_Security_VexJustificationType_vulnerableCodeNotPresent` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1071 |
-| 1106 | `const.security_CvssV2VulnAssessmentRelationship` | Object/class term | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Security/CvssV2VulnAssessmentRelationship` | 1072 |
-| 1107 | `const.security_CvssV3VulnAssessmentRelationship` | Object/class term | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Security/CvssV3VulnAssessmentRelationship` | 1073 |
-| 1108 | `const.critical` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1074 |
-| 1109 | `const.high` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1075 |
-| 1110 | `const.low` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1076 |
-| 1111 | `const.medium` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1077 |
-| 1112 | `const.none` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1078 |
-| 1113 | `const.security_CvssV4VulnAssessmentRelationship` | Object/class term | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Security/CvssV4VulnAssessmentRelationship` | 1079 |
-| 1114 | `const.security_EpssVulnAssessmentRelationship` | Object/class term | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Security/EpssVulnAssessmentRelationship` | 1080 |
-| 1115 | `const.security_ExploitCatalogVulnAssessmentRelationship` | Object/class term | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Security/ExploitCatalogVulnAssessmentRelationship` | 1081 |
-| 1116 | `const.kev` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1082 |
-| 1117 | `const.security_SsvcVulnAssessmentRelationship` | Object/class term | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Security/SsvcVulnAssessmentRelationship` | 1083 |
-| 1118 | `const.act` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1084 |
-| 1119 | `const.attend` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1085 |
-| 1120 | `const.track` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1086 |
-| 1121 | `const.trackStar` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1087 |
-| 1122 | `const.security_Vulnerability` | Object/class term | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Security/Vulnerability` | 1088 |
-| 1123 | `const.security_VexAffectedVulnAssessmentRelationship` | Object/class term | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Security/VexAffectedVulnAssessmentRelationship` | 1089 |
-| 1124 | `const.security_VexFixedVulnAssessmentRelationship` | Object/class term | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Security/VexFixedVulnAssessmentRelationship` | 1090 |
-| 1125 | `const.security_VexNotAffectedVulnAssessmentRelationship` | Object/class term | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Security/VexNotAffectedVulnAssessmentRelationship` | 1091 |
-| 1126 | `const.componentNotPresent` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1092 |
-| 1127 | `const.inlineMitigationsAlreadyExist` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1093 |
-| 1128 | `const.vulnerableCodeCannotBeControlledByAdversary` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1094 |
-| 1129 | `const.vulnerableCodeNotInExecutePath` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1095 |
-| 1130 | `const.vulnerableCodeNotPresent` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1096 |
-| 1131 | `const.security_VexUnderInvestigationVulnAssessmentRelationship` | Object/class term | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Security/VexUnderInvestigationVulnAssessmentRelationship` | 1097 |
-| 1132 | `const.expandedlicensing_NoAssertionLicense` | Special singleton term | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/ExpandedLicensing/NoAssertionLicense` | 1098 |
-| 1133 | `const.expandedlicensing_NoneLicense` | Special singleton term | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/ExpandedLicensing/NoneLicense` | 1099 |
-| 1134 | `const.simplelicensing_LicenseExpression` | Object/class term | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/SimpleLicensing/LicenseExpression` | 1100 |
-| 1135 | `const.simplelicensing_SimpleLicensingText` | Object/class term | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/SimpleLicensing/SimpleLicensingText` | 1101 |
-| 1136 | `const.expandedlicensing_ListedLicenseException` | Object/class term | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/ExpandedLicensing/ListedLicenseException` | 1102 |
-| 1137 | `const.expandedlicensing_ConjunctiveLicenseSet` | Object/class term | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/ExpandedLicensing/ConjunctiveLicenseSet` | 1103 |
-| 1138 | `const.expandedlicensing_CustomLicenseAddition` | Object/class term | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/ExpandedLicensing/CustomLicenseAddition` | 1104 |
-| 1139 | `const.expandedlicensing_DisjunctiveLicenseSet` | Object/class term | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/ExpandedLicensing/DisjunctiveLicenseSet` | 1105 |
-| 1140 | `const.expandedlicensing_IndividualLicensingInfo` | Object/class term | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/ExpandedLicensing/IndividualLicensingInfo` | 1106 |
-| 1141 | `const.expandedlicensing_ListedLicense` | Object/class term | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/ExpandedLicensing/ListedLicense` | 1107 |
-| 1142 | `const.expandedlicensing_OrLaterOperator` | Object/class term | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/ExpandedLicensing/OrLaterOperator` | 1108 |
-| 1143 | `const.expandedlicensing_WithAdditionOperator` | Object/class term | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/ExpandedLicensing/WithAdditionOperator` | 1109 |
-| 1144 | `const.expandedlicensing_CustomLicense` | Object/class term | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/ExpandedLicensing/CustomLicense` | 1110 |
-| 1145 | `const.dataset_ConfidentialityLevelType` | Vocabulary/type class | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Dataset/ConfidentialityLevelType` | 1111 |
-| 1146 | `const.spdx_Dataset_ConfidentialityLevelType_amber` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1112 |
-| 1147 | `const.spdx_Dataset_ConfidentialityLevelType_clear` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1113 |
-| 1148 | `const.spdx_Dataset_ConfidentialityLevelType_green` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1114 |
-| 1149 | `const.spdx_Dataset_ConfidentialityLevelType_red` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1115 |
-| 1150 | `const.dataset_DatasetAvailabilityType` | Vocabulary/type class | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Dataset/DatasetAvailabilityType` | 1116 |
-| 1151 | `const.spdx_Dataset_DatasetAvailabilityType_clickthrough` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1117 |
-| 1152 | `const.spdx_Dataset_DatasetAvailabilityType_directDownload` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1118 |
-| 1153 | `const.spdx_Dataset_DatasetAvailabilityType_query` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1119 |
-| 1154 | `const.spdx_Dataset_DatasetAvailabilityType_registration` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1120 |
-| 1155 | `const.spdx_Dataset_DatasetAvailabilityType_scrapingScript` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1121 |
-| 1156 | `const.dataset_DatasetType` | Vocabulary/type class | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Dataset/DatasetType` | 1122 |
-| 1157 | `const.spdx_Dataset_DatasetType_audio` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1123 |
-| 1158 | `const.spdx_Dataset_DatasetType_categorical` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1124 |
-| 1159 | `const.spdx_Dataset_DatasetType_graph` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1125 |
-| 1160 | `const.spdx_Dataset_DatasetType_image` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1126 |
-| 1161 | `const.spdx_Dataset_DatasetType_noAssertion` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1127 |
-| 1162 | `const.spdx_Dataset_DatasetType_numeric` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1128 |
-| 1163 | `const.spdx_Dataset_DatasetType_other` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1129 |
-| 1164 | `const.spdx_Dataset_DatasetType_sensor` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1130 |
-| 1165 | `const.spdx_Dataset_DatasetType_structured` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1131 |
-| 1166 | `const.spdx_Dataset_DatasetType_syntactic` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1132 |
-| 1167 | `const.spdx_Dataset_DatasetType_text` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1133 |
-| 1168 | `const.spdx_Dataset_DatasetType_timeseries` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1134 |
-| 1169 | `const.spdx_Dataset_DatasetType_timestamp` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1135 |
-| 1170 | `const.spdx_Dataset_DatasetType_video` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1136 |
-| 1171 | `const.dataset_DatasetPackage` | Object/class term | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Dataset/DatasetPackage` | 1137 |
-| 1172 | `const.amber` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1138 |
-| 1173 | `const.clear` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1139 |
-| 1174 | `const.green` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1140 |
-| 1175 | `const.red` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1141 |
-| 1176 | `const.clickthrough` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1142 |
-| 1177 | `const.directDownload` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1143 |
-| 1178 | `const.query` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1144 |
-| 1179 | `const.registration` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1145 |
-| 1180 | `const.scrapingScript` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1146 |
-| 1181 | `const.audio` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1147 |
-| 1182 | `const.categorical` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1148 |
-| 1183 | `const.graph` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1149 |
-| 1184 | `const.image` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1150 |
-| 1185 | `const.noAssertion` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1151 |
-| 1186 | `const.numeric` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1152 |
-| 1187 | `const.sensor` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1153 |
-| 1188 | `const.structured` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1154 |
-| 1189 | `const.syntactic` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1155 |
-| 1190 | `const.text` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1156 |
-| 1191 | `const.timeseries` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1157 |
-| 1192 | `const.timestamp` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1158 |
-| 1193 | `const.video` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1159 |
-| 1194 | `const.no` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1160 |
-| 1195 | `const.yes` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1161 |
-| 1196 | `const.ai_EnergyConsumption` | Object/class term | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/AI/EnergyConsumption` | 1162 |
-| 1197 | `const.ai_EnergyConsumptionDescription` | Object/class term | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/AI/EnergyConsumptionDescription` | 1163 |
-| 1198 | `const.kilowattHour` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1164 |
-| 1199 | `const.megajoule` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1165 |
-| 1200 | `const.ai_EnergyUnitType` | Vocabulary/type class | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/AI/EnergyUnitType` | 1166 |
-| 1201 | `const.spdx_AI_EnergyUnitType_kilowattHour` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1167 |
-| 1202 | `const.spdx_AI_EnergyUnitType_megajoule` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1168 |
-| 1203 | `const.spdx_AI_EnergyUnitType_other` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1169 |
-| 1204 | `const.ai_SafetyRiskAssessmentType` | Vocabulary/type class | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/AI/SafetyRiskAssessmentType` | 1170 |
-| 1205 | `const.spdx_AI_SafetyRiskAssessmentType_high` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1171 |
-| 1206 | `const.spdx_AI_SafetyRiskAssessmentType_low` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1172 |
-| 1207 | `const.spdx_AI_SafetyRiskAssessmentType_medium` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1173 |
-| 1208 | `const.spdx_AI_SafetyRiskAssessmentType_serious` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1174 |
-| 1209 | `const.ai_AIPackage` | Object/class term | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/AI/AIPackage` | 1175 |
-| 1210 | `const.serious` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1176 |
-| 1211 | `const.build_Build` | Object/class term | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Build/Build` | 1177 |
-| 1212 | `const.extension_CdxPropertyEntry` | Object/class term | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Extension/CdxPropertyEntry` | 1178 |
-| 1213 | `const.extension_CdxPropertiesExtension` | Object/class term | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Extension/CdxPropertiesExtension` | 1179 |
-| 1214 | `const.AnnotationType` | Vocabulary/type class | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Core/AnnotationType` | 1180 |
-| 1215 | `const.spdx_Core_AnnotationType_other` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1181 |
-| 1216 | `const.spdx_Core_AnnotationType_review` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1182 |
-| 1217 | `const.CreationInfo` | Object/class term | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Core/CreationInfo` | 1183 |
-| 1218 | `const.DictionaryEntry` | Object/class term | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Core/DictionaryEntry` | 1184 |
-| 1219 | `const.NoAssertionElement` | Special singleton term | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Core/NoAssertionElement` | 1185 |
-| 1220 | `const.NoneElement` | Special singleton term | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Core/NoneElement` | 1186 |
-| 1221 | `const.SpdxOrganization` | Special singleton term | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Core/SpdxOrganization` | 1187 |
-| 1222 | `const.ai` | Profile/namespace alias | CDDL-only or derived alias | `` | 1188 |
-| 1223 | `const.core` | Profile/namespace alias | CDDL-only or derived alias | `` | 1189 |
-| 1224 | `const.dataset` | Profile/namespace alias | CDDL-only or derived alias | `` | 1190 |
-| 1225 | `const.expandedLicensing` | Profile/namespace alias | CDDL-only or derived alias | `` | 1191 |
-| 1226 | `const.extension` | Profile/namespace alias | JSON-LD object term | `https://spdx.org/rdf/3.0.1/terms/Core/extension` | 1192 |
-| 1227 | `const.lite` | Profile/namespace alias | CDDL-only or derived alias | `` | 1193 |
-| 1228 | `const.security` | Profile/namespace alias | CDDL-only or derived alias | `` | 1194 |
-| 1229 | `const.simpleLicensing` | Profile/namespace alias | CDDL-only or derived alias | `` | 1195 |
-| 1230 | `const.software` | Profile/namespace alias | CDDL-only or derived alias | `` | 1196 |
-| 1231 | `const.ExternalIdentifier` | Object/class term | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Core/ExternalIdentifier` | 1197 |
-| 1232 | `const.cpe22` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1198 |
-| 1233 | `const.cpe23` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1199 |
-| 1234 | `const.cve` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1200 |
-| 1235 | `const.email` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1201 |
-| 1236 | `const.packageUrl` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1202 |
-| 1237 | `const.securityOther` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1203 |
-| 1238 | `const.swid` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1204 |
-| 1239 | `const.urlScheme` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1205 |
-| 1240 | `const.ExternalIdentifierType` | Vocabulary/type class | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Core/ExternalIdentifierType` | 1206 |
-| 1241 | `const.spdx_Core_ExternalIdentifierType_cpe22` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1207 |
-| 1242 | `const.spdx_Core_ExternalIdentifierType_cpe23` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1208 |
-| 1243 | `const.spdx_Core_ExternalIdentifierType_cve` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1209 |
-| 1244 | `const.spdx_Core_ExternalIdentifierType_email` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1210 |
-| 1245 | `const.spdx_Core_ExternalIdentifierType_gitoid` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1211 |
-| 1246 | `const.spdx_Core_ExternalIdentifierType_other` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1212 |
-| 1247 | `const.spdx_Core_ExternalIdentifierType_packageUrl` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1213 |
-| 1248 | `const.spdx_Core_ExternalIdentifierType_securityOther` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1214 |
-| 1249 | `const.spdx_Core_ExternalIdentifierType_swhid` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1215 |
-| 1250 | `const.spdx_Core_ExternalIdentifierType_swid` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1216 |
-| 1251 | `const.spdx_Core_ExternalIdentifierType_urlScheme` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1217 |
-| 1252 | `const.ExternalMap` | Object/class term | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Core/ExternalMap` | 1218 |
-| 1253 | `const.ExternalRef` | Object/class term | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Core/ExternalRef` | 1219 |
-| 1254 | `const.altDownloadLocation` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1220 |
-| 1255 | `const.altWebPage` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1221 |
-| 1256 | `const.binaryArtifact` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1222 |
-| 1257 | `const.bower` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1223 |
-| 1258 | `const.buildMeta` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1224 |
-| 1259 | `const.buildSystem` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1225 |
-| 1260 | `const.certificationReport` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1226 |
-| 1261 | `const.chat` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1227 |
-| 1262 | `const.componentAnalysisReport` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1228 |
-| 1263 | `const.cwe` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1229 |
-| 1264 | `const.dynamicAnalysisReport` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1230 |
-| 1265 | `const.eolNotice` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1231 |
-| 1266 | `const.exportControlAssessment` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1232 |
-| 1267 | `const.funding` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1233 |
-| 1268 | `const.issueTracker` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1234 |
-| 1269 | `const.license` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1235 |
-| 1270 | `const.mailingList` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1236 |
-| 1271 | `const.mavenCentral` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1237 |
-| 1272 | `const.metrics` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1238 |
-| 1273 | `const.npm` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1239 |
-| 1274 | `const.nuget` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1240 |
-| 1275 | `const.privacyAssessment` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1241 |
-| 1276 | `const.productMetadata` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1242 |
-| 1277 | `const.purchaseOrder` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1243 |
-| 1278 | `const.qualityAssessmentReport` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1244 |
-| 1279 | `const.releaseHistory` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1245 |
-| 1280 | `const.releaseNotes` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1246 |
-| 1281 | `const.riskAssessment` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1247 |
-| 1282 | `const.runtimeAnalysisReport` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1248 |
-| 1283 | `const.secureSoftwareAttestation` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1249 |
-| 1284 | `const.securityAdversaryModel` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1250 |
-| 1285 | `const.securityAdvisory` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1251 |
-| 1286 | `const.securityFix` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1252 |
-| 1287 | `const.securityPenTestReport` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1253 |
-| 1288 | `const.securityPolicy` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1254 |
-| 1289 | `const.securityThreatModel` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1255 |
-| 1290 | `const.socialMedia` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1256 |
-| 1291 | `const.sourceArtifact` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1257 |
-| 1292 | `const.staticAnalysisReport` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1258 |
-| 1293 | `const.support` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1259 |
-| 1294 | `const.vcs` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1260 |
-| 1295 | `const.vulnerabilityDisclosureReport` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1261 |
-| 1296 | `const.vulnerabilityExploitabilityAssessment` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1262 |
-| 1297 | `const.ExternalRefType` | Vocabulary/type class | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Core/ExternalRefType` | 1263 |
-| 1298 | `const.spdx_Core_ExternalRefType_altDownloadLocation` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1264 |
-| 1299 | `const.spdx_Core_ExternalRefType_altWebPage` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1265 |
-| 1300 | `const.spdx_Core_ExternalRefType_binaryArtifact` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1266 |
-| 1301 | `const.spdx_Core_ExternalRefType_bower` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1267 |
-| 1302 | `const.spdx_Core_ExternalRefType_buildMeta` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1268 |
-| 1303 | `const.spdx_Core_ExternalRefType_buildSystem` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1269 |
-| 1304 | `const.spdx_Core_ExternalRefType_certificationReport` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1270 |
-| 1305 | `const.spdx_Core_ExternalRefType_chat` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1271 |
-| 1306 | `const.spdx_Core_ExternalRefType_componentAnalysisReport` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1272 |
-| 1307 | `const.spdx_Core_ExternalRefType_cwe` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1273 |
-| 1308 | `const.spdx_Core_ExternalRefType_documentation` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1274 |
-| 1309 | `const.spdx_Core_ExternalRefType_dynamicAnalysisReport` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1275 |
-| 1310 | `const.spdx_Core_ExternalRefType_eolNotice` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1276 |
-| 1311 | `const.spdx_Core_ExternalRefType_exportControlAssessment` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1277 |
-| 1312 | `const.spdx_Core_ExternalRefType_funding` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1278 |
-| 1313 | `const.spdx_Core_ExternalRefType_issueTracker` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1279 |
-| 1314 | `const.spdx_Core_ExternalRefType_license` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1280 |
-| 1315 | `const.spdx_Core_ExternalRefType_mailingList` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1281 |
-| 1316 | `const.spdx_Core_ExternalRefType_mavenCentral` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1282 |
-| 1317 | `const.spdx_Core_ExternalRefType_metrics` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1283 |
-| 1318 | `const.spdx_Core_ExternalRefType_npm` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1284 |
-| 1319 | `const.spdx_Core_ExternalRefType_nuget` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1285 |
-| 1320 | `const.spdx_Core_ExternalRefType_other` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1286 |
-| 1321 | `const.spdx_Core_ExternalRefType_privacyAssessment` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1287 |
-| 1322 | `const.spdx_Core_ExternalRefType_productMetadata` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1288 |
-| 1323 | `const.spdx_Core_ExternalRefType_purchaseOrder` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1289 |
-| 1324 | `const.spdx_Core_ExternalRefType_qualityAssessmentReport` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1290 |
-| 1325 | `const.spdx_Core_ExternalRefType_releaseHistory` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1291 |
-| 1326 | `const.spdx_Core_ExternalRefType_releaseNotes` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1292 |
-| 1327 | `const.spdx_Core_ExternalRefType_riskAssessment` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1293 |
-| 1328 | `const.spdx_Core_ExternalRefType_runtimeAnalysisReport` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1294 |
-| 1329 | `const.spdx_Core_ExternalRefType_secureSoftwareAttestation` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1295 |
-| 1330 | `const.spdx_Core_ExternalRefType_securityAdversaryModel` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1296 |
-| 1331 | `const.spdx_Core_ExternalRefType_securityAdvisory` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1297 |
-| 1332 | `const.spdx_Core_ExternalRefType_securityFix` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1298 |
-| 1333 | `const.spdx_Core_ExternalRefType_securityOther` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1299 |
-| 1334 | `const.spdx_Core_ExternalRefType_securityPenTestReport` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1300 |
-| 1335 | `const.spdx_Core_ExternalRefType_securityPolicy` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1301 |
-| 1336 | `const.spdx_Core_ExternalRefType_securityThreatModel` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1302 |
-| 1337 | `const.spdx_Core_ExternalRefType_socialMedia` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1303 |
-| 1338 | `const.spdx_Core_ExternalRefType_sourceArtifact` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1304 |
-| 1339 | `const.spdx_Core_ExternalRefType_staticAnalysisReport` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1305 |
-| 1340 | `const.spdx_Core_ExternalRefType_support` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1306 |
-| 1341 | `const.spdx_Core_ExternalRefType_vcs` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1307 |
-| 1342 | `const.spdx_Core_ExternalRefType_vulnerabilityDisclosureReport` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1308 |
-| 1343 | `const.spdx_Core_ExternalRefType_vulnerabilityExploitabilityAssessment` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1309 |
-| 1344 | `const.HashAlgorithm` | Vocabulary/type class | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Core/HashAlgorithm` | 1310 |
-| 1345 | `const.spdx_Core_HashAlgorithm_adler32` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1311 |
-| 1346 | `const.spdx_Core_HashAlgorithm_blake2b256` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1312 |
-| 1347 | `const.spdx_Core_HashAlgorithm_blake2b384` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1313 |
-| 1348 | `const.spdx_Core_HashAlgorithm_blake2b512` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1314 |
-| 1349 | `const.spdx_Core_HashAlgorithm_blake3` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1315 |
-| 1350 | `const.spdx_Core_HashAlgorithm_crystalsDilithium` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1316 |
-| 1351 | `const.spdx_Core_HashAlgorithm_crystalsKyber` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1317 |
-| 1352 | `const.spdx_Core_HashAlgorithm_falcon` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1318 |
-| 1353 | `const.spdx_Core_HashAlgorithm_md2` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1319 |
-| 1354 | `const.spdx_Core_HashAlgorithm_md4` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1320 |
-| 1355 | `const.spdx_Core_HashAlgorithm_md5` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1321 |
-| 1356 | `const.spdx_Core_HashAlgorithm_md6` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1322 |
-| 1357 | `const.spdx_Core_HashAlgorithm_other` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1323 |
-| 1358 | `const.spdx_Core_HashAlgorithm_sha1` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1324 |
-| 1359 | `const.spdx_Core_HashAlgorithm_sha224` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1325 |
-| 1360 | `const.spdx_Core_HashAlgorithm_sha256` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1326 |
-| 1361 | `const.spdx_Core_HashAlgorithm_sha384` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1327 |
-| 1362 | `const.spdx_Core_HashAlgorithm_sha3_224` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1328 |
-| 1363 | `const.spdx_Core_HashAlgorithm_sha3_256` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1329 |
-| 1364 | `const.spdx_Core_HashAlgorithm_sha3_384` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1330 |
-| 1365 | `const.spdx_Core_HashAlgorithm_sha3_512` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1331 |
-| 1366 | `const.spdx_Core_HashAlgorithm_sha512` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1332 |
-| 1367 | `const.IndividualElement` | Object/class term | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Core/IndividualElement` | 1333 |
-| 1368 | `const.LifecycleScopeType` | Vocabulary/type class | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Core/LifecycleScopeType` | 1334 |
-| 1369 | `const.spdx_Core_LifecycleScopeType_build` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1335 |
-| 1370 | `const.spdx_Core_LifecycleScopeType_design` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1336 |
-| 1371 | `const.spdx_Core_LifecycleScopeType_development` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1337 |
-| 1372 | `const.spdx_Core_LifecycleScopeType_other` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1338 |
-| 1373 | `const.spdx_Core_LifecycleScopeType_runtime` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1339 |
-| 1374 | `const.spdx_Core_LifecycleScopeType_test` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1340 |
-| 1375 | `const.NamespaceMap` | Object/class term | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Core/NamespaceMap` | 1341 |
-| 1376 | `const.PackageVerificationCode` | Object/class term | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Core/PackageVerificationCode` | 1342 |
-| 1377 | `const.adler32` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1343 |
-| 1378 | `const.blake2b256` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1344 |
-| 1379 | `const.blake2b384` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1345 |
-| 1380 | `const.blake2b512` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1346 |
-| 1381 | `const.blake3` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1347 |
-| 1382 | `const.crystalsDilithium` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1348 |
-| 1383 | `const.crystalsKyber` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1349 |
-| 1384 | `const.falcon` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1350 |
-| 1385 | `const.md2` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1351 |
-| 1386 | `const.md4` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1352 |
-| 1387 | `const.md5` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1353 |
-| 1388 | `const.md6` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1354 |
-| 1389 | `const.sha1` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1355 |
-| 1390 | `const.sha224` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1356 |
-| 1391 | `const.sha256` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1357 |
-| 1392 | `const.sha384` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1358 |
-| 1393 | `const.sha3_224` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1359 |
-| 1394 | `const.sha3_256` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1360 |
-| 1395 | `const.sha3_384` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1361 |
-| 1396 | `const.sha3_512` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1362 |
-| 1397 | `const.sha512` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1363 |
-| 1398 | `const.PositiveIntegerRange` | Object/class term | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Core/PositiveIntegerRange` | 1364 |
-| 1399 | `const.PresenceType` | Vocabulary/type class | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Core/PresenceType` | 1365 |
-| 1400 | `const.spdx_Core_PresenceType_no` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1366 |
-| 1401 | `const.spdx_Core_PresenceType_noAssertion` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1367 |
-| 1402 | `const.spdx_Core_PresenceType_yes` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1368 |
-| 1403 | `const.ProfileIdentifierType` | Vocabulary/type class | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Core/ProfileIdentifierType` | 1369 |
-| 1404 | `const.spdx_Core_ProfileIdentifierType_ai` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1370 |
-| 1405 | `const.spdx_Core_ProfileIdentifierType_build` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1371 |
-| 1406 | `const.spdx_Core_ProfileIdentifierType_core` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1372 |
-| 1407 | `const.spdx_Core_ProfileIdentifierType_dataset` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1373 |
-| 1408 | `const.spdx_Core_ProfileIdentifierType_expandedLicensing` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1374 |
-| 1409 | `const.spdx_Core_ProfileIdentifierType_extension` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1375 |
-| 1410 | `const.spdx_Core_ProfileIdentifierType_lite` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1376 |
-| 1411 | `const.spdx_Core_ProfileIdentifierType_security` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1377 |
-| 1412 | `const.spdx_Core_ProfileIdentifierType_simpleLicensing` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1378 |
-| 1413 | `const.spdx_Core_ProfileIdentifierType_software` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1379 |
-| 1414 | `const.Relationship` | Object/class term | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Core/Relationship` | 1380 |
-| 1415 | `const.complete` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1381 |
-| 1416 | `const.incomplete` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1382 |
-| 1417 | `const.affects` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1383 |
-| 1418 | `const.amendedBy` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1384 |
-| 1419 | `const.ancestorOf` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1385 |
-| 1420 | `const.availableFrom` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1386 |
-| 1421 | `const.configures` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1387 |
-| 1422 | `const.contains` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1388 |
-| 1423 | `const.coordinatedBy` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1389 |
-| 1424 | `const.copiedTo` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1390 |
-| 1425 | `const.delegatedTo` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1391 |
-| 1426 | `const.dependsOn` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1392 |
-| 1427 | `const.descendantOf` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1393 |
-| 1428 | `const.describes` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1394 |
-| 1429 | `const.doesNotAffect` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1395 |
-| 1430 | `const.expandsTo` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1396 |
-| 1431 | `const.exploitCreatedBy` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1397 |
-| 1432 | `const.fixedBy` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1398 |
-| 1433 | `const.fixedIn` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1399 |
-| 1434 | `const.foundBy` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1400 |
-| 1435 | `const.generates` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1401 |
-| 1436 | `const.hasAddedFile` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1402 |
-| 1437 | `const.hasAssessmentFor` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1403 |
-| 1438 | `const.hasAssociatedVulnerability` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1404 |
-| 1439 | `const.hasConcludedLicense` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1405 |
-| 1440 | `const.hasDataFile` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1406 |
-| 1441 | `const.hasDeclaredLicense` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1407 |
-| 1442 | `const.hasDeletedFile` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1408 |
-| 1443 | `const.hasDependencyManifest` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1409 |
-| 1444 | `const.hasDistributionArtifact` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1410 |
-| 1445 | `const.hasDocumentation` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1411 |
-| 1446 | `const.hasDynamicLink` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1412 |
-| 1447 | `const.hasEvidence` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1413 |
-| 1448 | `const.hasExample` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1414 |
-| 1449 | `const.hasHost` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1415 |
-| 1450 | `const.hasInput` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1416 |
-| 1451 | `const.hasMetadata` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1417 |
-| 1452 | `const.hasOptionalComponent` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1418 |
-| 1453 | `const.hasOptionalDependency` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1419 |
-| 1454 | `const.hasOutput` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1420 |
-| 1455 | `const.hasPrerequisite` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1421 |
-| 1456 | `const.hasProvidedDependency` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1422 |
-| 1457 | `const.hasRequirement` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1423 |
-| 1458 | `const.hasSpecification` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1424 |
-| 1459 | `const.hasStaticLink` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1425 |
-| 1460 | `const.hasTest` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1426 |
-| 1461 | `const.hasTestCase` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1427 |
-| 1462 | `const.hasVariant` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1428 |
-| 1463 | `const.invokedBy` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1429 |
-| 1464 | `const.modifiedBy` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1430 |
-| 1465 | `const.packagedBy` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1431 |
-| 1466 | `const.patchedBy` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1432 |
-| 1467 | `const.publishedBy` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1433 |
-| 1468 | `const.reportedBy` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1434 |
-| 1469 | `const.republishedBy` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1435 |
-| 1470 | `const.serializedInArtifact` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1436 |
-| 1471 | `const.testedOn` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1437 |
-| 1472 | `const.trainedOn` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1438 |
-| 1473 | `const.underInvestigationFor` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1439 |
-| 1474 | `const.usesTool` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1440 |
-| 1475 | `const.RelationshipCompleteness` | Vocabulary/type class | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Core/RelationshipCompleteness` | 1441 |
-| 1476 | `const.spdx_Core_RelationshipCompleteness_complete` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1442 |
-| 1477 | `const.spdx_Core_RelationshipCompleteness_incomplete` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1443 |
-| 1478 | `const.spdx_Core_RelationshipCompleteness_noAssertion` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1444 |
-| 1479 | `const.RelationshipType` | Vocabulary/type class | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Core/RelationshipType` | 1445 |
-| 1480 | `const.spdx_Core_RelationshipType_affects` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1446 |
-| 1481 | `const.spdx_Core_RelationshipType_amendedBy` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1447 |
-| 1482 | `const.spdx_Core_RelationshipType_ancestorOf` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1448 |
-| 1483 | `const.spdx_Core_RelationshipType_availableFrom` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1449 |
-| 1484 | `const.spdx_Core_RelationshipType_configures` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1450 |
-| 1485 | `const.spdx_Core_RelationshipType_contains` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1451 |
-| 1486 | `const.spdx_Core_RelationshipType_coordinatedBy` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1452 |
-| 1487 | `const.spdx_Core_RelationshipType_copiedTo` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1453 |
-| 1488 | `const.spdx_Core_RelationshipType_delegatedTo` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1454 |
-| 1489 | `const.spdx_Core_RelationshipType_dependsOn` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1455 |
-| 1490 | `const.spdx_Core_RelationshipType_descendantOf` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1456 |
-| 1491 | `const.spdx_Core_RelationshipType_describes` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1457 |
-| 1492 | `const.spdx_Core_RelationshipType_doesNotAffect` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1458 |
-| 1493 | `const.spdx_Core_RelationshipType_expandsTo` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1459 |
-| 1494 | `const.spdx_Core_RelationshipType_exploitCreatedBy` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1460 |
-| 1495 | `const.spdx_Core_RelationshipType_fixedBy` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1461 |
-| 1496 | `const.spdx_Core_RelationshipType_fixedIn` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1462 |
-| 1497 | `const.spdx_Core_RelationshipType_foundBy` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1463 |
-| 1498 | `const.spdx_Core_RelationshipType_generates` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1464 |
-| 1499 | `const.spdx_Core_RelationshipType_hasAddedFile` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1465 |
-| 1500 | `const.spdx_Core_RelationshipType_hasAssessmentFor` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1466 |
-| 1501 | `const.spdx_Core_RelationshipType_hasAssociatedVulnerability` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1467 |
-| 1502 | `const.spdx_Core_RelationshipType_hasConcludedLicense` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1468 |
-| 1503 | `const.spdx_Core_RelationshipType_hasDataFile` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1469 |
-| 1504 | `const.spdx_Core_RelationshipType_hasDeclaredLicense` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1470 |
-| 1505 | `const.spdx_Core_RelationshipType_hasDeletedFile` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1471 |
-| 1506 | `const.spdx_Core_RelationshipType_hasDependencyManifest` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1472 |
-| 1507 | `const.spdx_Core_RelationshipType_hasDistributionArtifact` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1473 |
-| 1508 | `const.spdx_Core_RelationshipType_hasDocumentation` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1474 |
-| 1509 | `const.spdx_Core_RelationshipType_hasDynamicLink` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1475 |
-| 1510 | `const.spdx_Core_RelationshipType_hasEvidence` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1476 |
-| 1511 | `const.spdx_Core_RelationshipType_hasExample` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1477 |
-| 1512 | `const.spdx_Core_RelationshipType_hasHost` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1478 |
-| 1513 | `const.spdx_Core_RelationshipType_hasInput` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1479 |
-| 1514 | `const.spdx_Core_RelationshipType_hasMetadata` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1480 |
-| 1515 | `const.spdx_Core_RelationshipType_hasOptionalComponent` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1481 |
-| 1516 | `const.spdx_Core_RelationshipType_hasOptionalDependency` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1482 |
-| 1517 | `const.spdx_Core_RelationshipType_hasOutput` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1483 |
-| 1518 | `const.spdx_Core_RelationshipType_hasPrerequisite` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1484 |
-| 1519 | `const.spdx_Core_RelationshipType_hasProvidedDependency` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1485 |
-| 1520 | `const.spdx_Core_RelationshipType_hasRequirement` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1486 |
-| 1521 | `const.spdx_Core_RelationshipType_hasSpecification` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1487 |
-| 1522 | `const.spdx_Core_RelationshipType_hasStaticLink` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1488 |
-| 1523 | `const.spdx_Core_RelationshipType_hasTest` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1489 |
-| 1524 | `const.spdx_Core_RelationshipType_hasTestCase` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1490 |
-| 1525 | `const.spdx_Core_RelationshipType_hasVariant` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1491 |
-| 1526 | `const.spdx_Core_RelationshipType_invokedBy` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1492 |
-| 1527 | `const.spdx_Core_RelationshipType_modifiedBy` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1493 |
-| 1528 | `const.spdx_Core_RelationshipType_other` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1494 |
-| 1529 | `const.spdx_Core_RelationshipType_packagedBy` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1495 |
-| 1530 | `const.spdx_Core_RelationshipType_patchedBy` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1496 |
-| 1531 | `const.spdx_Core_RelationshipType_publishedBy` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1497 |
-| 1532 | `const.spdx_Core_RelationshipType_reportedBy` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1498 |
-| 1533 | `const.spdx_Core_RelationshipType_republishedBy` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1499 |
-| 1534 | `const.spdx_Core_RelationshipType_serializedInArtifact` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1500 |
-| 1535 | `const.spdx_Core_RelationshipType_testedOn` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1501 |
-| 1536 | `const.spdx_Core_RelationshipType_trainedOn` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1502 |
-| 1537 | `const.spdx_Core_RelationshipType_underInvestigationFor` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1503 |
-| 1538 | `const.spdx_Core_RelationshipType_usesTool` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1504 |
-| 1539 | `const.SpdxDocument` | Object/class term | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Core/SpdxDocument` | 1505 |
-| 1540 | `const.SupportType` | Vocabulary/type class | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Core/SupportType` | 1506 |
-| 1541 | `const.spdx_Core_SupportType_deployed` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1507 |
-| 1542 | `const.spdx_Core_SupportType_development` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1508 |
-| 1543 | `const.spdx_Core_SupportType_endOfSupport` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1509 |
-| 1544 | `const.spdx_Core_SupportType_limitedSupport` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1510 |
-| 1545 | `const.spdx_Core_SupportType_noAssertion` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1511 |
-| 1546 | `const.spdx_Core_SupportType_noSupport` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1512 |
-| 1547 | `const.spdx_Core_SupportType_support` | Fully-qualified vocabulary member | CDDL-only or derived alias | `` | 1513 |
-| 1548 | `const.Tool` | Object/class term | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Core/Tool` | 1514 |
-| 1549 | `const.Agent` | Object/class term | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Core/Agent` | 1515 |
-| 1550 | `const.Annotation` | Object/class term | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Core/Annotation` | 1516 |
-| 1551 | `const.review` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1517 |
-| 1552 | `const.development` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1518 |
-| 1553 | `const.endOfSupport` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1519 |
-| 1554 | `const.limitedSupport` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1520 |
-| 1555 | `const.noSupport` | Local vocabulary member alias | CDDL-only or derived alias | `` | 1521 |
-| 1556 | `const.Bundle` | Object/class term | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Core/Bundle` | 1522 |
-| 1557 | `const.Hash` | Object/class term | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Core/Hash` | 1523 |
-| 1558 | `const.LifecycleScopedRelationship` | Object/class term | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Core/LifecycleScopedRelationship` | 1524 |
-| 1559 | `const.Organization` | Object/class term | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Core/Organization` | 1525 |
-| 1560 | `const.Person` | Object/class term | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Core/Person` | 1526 |
-| 1561 | `const.SoftwareAgent` | Object/class term | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Core/SoftwareAgent` | 1527 |
-| 1562 | `const.Bom` | Object/class term | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Core/Bom` | 1528 |
+| Integer | CDDL name | Category | Metadata `name` | Metadata `Instantiability` | Metadata source | Source | JSON-LD/model URL | CDDL line |
+|---:|---|---|---|---|---|---|---|---:|
+| 1 | `label.@graph` | JSON-LD structural key | `` | `` | `` | CDDL-only or derived alias | `` | 642 |
+| 2 | `label.type` | JSON-LD structural key | `` | `` | `` | JSON-LD string term | `@type` | 643 |
+| 3 | `label.@id` | JSON-LD structural key | `` | `` | `` | CDDL-only or derived alias | `` | 644 |
+| 4 | `label.software_contentIdentifierType` | Model property | `contentIdentifierType` | `` | `model/Software/Properties/contentIdentifierType.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Software/Properties/contentIdentifierType/` | 646 |
+| 5 | `label.software_contentIdentifierValue` | Model property | `contentIdentifierValue` | `` | `model/Software/Properties/contentIdentifierValue.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Software/Properties/contentIdentifierValue/` | 648 |
+| 6 | `label.software_additionalPurpose` | Model property | `additionalPurpose` | `` | `model/Software/Properties/additionalPurpose.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Software/Properties/additionalPurpose/` | 650 |
+| 7 | `label.software_attributionText` | Model property | `attributionText` | `` | `model/Software/Properties/attributionText.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Software/Properties/attributionText/` | 652 |
+| 8 | `label.software_contentIdentifier` | Model property | `contentIdentifier` | `` | `model/Software/Properties/contentIdentifier.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Software/Properties/contentIdentifier/` | 654 |
+| 9 | `label.software_copyrightText` | Model property | `copyrightText` | `` | `model/Software/Properties/copyrightText.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Software/Properties/copyrightText/` | 656 |
+| 10 | `label.software_primaryPurpose` | Model property | `primaryPurpose` | `` | `model/Software/Properties/primaryPurpose.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Software/Properties/primaryPurpose/` | 658 |
+| 11 | `label.spdxId` | Model property | `spdxId` | `` | `model/Core/Properties/spdxId.md` | JSON-LD string term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/spdxId/` | 660 |
+| 12 | `label.contentType` | Model property | `contentType` | `` | `model/Core/Properties/contentType.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/contentType/` | 662 |
+| 13 | `label.software_fileKind` | Model property | `fileKind` | `` | `model/Software/Properties/fileKind.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Software/Properties/fileKind/` | 664 |
+| 14 | `label.software_downloadLocation` | Model property | `downloadLocation` | `` | `model/Software/Properties/downloadLocation.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Software/Properties/downloadLocation/` | 666 |
+| 15 | `label.software_homePage` | Model property | `homePage` | `` | `model/Software/Properties/homePage.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Software/Properties/homePage/` | 668 |
+| 16 | `label.software_packageUrl` | Model property | `packageUrl` | `` | `model/Software/Properties/packageUrl.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Software/Properties/packageUrl/` | 670 |
+| 17 | `label.software_packageVersion` | Model property | `packageVersion` | `` | `model/Software/Properties/packageVersion.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Software/Properties/packageVersion/` | 672 |
+| 18 | `label.software_sourceInfo` | Model property | `sourceInfo` | `` | `model/Software/Properties/sourceInfo.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Software/Properties/sourceInfo/` | 674 |
+| 19 | `label.software_sbomType` | Model property | `sbomType` | `` | `model/Software/Properties/sbomType.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Software/Properties/sbomType/` | 676 |
+| 20 | `label.software_byteRange` | Model property | `byteRange` | `` | `model/Software/Properties/byteRange.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Software/Properties/byteRange/` | 678 |
+| 21 | `label.software_lineRange` | Model property | `lineRange` | `` | `model/Software/Properties/lineRange.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Software/Properties/lineRange/` | 680 |
+| 22 | `label.software_snippetFromFile` | Model property | `snippetFromFile` | `` | `model/Software/Properties/snippetFromFile.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Software/Properties/snippetFromFile/` | 682 |
+| 23 | `label.suppliedBy` | Model property | `suppliedBy` | `` | `model/Core/Properties/suppliedBy.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/suppliedBy/` | 684 |
+| 24 | `label.security_assessedElement` | Model property | `assessedElement` | `` | `model/Security/Properties/assessedElement.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Security/Properties/assessedElement/` | 686 |
+| 25 | `label.security_modifiedTime` | Model property | `modifiedTime` | `` | `model/Security/Properties/modifiedTime.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Security/Properties/modifiedTime/` | 688 |
+| 26 | `label.security_publishedTime` | Model property | `publishedTime` | `` | `model/Security/Properties/publishedTime.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Security/Properties/publishedTime/` | 690 |
+| 27 | `label.security_withdrawnTime` | Model property | `withdrawnTime` | `` | `model/Security/Properties/withdrawnTime.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Security/Properties/withdrawnTime/` | 692 |
+| 28 | `label.security_score` | Model property | `score` | `` | `model/Security/Properties/score.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Security/Properties/score/` | 694 |
+| 29 | `label.security_vectorString` | Model property | `vectorString` | `` | `model/Security/Properties/vectorString.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Security/Properties/vectorString/` | 696 |
+| 30 | `label.security_severity` | Model property | `severity` | `` | `model/Security/Properties/severity.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Security/Properties/severity/` | 698 |
+| 31 | `label.security_percentile` | Model property | `percentile` | `` | `model/Security/Properties/percentile.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Security/Properties/percentile/` | 700 |
+| 32 | `label.security_probability` | Model property | `probability` | `` | `model/Security/Properties/probability.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Security/Properties/probability/` | 702 |
+| 33 | `label.security_catalogType` | Model property | `catalogType` | `` | `model/Security/Properties/catalogType.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Security/Properties/catalogType/` | 704 |
+| 34 | `label.security_exploited` | Model property | `exploited` | `` | `model/Security/Properties/exploited.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Security/Properties/exploited/` | 706 |
+| 35 | `label.security_locator` | Model property | `locator` | `` | `model/Security/Properties/locator.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Security/Properties/locator/` | 708 |
+| 36 | `label.security_decisionType` | Model property | `decisionType` | `` | `model/Security/Properties/decisionType.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Security/Properties/decisionType/` | 710 |
+| 37 | `label.security_statusNotes` | Model property | `statusNotes` | `` | `model/Security/Properties/statusNotes.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Security/Properties/statusNotes/` | 712 |
+| 38 | `label.security_vexVersion` | Model property | `vexVersion` | `` | `model/Security/Properties/vexVersion.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Security/Properties/vexVersion/` | 714 |
+| 39 | `label.security_actionStatement` | Model property | `actionStatement` | `` | `model/Security/Properties/actionStatement.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Security/Properties/actionStatement/` | 716 |
+| 40 | `label.security_actionStatementTime` | Model property | `actionStatementTime` | `` | `model/Security/Properties/actionStatementTime.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Security/Properties/actionStatementTime/` | 718 |
+| 41 | `label.security_impactStatement` | Model property | `impactStatement` | `` | `model/Security/Properties/impactStatement.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Security/Properties/impactStatement/` | 720 |
+| 42 | `label.security_impactStatementTime` | Model property | `impactStatementTime` | `` | `model/Security/Properties/impactStatementTime.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Security/Properties/impactStatementTime/` | 722 |
+| 43 | `label.security_justificationType` | Model property | `justificationType` | `` | `model/Security/Properties/justificationType.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Security/Properties/justificationType/` | 724 |
+| 44 | `label.simplelicensing_customIdToUri` | Model property | `customIdToUri` | `` | `model/SimpleLicensing/Properties/customIdToUri.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/SimpleLicensing/Properties/customIdToUri/` | 726 |
+| 45 | `label.simplelicensing_licenseExpression` | Model property | `licenseExpression` | `` | `model/SimpleLicensing/Properties/licenseExpression.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/SimpleLicensing/Properties/licenseExpression/` | 728 |
+| 46 | `label.simplelicensing_licenseListVersion` | Model property | `licenseListVersion` | `` | `model/SimpleLicensing/Properties/licenseListVersion.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/SimpleLicensing/Properties/licenseListVersion/` | 730 |
+| 47 | `label.simplelicensing_licenseText` | Model property | `licenseText` | `` | `model/SimpleLicensing/Properties/licenseText.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/SimpleLicensing/Properties/licenseText/` | 732 |
+| 48 | `label.expandedlicensing_additionText` | Model property | `additionText` | `` | `model/ExpandedLicensing/Properties/additionText.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/ExpandedLicensing/Properties/additionText/` | 734 |
+| 49 | `label.expandedlicensing_isDeprecatedAdditionId` | Model property | `isDeprecatedAdditionId` | `` | `model/ExpandedLicensing/Properties/isDeprecatedAdditionId.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/ExpandedLicensing/Properties/isDeprecatedAdditionId/` | 736 |
+| 50 | `label.expandedlicensing_licenseXml` | Model property | `licenseXml` | `` | `model/ExpandedLicensing/Properties/licenseXml.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/ExpandedLicensing/Properties/licenseXml/` | 738 |
+| 51 | `label.expandedlicensing_obsoletedBy` | Model property | `obsoletedBy` | `` | `model/ExpandedLicensing/Properties/obsoletedBy.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/ExpandedLicensing/Properties/obsoletedBy/` | 740 |
+| 52 | `label.expandedlicensing_seeAlso` | Model property | `seeAlso` | `` | `model/ExpandedLicensing/Properties/seeAlso.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/ExpandedLicensing/Properties/seeAlso/` | 742 |
+| 53 | `label.expandedlicensing_standardAdditionTemplate` | Model property | `standardAdditionTemplate` | `` | `model/ExpandedLicensing/Properties/standardAdditionTemplate.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/ExpandedLicensing/Properties/standardAdditionTemplate/` | 744 |
+| 54 | `label.expandedlicensing_deprecatedVersion` | Model property | `deprecatedVersion` | `` | `model/ExpandedLicensing/Properties/deprecatedVersion.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/ExpandedLicensing/Properties/deprecatedVersion/` | 746 |
+| 55 | `label.expandedlicensing_listVersionAdded` | Model property | `listVersionAdded` | `` | `model/ExpandedLicensing/Properties/listVersionAdded.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/ExpandedLicensing/Properties/listVersionAdded/` | 748 |
+| 56 | `label.expandedlicensing_member` | Model property | `member` | `` | `model/ExpandedLicensing/Properties/member.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/ExpandedLicensing/Properties/member/` | 750 |
+| 57 | `label.expandedlicensing_isDeprecatedLicenseId` | Model property | `isDeprecatedLicenseId` | `` | `model/ExpandedLicensing/Properties/isDeprecatedLicenseId.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/ExpandedLicensing/Properties/isDeprecatedLicenseId/` | 752 |
+| 58 | `label.expandedlicensing_isFsfLibre` | Model property | `isFsfLibre` | `` | `model/ExpandedLicensing/Properties/isFsfLibre.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/ExpandedLicensing/Properties/isFsfLibre/` | 754 |
+| 59 | `label.expandedlicensing_isOsiApproved` | Model property | `isOsiApproved` | `` | `model/ExpandedLicensing/Properties/isOsiApproved.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/ExpandedLicensing/Properties/isOsiApproved/` | 756 |
+| 60 | `label.expandedlicensing_standardLicenseHeader` | Model property | `standardLicenseHeader` | `` | `model/ExpandedLicensing/Properties/standardLicenseHeader.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/ExpandedLicensing/Properties/standardLicenseHeader/` | 758 |
+| 61 | `label.expandedlicensing_standardLicenseTemplate` | Model property | `standardLicenseTemplate` | `` | `model/ExpandedLicensing/Properties/standardLicenseTemplate.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/ExpandedLicensing/Properties/standardLicenseTemplate/` | 760 |
+| 62 | `label.expandedlicensing_subjectLicense` | Model property | `subjectLicense` | `` | `model/ExpandedLicensing/Properties/subjectLicense.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/ExpandedLicensing/Properties/subjectLicense/` | 762 |
+| 63 | `label.expandedlicensing_subjectAddition` | Model property | `subjectAddition` | `` | `model/ExpandedLicensing/Properties/subjectAddition.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/ExpandedLicensing/Properties/subjectAddition/` | 764 |
+| 64 | `label.expandedlicensing_subjectExtendableLicense` | Model property | `subjectExtendableLicense` | `` | `model/ExpandedLicensing/Properties/subjectExtendableLicense.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/ExpandedLicensing/Properties/subjectExtendableLicense/` | 766 |
+| 65 | `label.dataset_anonymizationMethodUsed` | Model property | `anonymizationMethodUsed` | `` | `model/Dataset/Properties/anonymizationMethodUsed.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Dataset/Properties/anonymizationMethodUsed/` | 768 |
+| 66 | `label.dataset_confidentialityLevel` | Model property | `confidentialityLevel` | `` | `model/Dataset/Properties/confidentialityLevel.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Dataset/Properties/confidentialityLevel/` | 770 |
+| 67 | `label.dataset_dataCollectionProcess` | Model property | `dataCollectionProcess` | `` | `model/Dataset/Properties/dataCollectionProcess.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Dataset/Properties/dataCollectionProcess/` | 772 |
+| 68 | `label.dataset_dataPreprocessing` | Model property | `dataPreprocessing` | `` | `model/Dataset/Properties/dataPreprocessing.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Dataset/Properties/dataPreprocessing/` | 774 |
+| 69 | `label.dataset_datasetAvailability` | Model property | `datasetAvailability` | `` | `model/Dataset/Properties/datasetAvailability.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Dataset/Properties/datasetAvailability/` | 776 |
+| 70 | `label.dataset_datasetNoise` | Model property | `datasetNoise` | `` | `model/Dataset/Properties/datasetNoise.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Dataset/Properties/datasetNoise/` | 778 |
+| 71 | `label.dataset_datasetSize` | Model property | `datasetSize` | `` | `model/Dataset/Properties/datasetSize.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Dataset/Properties/datasetSize/` | 780 |
+| 72 | `label.dataset_datasetType` | Model property | `datasetType` | `` | `model/Dataset/Properties/datasetType.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Dataset/Properties/datasetType/` | 782 |
+| 73 | `label.dataset_datasetUpdateMechanism` | Model property | `datasetUpdateMechanism` | `` | `model/Dataset/Properties/datasetUpdateMechanism.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Dataset/Properties/datasetUpdateMechanism/` | 784 |
+| 74 | `label.dataset_hasSensitivePersonalInformation` | Model property | `hasSensitivePersonalInformation` | `` | `model/Dataset/Properties/hasSensitivePersonalInformation.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Dataset/Properties/hasSensitivePersonalInformation/` | 786 |
+| 75 | `label.dataset_intendedUse` | Model property | `intendedUse` | `` | `model/Dataset/Properties/intendedUse.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Dataset/Properties/intendedUse/` | 788 |
+| 76 | `label.dataset_knownBias` | Model property | `knownBias` | `` | `model/Dataset/Properties/knownBias.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Dataset/Properties/knownBias/` | 790 |
+| 77 | `label.dataset_sensor` | Model property | `sensor` | `` | `model/Dataset/Properties/sensor.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Dataset/Properties/sensor/` | 792 |
+| 78 | `label.ai_finetuningEnergyConsumption` | Model property | `finetuningEnergyConsumption` | `` | `model/AI/Properties/finetuningEnergyConsumption.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/AI/Properties/finetuningEnergyConsumption/` | 794 |
+| 79 | `label.ai_inferenceEnergyConsumption` | Model property | `inferenceEnergyConsumption` | `` | `model/AI/Properties/inferenceEnergyConsumption.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/AI/Properties/inferenceEnergyConsumption/` | 796 |
+| 80 | `label.ai_trainingEnergyConsumption` | Model property | `trainingEnergyConsumption` | `` | `model/AI/Properties/trainingEnergyConsumption.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/AI/Properties/trainingEnergyConsumption/` | 798 |
+| 81 | `label.ai_energyQuantity` | Model property | `energyQuantity` | `` | `model/AI/Properties/energyQuantity.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/AI/Properties/energyQuantity/` | 800 |
+| 82 | `label.ai_energyUnit` | Model property | `energyUnit` | `` | `model/AI/Properties/energyUnit.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/AI/Properties/energyUnit/` | 802 |
+| 83 | `label.ai_autonomyType` | Model property | `autonomyType` | `` | `model/AI/Properties/autonomyType.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/AI/Properties/autonomyType/` | 804 |
+| 84 | `label.ai_domain` | Model property | `domain` | `` | `model/AI/Properties/domain.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/AI/Properties/domain/` | 806 |
+| 85 | `label.ai_energyConsumption` | Model property | `energyConsumption` | `` | `model/AI/Properties/energyConsumption.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/AI/Properties/energyConsumption/` | 808 |
+| 86 | `label.ai_hyperparameter` | Model property | `hyperparameter` | `` | `model/AI/Properties/hyperparameter.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/AI/Properties/hyperparameter/` | 810 |
+| 87 | `label.ai_informationAboutApplication` | Model property | `informationAboutApplication` | `` | `model/AI/Properties/informationAboutApplication.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/AI/Properties/informationAboutApplication/` | 812 |
+| 88 | `label.ai_informationAboutTraining` | Model property | `informationAboutTraining` | `` | `model/AI/Properties/informationAboutTraining.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/AI/Properties/informationAboutTraining/` | 814 |
+| 89 | `label.ai_limitation` | Model property | `limitation` | `` | `model/AI/Properties/limitation.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/AI/Properties/limitation/` | 816 |
+| 90 | `label.ai_metric` | Model property | `metric` | `` | `model/AI/Properties/metric.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/AI/Properties/metric/` | 818 |
+| 91 | `label.ai_metricDecisionThreshold` | Model property | `metricDecisionThreshold` | `` | `model/AI/Properties/metricDecisionThreshold.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/AI/Properties/metricDecisionThreshold/` | 820 |
+| 92 | `label.ai_modelDataPreprocessing` | Model property | `modelDataPreprocessing` | `` | `model/AI/Properties/modelDataPreprocessing.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/AI/Properties/modelDataPreprocessing/` | 822 |
+| 93 | `label.ai_modelExplainability` | Model property | `modelExplainability` | `` | `model/AI/Properties/modelExplainability.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/AI/Properties/modelExplainability/` | 824 |
+| 94 | `label.ai_safetyRiskAssessment` | Model property | `safetyRiskAssessment` | `` | `model/AI/Properties/safetyRiskAssessment.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/AI/Properties/safetyRiskAssessment/` | 826 |
+| 95 | `label.ai_standardCompliance` | Model property | `standardCompliance` | `` | `model/AI/Properties/standardCompliance.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/AI/Properties/standardCompliance/` | 828 |
+| 96 | `label.ai_typeOfModel` | Model property | `typeOfModel` | `` | `model/AI/Properties/typeOfModel.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/AI/Properties/typeOfModel/` | 830 |
+| 97 | `label.ai_useSensitivePersonalInformation` | Model property | `useSensitivePersonalInformation` | `` | `model/AI/Properties/useSensitivePersonalInformation.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/AI/Properties/useSensitivePersonalInformation/` | 832 |
+| 98 | `label.build_buildEndTime` | Model property | `buildEndTime` | `` | `model/Build/Properties/buildEndTime.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Build/Properties/buildEndTime/` | 834 |
+| 99 | `label.build_buildId` | Model property | `buildId` | `` | `model/Build/Properties/buildId.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Build/Properties/buildId/` | 836 |
+| 100 | `label.build_buildStartTime` | Model property | `buildStartTime` | `` | `model/Build/Properties/buildStartTime.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Build/Properties/buildStartTime/` | 838 |
+| 101 | `label.build_buildType` | Model property | `buildType` | `` | `model/Build/Properties/buildType.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Build/Properties/buildType/` | 840 |
+| 102 | `label.build_configSourceDigest` | Model property | `configSourceDigest` | `` | `model/Build/Properties/configSourceDigest.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Build/Properties/configSourceDigest/` | 842 |
+| 103 | `label.build_configSourceEntrypoint` | Model property | `configSourceEntrypoint` | `` | `model/Build/Properties/configSourceEntrypoint.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Build/Properties/configSourceEntrypoint/` | 844 |
+| 104 | `label.build_configSourceUri` | Model property | `configSourceUri` | `` | `model/Build/Properties/configSourceUri.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Build/Properties/configSourceUri/` | 846 |
+| 105 | `label.build_environment` | Model property | `environment` | `` | `model/Build/Properties/environment.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Build/Properties/environment/` | 848 |
+| 106 | `label.build_parameter` | Model property | `parameter` | `` | `model/Build/Properties/parameter.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Build/Properties/parameter/` | 850 |
+| 107 | `label.extension_cdxPropName` | Model property | `cdxPropName` | `` | `model/Extension/Properties/cdxPropName.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Extension/Properties/cdxPropName/` | 852 |
+| 108 | `label.extension_cdxPropValue` | Model property | `cdxPropValue` | `` | `model/Extension/Properties/cdxPropValue.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Extension/Properties/cdxPropValue/` | 854 |
+| 109 | `label.extension_cdxProperty` | Model property | `cdxProperty` | `` | `model/Extension/Properties/cdxProperty.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Extension/Properties/cdxProperty/` | 856 |
+| 110 | `label.comment` | Model property | `comment` | `` | `model/Core/Properties/comment.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/comment/` | 858 |
+| 111 | `label.created` | Model property | `created` | `` | `model/Core/Properties/created.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/created/` | 860 |
+| 112 | `label.createdBy` | Model property | `createdBy` | `` | `model/Core/Properties/createdBy.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/createdBy/` | 862 |
+| 113 | `label.createdUsing` | Model property | `createdUsing` | `` | `model/Core/Properties/createdUsing.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/createdUsing/` | 864 |
+| 114 | `label.specVersion` | Model property | `specVersion` | `` | `model/Core/Properties/specVersion.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/specVersion/` | 866 |
+| 115 | `label.key` | Model property | `key` | `` | `model/Core/Properties/key.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/key/` | 868 |
+| 116 | `label.value` | Model property | `value` | `` | `model/Core/Properties/value.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/value/` | 870 |
+| 117 | `label.creationInfo` | Model property | `creationInfo` | `` | `model/Core/Properties/creationInfo.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/creationInfo/` | 872 |
+| 118 | `label.description` | Model property | `description` | `` | `model/Core/Properties/description.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/description/` | 874 |
+| 119 | `label.extension` | Model property | `extension` | `` | `model/Core/Properties/extension.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/extension/` | 876 |
+| 120 | `label.externalIdentifier` | Model property | `externalIdentifier` | `` | `model/Core/Properties/externalIdentifier.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/externalIdentifier/` | 878 |
+| 121 | `label.externalRef` | Model property | `externalRef` | `` | `model/Core/Properties/externalRef.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/externalRef/` | 880 |
+| 122 | `label.name` | Model property | `name` | `` | `model/Core/Properties/name.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/name/` | 882 |
+| 123 | `label.summary` | Model property | `summary` | `` | `model/Core/Properties/summary.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/summary/` | 884 |
+| 124 | `label.verifiedUsing` | Model property | `verifiedUsing` | `` | `model/Core/Properties/verifiedUsing.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/verifiedUsing/` | 886 |
+| 125 | `label.element` | Model property | `element` | `` | `model/Core/Properties/element.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/element/` | 888 |
+| 126 | `label.profileConformance` | Model property | `profileConformance` | `` | `model/Core/Properties/profileConformance.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/profileConformance/` | 890 |
+| 127 | `label.rootElement` | Model property | `rootElement` | `` | `model/Core/Properties/rootElement.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/rootElement/` | 892 |
+| 128 | `label.externalIdentifierType` | Model property | `externalIdentifierType` | `` | `model/Core/Properties/externalIdentifierType.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/externalIdentifierType/` | 894 |
+| 129 | `label.identifier` | Model property | `identifier` | `` | `model/Core/Properties/identifier.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/identifier/` | 896 |
+| 130 | `label.identifierLocator` | Model property | `identifierLocator` | `` | `model/Core/Properties/identifierLocator.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/identifierLocator/` | 898 |
+| 131 | `label.issuingAuthority` | Model property | `issuingAuthority` | `` | `model/Core/Properties/issuingAuthority.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/issuingAuthority/` | 900 |
+| 132 | `label.definingArtifact` | Model property | `definingArtifact` | `` | `model/Core/Properties/definingArtifact.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/definingArtifact/` | 902 |
+| 133 | `label.externalSpdxId` | Model property | `externalSpdxId` | `` | `model/Core/Properties/externalSpdxId.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/externalSpdxId/` | 904 |
+| 134 | `label.locationHint` | Model property | `locationHint` | `` | `model/Core/Properties/locationHint.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/locationHint/` | 906 |
+| 135 | `label.externalRefType` | Model property | `externalRefType` | `` | `model/Core/Properties/externalRefType.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/externalRefType/` | 908 |
+| 136 | `label.locator` | Model property | `locator` | `` | `model/Core/Properties/locator.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/locator/` | 910 |
+| 137 | `label.namespace` | Model property | `namespace` | `` | `model/Core/Properties/namespace.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/namespace/` | 912 |
+| 138 | `label.prefix` | Model property | `prefix` | `` | `model/Core/Properties/prefix.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/prefix/` | 914 |
+| 139 | `label.algorithm` | Model property | `algorithm` | `` | `model/Core/Properties/algorithm.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/algorithm/` | 916 |
+| 140 | `label.hashValue` | Model property | `hashValue` | `` | `model/Core/Properties/hashValue.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/hashValue/` | 918 |
+| 141 | `label.packageVerificationCodeExcludedFile` | Model property | `packageVerificationCodeExcludedFile` | `` | `model/Core/Properties/packageVerificationCodeExcludedFile.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/packageVerificationCodeExcludedFile/` | 920 |
+| 142 | `label.beginIntegerRange` | Model property | `beginIntegerRange` | `` | `model/Core/Properties/beginIntegerRange.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/beginIntegerRange/` | 922 |
+| 143 | `label.endIntegerRange` | Model property | `endIntegerRange` | `` | `model/Core/Properties/endIntegerRange.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/endIntegerRange/` | 924 |
+| 144 | `label.completeness` | Model property | `completeness` | `` | `model/Core/Properties/completeness.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/completeness/` | 926 |
+| 145 | `label.endTime` | Model property | `endTime` | `` | `model/Core/Properties/endTime.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/endTime/` | 928 |
+| 146 | `label.from` | Model property | `from` | `` | `model/Core/Properties/from.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/from/` | 930 |
+| 147 | `label.relationshipType` | Model property | `relationshipType` | `` | `model/Core/Properties/relationshipType.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/relationshipType/` | 932 |
+| 148 | `label.startTime` | Model property | `startTime` | `` | `model/Core/Properties/startTime.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/startTime/` | 934 |
+| 149 | `label.to` | Model property | `to` | `` | `model/Core/Properties/to.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/to/` | 936 |
+| 150 | `label.dataLicense` | Model property | `dataLicense` | `` | `model/Core/Properties/dataLicense.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/dataLicense/` | 938 |
+| 151 | `label.import` | Model property | `import` | `` | `model/Core/Properties/import.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/import/` | 940 |
+| 152 | `label.namespaceMap` | Model property | `namespaceMap` | `` | `model/Core/Properties/namespaceMap.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/namespaceMap/` | 942 |
+| 153 | `label.annotationType` | Model property | `annotationType` | `` | `model/Core/Properties/annotationType.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/annotationType/` | 944 |
+| 154 | `label.statement` | Model property | `statement` | `` | `model/Core/Properties/statement.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/statement/` | 946 |
+| 155 | `label.subject` | Model property | `subject` | `` | `model/Core/Properties/subject.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/subject/` | 948 |
+| 156 | `label.builtTime` | Model property | `builtTime` | `` | `model/Core/Properties/builtTime.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/builtTime/` | 950 |
+| 157 | `label.originatedBy` | Model property | `originatedBy` | `` | `model/Core/Properties/originatedBy.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/originatedBy/` | 952 |
+| 158 | `label.releaseTime` | Model property | `releaseTime` | `` | `model/Core/Properties/releaseTime.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/releaseTime/` | 954 |
+| 159 | `label.standardName` | Model property | `standardName` | `` | `model/Core/Properties/standardName.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/standardName/` | 956 |
+| 160 | `label.supportLevel` | Model property | `supportLevel` | `` | `model/Core/Properties/supportLevel.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/supportLevel/` | 958 |
+| 161 | `label.validUntilTime` | Model property | `validUntilTime` | `` | `model/Core/Properties/validUntilTime.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/validUntilTime/` | 960 |
+| 162 | `label.context` | Model property | `context` | `` | `model/Core/Properties/context.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/context/` | 962 |
+| 163 | `label.scope` | Model property | `scope` | `` | `model/Core/Properties/scope.md` | JSON-LD object term | `https://spdx.github.io/spdx-spec/v3.0.1/model/Core/Properties/scope/` | 964 |
+| 1001 | `const.software_ContentIdentifier` | Object/class term | `ContentIdentifier` | `Concrete` | `model/Software/Classes/ContentIdentifier.md` | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Software/ContentIdentifier` | 967 |
+| 1002 | `const.gitoid` | Local vocabulary member alias | `gitoid` | `` | `ambiguous vocabulary entry: ContentIdentifierType (model/Software/Vocabularies/ContentIdentifierType.md), ExternalIdentifierType (model/Core/Vocabularies/ExternalIdentifierType.md)` | CDDL-only or derived alias | `` | 968 |
+| 1003 | `const.swhid` | Local vocabulary member alias | `swhid` | `` | `ambiguous vocabulary entry: ContentIdentifierType (model/Software/Vocabularies/ContentIdentifierType.md), ExternalIdentifierType (model/Core/Vocabularies/ExternalIdentifierType.md)` | CDDL-only or derived alias | `` | 969 |
+| 1004 | `const.software_ContentIdentifierType` | Vocabulary/type class | `ContentIdentifierType` | `` | `model/Software/Vocabularies/ContentIdentifierType.md` | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Software/ContentIdentifierType` | 970 |
+| 1005 | `const.spdx_Software_ContentIdentifierType_gitoid` | Fully-qualified vocabulary member | `gitoid` | `` | `model/Software/Vocabularies/ContentIdentifierType.md` | CDDL-only or derived alias | `` | 971 |
+| 1006 | `const.spdx_Software_ContentIdentifierType_swhid` | Fully-qualified vocabulary member | `swhid` | `` | `model/Software/Vocabularies/ContentIdentifierType.md` | CDDL-only or derived alias | `` | 972 |
+| 1007 | `const.software_FileKindType` | Vocabulary/type class | `FileKindType` | `` | `model/Software/Vocabularies/FileKindType.md` | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Software/FileKindType` | 973 |
+| 1008 | `const.spdx_Software_FileKindType_directory` | Fully-qualified vocabulary member | `directory` | `` | `model/Software/Vocabularies/FileKindType.md` | CDDL-only or derived alias | `` | 974 |
+| 1009 | `const.spdx_Software_FileKindType_file` | Fully-qualified vocabulary member | `file` | `` | `model/Software/Vocabularies/FileKindType.md` | CDDL-only or derived alias | `` | 975 |
+| 1010 | `const.software_SbomType` | Vocabulary/type class | `SbomType` | `` | `model/Software/Vocabularies/SbomType.md` | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Software/SbomType` | 976 |
+| 1011 | `const.spdx_Software_SbomType_analyzed` | Fully-qualified vocabulary member | `analyzed` | `` | `model/Software/Vocabularies/SbomType.md` | CDDL-only or derived alias | `` | 977 |
+| 1012 | `const.spdx_Software_SbomType_build` | Fully-qualified vocabulary member | `build` | `` | `model/Software/Vocabularies/SbomType.md` | CDDL-only or derived alias | `` | 978 |
+| 1013 | `const.spdx_Software_SbomType_deployed` | Fully-qualified vocabulary member | `deployed` | `` | `model/Software/Vocabularies/SbomType.md` | CDDL-only or derived alias | `` | 979 |
+| 1014 | `const.spdx_Software_SbomType_design` | Fully-qualified vocabulary member | `design` | `` | `model/Software/Vocabularies/SbomType.md` | CDDL-only or derived alias | `` | 980 |
+| 1015 | `const.spdx_Software_SbomType_runtime` | Fully-qualified vocabulary member | `runtime` | `` | `model/Software/Vocabularies/SbomType.md` | CDDL-only or derived alias | `` | 981 |
+| 1016 | `const.spdx_Software_SbomType_source` | Fully-qualified vocabulary member | `source` | `` | `model/Software/Vocabularies/SbomType.md` | CDDL-only or derived alias | `` | 982 |
+| 1017 | `const.software_SoftwarePurpose` | Vocabulary/type class | `SoftwarePurpose` | `` | `model/Software/Vocabularies/SoftwarePurpose.md` | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Software/SoftwarePurpose` | 983 |
+| 1018 | `const.spdx_Software_SoftwarePurpose_application` | Fully-qualified vocabulary member | `application` | `` | `model/Software/Vocabularies/SoftwarePurpose.md` | CDDL-only or derived alias | `` | 984 |
+| 1019 | `const.spdx_Software_SoftwarePurpose_archive` | Fully-qualified vocabulary member | `archive` | `` | `model/Software/Vocabularies/SoftwarePurpose.md` | CDDL-only or derived alias | `` | 985 |
+| 1020 | `const.spdx_Software_SoftwarePurpose_bom` | Fully-qualified vocabulary member | `bom` | `` | `model/Software/Vocabularies/SoftwarePurpose.md` | CDDL-only or derived alias | `` | 986 |
+| 1021 | `const.spdx_Software_SoftwarePurpose_configuration` | Fully-qualified vocabulary member | `configuration` | `` | `model/Software/Vocabularies/SoftwarePurpose.md` | CDDL-only or derived alias | `` | 987 |
+| 1022 | `const.spdx_Software_SoftwarePurpose_container` | Fully-qualified vocabulary member | `container` | `` | `model/Software/Vocabularies/SoftwarePurpose.md` | CDDL-only or derived alias | `` | 988 |
+| 1023 | `const.spdx_Software_SoftwarePurpose_data` | Fully-qualified vocabulary member | `data` | `` | `model/Software/Vocabularies/SoftwarePurpose.md` | CDDL-only or derived alias | `` | 989 |
+| 1024 | `const.spdx_Software_SoftwarePurpose_device` | Fully-qualified vocabulary member | `device` | `` | `model/Software/Vocabularies/SoftwarePurpose.md` | CDDL-only or derived alias | `` | 990 |
+| 1025 | `const.spdx_Software_SoftwarePurpose_deviceDriver` | Fully-qualified vocabulary member | `deviceDriver` | `` | `model/Software/Vocabularies/SoftwarePurpose.md` | CDDL-only or derived alias | `` | 991 |
+| 1026 | `const.spdx_Software_SoftwarePurpose_diskImage` | Fully-qualified vocabulary member | `diskImage` | `` | `model/Software/Vocabularies/SoftwarePurpose.md` | CDDL-only or derived alias | `` | 992 |
+| 1027 | `const.spdx_Software_SoftwarePurpose_documentation` | Fully-qualified vocabulary member | `documentation` | `` | `model/Software/Vocabularies/SoftwarePurpose.md` | CDDL-only or derived alias | `` | 993 |
+| 1028 | `const.spdx_Software_SoftwarePurpose_evidence` | Fully-qualified vocabulary member | `evidence` | `` | `model/Software/Vocabularies/SoftwarePurpose.md` | CDDL-only or derived alias | `` | 994 |
+| 1029 | `const.spdx_Software_SoftwarePurpose_executable` | Fully-qualified vocabulary member | `executable` | `` | `model/Software/Vocabularies/SoftwarePurpose.md` | CDDL-only or derived alias | `` | 995 |
+| 1030 | `const.spdx_Software_SoftwarePurpose_file` | Fully-qualified vocabulary member | `file` | `` | `model/Software/Vocabularies/SoftwarePurpose.md` | CDDL-only or derived alias | `` | 996 |
+| 1031 | `const.spdx_Software_SoftwarePurpose_filesystemImage` | Fully-qualified vocabulary member | `filesystemImage` | `` | `model/Software/Vocabularies/SoftwarePurpose.md` | CDDL-only or derived alias | `` | 997 |
+| 1032 | `const.spdx_Software_SoftwarePurpose_firmware` | Fully-qualified vocabulary member | `firmware` | `` | `model/Software/Vocabularies/SoftwarePurpose.md` | CDDL-only or derived alias | `` | 998 |
+| 1033 | `const.spdx_Software_SoftwarePurpose_framework` | Fully-qualified vocabulary member | `framework` | `` | `model/Software/Vocabularies/SoftwarePurpose.md` | CDDL-only or derived alias | `` | 999 |
+| 1034 | `const.spdx_Software_SoftwarePurpose_install` | Fully-qualified vocabulary member | `install` | `` | `model/Software/Vocabularies/SoftwarePurpose.md` | CDDL-only or derived alias | `` | 1000 |
+| 1035 | `const.spdx_Software_SoftwarePurpose_library` | Fully-qualified vocabulary member | `library` | `` | `model/Software/Vocabularies/SoftwarePurpose.md` | CDDL-only or derived alias | `` | 1001 |
+| 1036 | `const.spdx_Software_SoftwarePurpose_manifest` | Fully-qualified vocabulary member | `manifest` | `` | `model/Software/Vocabularies/SoftwarePurpose.md` | CDDL-only or derived alias | `` | 1002 |
+| 1037 | `const.spdx_Software_SoftwarePurpose_model` | Fully-qualified vocabulary member | `model` | `` | `model/Software/Vocabularies/SoftwarePurpose.md` | CDDL-only or derived alias | `` | 1003 |
+| 1038 | `const.spdx_Software_SoftwarePurpose_module` | Fully-qualified vocabulary member | `module` | `` | `model/Software/Vocabularies/SoftwarePurpose.md` | CDDL-only or derived alias | `` | 1004 |
+| 1039 | `const.spdx_Software_SoftwarePurpose_operatingSystem` | Fully-qualified vocabulary member | `operatingSystem` | `` | `model/Software/Vocabularies/SoftwarePurpose.md` | CDDL-only or derived alias | `` | 1005 |
+| 1040 | `const.spdx_Software_SoftwarePurpose_other` | Fully-qualified vocabulary member | `other` | `` | `model/Software/Vocabularies/SoftwarePurpose.md` | CDDL-only or derived alias | `` | 1006 |
+| 1041 | `const.spdx_Software_SoftwarePurpose_patch` | Fully-qualified vocabulary member | `patch` | `` | `model/Software/Vocabularies/SoftwarePurpose.md` | CDDL-only or derived alias | `` | 1007 |
+| 1042 | `const.spdx_Software_SoftwarePurpose_platform` | Fully-qualified vocabulary member | `platform` | `` | `model/Software/Vocabularies/SoftwarePurpose.md` | CDDL-only or derived alias | `` | 1008 |
+| 1043 | `const.spdx_Software_SoftwarePurpose_requirement` | Fully-qualified vocabulary member | `requirement` | `` | `model/Software/Vocabularies/SoftwarePurpose.md` | CDDL-only or derived alias | `` | 1009 |
+| 1044 | `const.spdx_Software_SoftwarePurpose_source` | Fully-qualified vocabulary member | `source` | `` | `model/Software/Vocabularies/SoftwarePurpose.md` | CDDL-only or derived alias | `` | 1010 |
+| 1045 | `const.spdx_Software_SoftwarePurpose_specification` | Fully-qualified vocabulary member | `specification` | `` | `model/Software/Vocabularies/SoftwarePurpose.md` | CDDL-only or derived alias | `` | 1011 |
+| 1046 | `const.spdx_Software_SoftwarePurpose_test` | Fully-qualified vocabulary member | `test` | `` | `model/Software/Vocabularies/SoftwarePurpose.md` | CDDL-only or derived alias | `` | 1012 |
+| 1047 | `const.application` | Local vocabulary member alias | `application` | `` | `model/Software/Vocabularies/SoftwarePurpose.md` | CDDL-only or derived alias | `` | 1013 |
+| 1048 | `const.archive` | Local vocabulary member alias | `archive` | `` | `model/Software/Vocabularies/SoftwarePurpose.md` | CDDL-only or derived alias | `` | 1014 |
+| 1049 | `const.bom` | Local vocabulary member alias | `bom` | `` | `ambiguous vocabulary entry: ExternalRefType (model/Core/Vocabularies/ExternalRefType.md), SoftwarePurpose (model/Software/Vocabularies/SoftwarePurpose.md)` | CDDL-only or derived alias | `` | 1015 |
+| 1050 | `const.configuration` | Local vocabulary member alias | `configuration` | `` | `model/Software/Vocabularies/SoftwarePurpose.md` | CDDL-only or derived alias | `` | 1016 |
+| 1051 | `const.container` | Local vocabulary member alias | `container` | `` | `model/Software/Vocabularies/SoftwarePurpose.md` | CDDL-only or derived alias | `` | 1017 |
+| 1052 | `const.data` | Local vocabulary member alias | `data` | `` | `model/Software/Vocabularies/SoftwarePurpose.md` | CDDL-only or derived alias | `` | 1018 |
+| 1053 | `const.device` | Local vocabulary member alias | `device` | `` | `model/Software/Vocabularies/SoftwarePurpose.md` | CDDL-only or derived alias | `` | 1019 |
+| 1054 | `const.deviceDriver` | Local vocabulary member alias | `deviceDriver` | `` | `model/Software/Vocabularies/SoftwarePurpose.md` | CDDL-only or derived alias | `` | 1020 |
+| 1055 | `const.diskImage` | Local vocabulary member alias | `diskImage` | `` | `model/Software/Vocabularies/SoftwarePurpose.md` | CDDL-only or derived alias | `` | 1021 |
+| 1056 | `const.documentation` | Local vocabulary member alias | `documentation` | `` | `ambiguous vocabulary entry: ExternalRefType (model/Core/Vocabularies/ExternalRefType.md), SoftwarePurpose (model/Software/Vocabularies/SoftwarePurpose.md)` | CDDL-only or derived alias | `` | 1022 |
+| 1057 | `const.evidence` | Local vocabulary member alias | `evidence` | `` | `model/Software/Vocabularies/SoftwarePurpose.md` | CDDL-only or derived alias | `` | 1023 |
+| 1058 | `const.executable` | Local vocabulary member alias | `executable` | `` | `model/Software/Vocabularies/SoftwarePurpose.md` | CDDL-only or derived alias | `` | 1024 |
+| 1059 | `const.file` | Local vocabulary member alias | `file` | `` | `ambiguous vocabulary entry: FileKindType (model/Software/Vocabularies/FileKindType.md), SoftwarePurpose (model/Software/Vocabularies/SoftwarePurpose.md)` | CDDL-only or derived alias | `` | 1025 |
+| 1060 | `const.filesystemImage` | Local vocabulary member alias | `filesystemImage` | `` | `model/Software/Vocabularies/SoftwarePurpose.md` | CDDL-only or derived alias | `` | 1026 |
+| 1061 | `const.firmware` | Local vocabulary member alias | `firmware` | `` | `model/Software/Vocabularies/SoftwarePurpose.md` | CDDL-only or derived alias | `` | 1027 |
+| 1062 | `const.framework` | Local vocabulary member alias | `framework` | `` | `model/Software/Vocabularies/SoftwarePurpose.md` | CDDL-only or derived alias | `` | 1028 |
+| 1063 | `const.install` | Local vocabulary member alias | `install` | `` | `model/Software/Vocabularies/SoftwarePurpose.md` | CDDL-only or derived alias | `` | 1029 |
+| 1064 | `const.library` | Local vocabulary member alias | `library` | `` | `model/Software/Vocabularies/SoftwarePurpose.md` | CDDL-only or derived alias | `` | 1030 |
+| 1065 | `const.manifest` | Local vocabulary member alias | `manifest` | `` | `model/Software/Vocabularies/SoftwarePurpose.md` | CDDL-only or derived alias | `` | 1031 |
+| 1066 | `const.model` | Local vocabulary member alias | `model` | `` | `model/Software/Vocabularies/SoftwarePurpose.md` | CDDL-only or derived alias | `` | 1032 |
+| 1067 | `const.module` | Local vocabulary member alias | `module` | `` | `model/Software/Vocabularies/SoftwarePurpose.md` | CDDL-only or derived alias | `` | 1033 |
+| 1068 | `const.operatingSystem` | Local vocabulary member alias | `operatingSystem` | `` | `model/Software/Vocabularies/SoftwarePurpose.md` | CDDL-only or derived alias | `` | 1034 |
+| 1069 | `const.other` | Local vocabulary member alias | `other` | `` | `ambiguous vocabulary entry: AnnotationType (model/Core/Vocabularies/AnnotationType.md), AuthenticationProtocolType (model/Service/Vocabularies/AuthenticationProtocolType.md), ContactPointRelationshipType (model/Core/Vocabularies/ContactPointRelationshipType.md), DatasetType (model/Dataset/Vocabularies/DatasetType.md), EnergyUnitType (model/AI/Vocabularies/EnergyUnitType.md), EvidenceType (model/FunctionalSafety/Vocabularies/EvidenceType.md), ExploitCatalogType (model/Security/Vocabularies/ExploitCatalogType.md), ExternalIdentifierType (model/Core/Vocabularies/ExternalIdentifierType.md), ExternalRefType (model/Core/Vocabularies/ExternalRefType.md), HashAlgorithm (model/Core/Vocabularies/HashAlgorithm.md), LifecycleScopeType (model/Core/Vocabularies/LifecycleScopeType.md), ProcessReadinessType (model/Core/Vocabularies/ProcessReadinessType.md), RelationshipType (model/Core/Vocabularies/RelationshipType.md), SoftwarePurpose (model/Software/Vocabularies/SoftwarePurpose.md), SpecificationType (model/Core/Vocabularies/SpecificationType.md), VerificationType (model/FunctionalSafety/Vocabularies/VerificationType.md), VirtualHardwareModelType (model/Hardware/Vocabularies/VirtualHardwareModelType.md)` | CDDL-only or derived alias | `` | 1035 |
+| 1070 | `const.patch` | Local vocabulary member alias | `patch` | `` | `model/Software/Vocabularies/SoftwarePurpose.md` | CDDL-only or derived alias | `` | 1036 |
+| 1071 | `const.platform` | Local vocabulary member alias | `platform` | `` | `model/Software/Vocabularies/SoftwarePurpose.md` | CDDL-only or derived alias | `` | 1037 |
+| 1072 | `const.requirement` | Local vocabulary member alias | `requirement` | `` | `model/Software/Vocabularies/SoftwarePurpose.md` | CDDL-only or derived alias | `` | 1038 |
+| 1073 | `const.source` | Local vocabulary member alias | `source` | `` | `ambiguous vocabulary entry: SbomType (model/Software/Vocabularies/SbomType.md), SoftwarePurpose (model/Software/Vocabularies/SoftwarePurpose.md)` | CDDL-only or derived alias | `` | 1039 |
+| 1074 | `const.specification` | Local vocabulary member alias | `specification` | `` | `ambiguous vocabulary entry: SoftwarePurpose (model/Software/Vocabularies/SoftwarePurpose.md), SpecificationType (model/Core/Vocabularies/SpecificationType.md)` | CDDL-only or derived alias | `` | 1040 |
+| 1075 | `const.test` | Local vocabulary member alias | `test` | `` | `ambiguous vocabulary entry: LifecycleScopeType (model/Core/Vocabularies/LifecycleScopeType.md), SoftwarePurpose (model/Software/Vocabularies/SoftwarePurpose.md), VerificationType (model/FunctionalSafety/Vocabularies/VerificationType.md)` | CDDL-only or derived alias | `` | 1041 |
+| 1076 | `const.software_File` | Object/class term | `File` | `` | `model/Software/Classes/File.md` | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Software/File` | 1042 |
+| 1077 | `const.directory` | Local vocabulary member alias | `directory` | `` | `model/Software/Vocabularies/FileKindType.md` | CDDL-only or derived alias | `` | 1043 |
+| 1078 | `const.software_Package` | Object/class term | `Package` | `` | `model/Software/Classes/Package.md` | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Software/Package` | 1044 |
+| 1079 | `const.software_Sbom` | Object/class term | `Sbom` | `` | `model/Software/Classes/Sbom.md` | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Software/Sbom` | 1045 |
+| 1080 | `const.analyzed` | Local vocabulary member alias | `analyzed` | `` | `model/Software/Vocabularies/SbomType.md` | CDDL-only or derived alias | `` | 1046 |
+| 1081 | `const.build` | Local vocabulary member alias | `build` | `` | `ambiguous vocabulary entry: LifecycleScopeType (model/Core/Vocabularies/LifecycleScopeType.md), ProfileIdentifierType (model/Core/Vocabularies/ProfileIdentifierType.md), SbomType (model/Software/Vocabularies/SbomType.md)` | CDDL-only or derived alias | `` | 1047 |
+| 1082 | `const.deployed` | Local vocabulary member alias | `deployed` | `` | `ambiguous vocabulary entry: SbomType (model/Software/Vocabularies/SbomType.md), SupportType (model/Core/Vocabularies/SupportType.md)` | CDDL-only or derived alias | `` | 1048 |
+| 1083 | `const.design` | Local vocabulary member alias | `design` | `` | `ambiguous vocabulary entry: LifecycleScopeType (model/Core/Vocabularies/LifecycleScopeType.md), SbomType (model/Software/Vocabularies/SbomType.md)` | CDDL-only or derived alias | `` | 1049 |
+| 1084 | `const.runtime` | Local vocabulary member alias | `runtime` | `` | `ambiguous vocabulary entry: LifecycleScopeType (model/Core/Vocabularies/LifecycleScopeType.md), SbomType (model/Software/Vocabularies/SbomType.md)` | CDDL-only or derived alias | `` | 1050 |
+| 1085 | `const.software_Snippet` | Object/class term | `Snippet` | `` | `model/Software/Classes/Snippet.md` | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Software/Snippet` | 1051 |
+| 1086 | `const.security_CvssSeverityType` | Vocabulary/type class | `CvssSeverityType` | `` | `model/Security/Vocabularies/CvssSeverityType.md` | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Security/CvssSeverityType` | 1052 |
+| 1087 | `const.spdx_Security_CvssSeverityType_critical` | Fully-qualified vocabulary member | `critical` | `` | `model/Security/Vocabularies/CvssSeverityType.md` | CDDL-only or derived alias | `` | 1053 |
+| 1088 | `const.spdx_Security_CvssSeverityType_high` | Fully-qualified vocabulary member | `high` | `` | `model/Security/Vocabularies/CvssSeverityType.md` | CDDL-only or derived alias | `` | 1054 |
+| 1089 | `const.spdx_Security_CvssSeverityType_low` | Fully-qualified vocabulary member | `low` | `` | `model/Security/Vocabularies/CvssSeverityType.md` | CDDL-only or derived alias | `` | 1055 |
+| 1090 | `const.spdx_Security_CvssSeverityType_medium` | Fully-qualified vocabulary member | `medium` | `` | `model/Security/Vocabularies/CvssSeverityType.md` | CDDL-only or derived alias | `` | 1056 |
+| 1091 | `const.spdx_Security_CvssSeverityType_none` | Fully-qualified vocabulary member | `none` | `` | `model/Security/Vocabularies/CvssSeverityType.md` | CDDL-only or derived alias | `` | 1057 |
+| 1092 | `const.security_ExploitCatalogType` | Vocabulary/type class | `ExploitCatalogType` | `` | `model/Security/Vocabularies/ExploitCatalogType.md` | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Security/ExploitCatalogType` | 1058 |
+| 1093 | `const.spdx_Security_ExploitCatalogType_kev` | Fully-qualified vocabulary member | `kev` | `` | `model/Security/Vocabularies/ExploitCatalogType.md` | CDDL-only or derived alias | `` | 1059 |
+| 1094 | `const.spdx_Security_ExploitCatalogType_other` | Fully-qualified vocabulary member | `other` | `` | `model/Security/Vocabularies/ExploitCatalogType.md` | CDDL-only or derived alias | `` | 1060 |
+| 1095 | `const.security_SsvcDecisionType` | Vocabulary/type class | `SsvcDecisionType` | `` | `model/Security/Vocabularies/SsvcDecisionType.md` | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Security/SsvcDecisionType` | 1061 |
+| 1096 | `const.spdx_Security_SsvcDecisionType_act` | Fully-qualified vocabulary member | `act` | `` | `model/Security/Vocabularies/SsvcDecisionType.md` | CDDL-only or derived alias | `` | 1062 |
+| 1097 | `const.spdx_Security_SsvcDecisionType_attend` | Fully-qualified vocabulary member | `attend` | `` | `model/Security/Vocabularies/SsvcDecisionType.md` | CDDL-only or derived alias | `` | 1063 |
+| 1098 | `const.spdx_Security_SsvcDecisionType_track` | Fully-qualified vocabulary member | `track` | `` | `model/Security/Vocabularies/SsvcDecisionType.md` | CDDL-only or derived alias | `` | 1064 |
+| 1099 | `const.spdx_Security_SsvcDecisionType_trackStar` | Fully-qualified vocabulary member | `trackStar` | `` | `model/Security/Vocabularies/SsvcDecisionType.md` | CDDL-only or derived alias | `` | 1065 |
+| 1100 | `const.security_VexJustificationType` | Vocabulary/type class | `VexJustificationType` | `` | `model/Security/Vocabularies/VexJustificationType.md` | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Security/VexJustificationType` | 1066 |
+| 1101 | `const.spdx_Security_VexJustificationType_componentNotPresent` | Fully-qualified vocabulary member | `componentNotPresent` | `` | `model/Security/Vocabularies/VexJustificationType.md` | CDDL-only or derived alias | `` | 1067 |
+| 1102 | `const.spdx_Security_VexJustificationType_inlineMitigationsAlreadyExist` | Fully-qualified vocabulary member | `inlineMitigationsAlreadyExist` | `` | `model/Security/Vocabularies/VexJustificationType.md` | CDDL-only or derived alias | `` | 1068 |
+| 1103 | `const.spdx_Security_VexJustificationType_vulnerableCodeCannotBeControlledByAdversary` | Fully-qualified vocabulary member | `vulnerableCodeCannotBeControlledByAdversary` | `` | `model/Security/Vocabularies/VexJustificationType.md` | CDDL-only or derived alias | `` | 1069 |
+| 1104 | `const.spdx_Security_VexJustificationType_vulnerableCodeNotInExecutePath` | Fully-qualified vocabulary member | `vulnerableCodeNotInExecutePath` | `` | `model/Security/Vocabularies/VexJustificationType.md` | CDDL-only or derived alias | `` | 1070 |
+| 1105 | `const.spdx_Security_VexJustificationType_vulnerableCodeNotPresent` | Fully-qualified vocabulary member | `vulnerableCodeNotPresent` | `` | `model/Security/Vocabularies/VexJustificationType.md` | CDDL-only or derived alias | `` | 1071 |
+| 1106 | `const.security_CvssV2VulnAssessmentRelationship` | Object/class term | `CvssV2VulnAssessmentRelationship` | `Concrete` | `model/Security/Classes/CvssV2VulnAssessmentRelationship.md` | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Security/CvssV2VulnAssessmentRelationship` | 1072 |
+| 1107 | `const.security_CvssV3VulnAssessmentRelationship` | Object/class term | `CvssV3VulnAssessmentRelationship` | `Concrete` | `model/Security/Classes/CvssV3VulnAssessmentRelationship.md` | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Security/CvssV3VulnAssessmentRelationship` | 1073 |
+| 1108 | `const.critical` | Local vocabulary member alias | `critical` | `` | `model/Security/Vocabularies/CvssSeverityType.md` | CDDL-only or derived alias | `` | 1074 |
+| 1109 | `const.high` | Local vocabulary member alias | `high` | `` | `ambiguous vocabulary entry: CvssSeverityType (model/Security/Vocabularies/CvssSeverityType.md), SafetyRiskAssessmentType (model/AI/Vocabularies/SafetyRiskAssessmentType.md)` | CDDL-only or derived alias | `` | 1075 |
+| 1110 | `const.low` | Local vocabulary member alias | `low` | `` | `ambiguous vocabulary entry: CvssSeverityType (model/Security/Vocabularies/CvssSeverityType.md), SafetyRiskAssessmentType (model/AI/Vocabularies/SafetyRiskAssessmentType.md)` | CDDL-only or derived alias | `` | 1076 |
+| 1111 | `const.medium` | Local vocabulary member alias | `medium` | `` | `ambiguous vocabulary entry: CvssSeverityType (model/Security/Vocabularies/CvssSeverityType.md), SafetyRiskAssessmentType (model/AI/Vocabularies/SafetyRiskAssessmentType.md)` | CDDL-only or derived alias | `` | 1077 |
+| 1112 | `const.none` | Local vocabulary member alias | `none` | `` | `model/Security/Vocabularies/CvssSeverityType.md` | CDDL-only or derived alias | `` | 1078 |
+| 1113 | `const.security_CvssV4VulnAssessmentRelationship` | Object/class term | `CvssV4VulnAssessmentRelationship` | `Concrete` | `model/Security/Classes/CvssV4VulnAssessmentRelationship.md` | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Security/CvssV4VulnAssessmentRelationship` | 1079 |
+| 1114 | `const.security_EpssVulnAssessmentRelationship` | Object/class term | `EpssVulnAssessmentRelationship` | `Concrete` | `model/Security/Classes/EpssVulnAssessmentRelationship.md` | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Security/EpssVulnAssessmentRelationship` | 1080 |
+| 1115 | `const.security_ExploitCatalogVulnAssessmentRelationship` | Object/class term | `ExploitCatalogVulnAssessmentRelationship` | `Concrete` | `model/Security/Classes/ExploitCatalogVulnAssessmentRelationship.md` | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Security/ExploitCatalogVulnAssessmentRelationship` | 1081 |
+| 1116 | `const.kev` | Local vocabulary member alias | `kev` | `` | `model/Security/Vocabularies/ExploitCatalogType.md` | CDDL-only or derived alias | `` | 1082 |
+| 1117 | `const.security_SsvcVulnAssessmentRelationship` | Object/class term | `SsvcVulnAssessmentRelationship` | `Concrete` | `model/Security/Classes/SsvcVulnAssessmentRelationship.md` | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Security/SsvcVulnAssessmentRelationship` | 1083 |
+| 1118 | `const.act` | Local vocabulary member alias | `act` | `` | `model/Security/Vocabularies/SsvcDecisionType.md` | CDDL-only or derived alias | `` | 1084 |
+| 1119 | `const.attend` | Local vocabulary member alias | `attend` | `` | `model/Security/Vocabularies/SsvcDecisionType.md` | CDDL-only or derived alias | `` | 1085 |
+| 1120 | `const.track` | Local vocabulary member alias | `track` | `` | `model/Security/Vocabularies/SsvcDecisionType.md` | CDDL-only or derived alias | `` | 1086 |
+| 1121 | `const.trackStar` | Local vocabulary member alias | `trackStar` | `` | `model/Security/Vocabularies/SsvcDecisionType.md` | CDDL-only or derived alias | `` | 1087 |
+| 1122 | `const.security_Vulnerability` | Object/class term | `Vulnerability` | `Concrete` | `model/Security/Classes/Vulnerability.md` | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Security/Vulnerability` | 1088 |
+| 1123 | `const.security_VexAffectedVulnAssessmentRelationship` | Object/class term | `VexAffectedVulnAssessmentRelationship` | `Concrete` | `model/Security/Classes/VexAffectedVulnAssessmentRelationship.md` | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Security/VexAffectedVulnAssessmentRelationship` | 1089 |
+| 1124 | `const.security_VexFixedVulnAssessmentRelationship` | Object/class term | `VexFixedVulnAssessmentRelationship` | `Concrete` | `model/Security/Classes/VexFixedVulnAssessmentRelationship.md` | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Security/VexFixedVulnAssessmentRelationship` | 1090 |
+| 1125 | `const.security_VexNotAffectedVulnAssessmentRelationship` | Object/class term | `VexNotAffectedVulnAssessmentRelationship` | `Concrete` | `model/Security/Classes/VexNotAffectedVulnAssessmentRelationship.md` | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Security/VexNotAffectedVulnAssessmentRelationship` | 1091 |
+| 1126 | `const.componentNotPresent` | Local vocabulary member alias | `componentNotPresent` | `` | `model/Security/Vocabularies/VexJustificationType.md` | CDDL-only or derived alias | `` | 1092 |
+| 1127 | `const.inlineMitigationsAlreadyExist` | Local vocabulary member alias | `inlineMitigationsAlreadyExist` | `` | `model/Security/Vocabularies/VexJustificationType.md` | CDDL-only or derived alias | `` | 1093 |
+| 1128 | `const.vulnerableCodeCannotBeControlledByAdversary` | Local vocabulary member alias | `vulnerableCodeCannotBeControlledByAdversary` | `` | `model/Security/Vocabularies/VexJustificationType.md` | CDDL-only or derived alias | `` | 1094 |
+| 1129 | `const.vulnerableCodeNotInExecutePath` | Local vocabulary member alias | `vulnerableCodeNotInExecutePath` | `` | `model/Security/Vocabularies/VexJustificationType.md` | CDDL-only or derived alias | `` | 1095 |
+| 1130 | `const.vulnerableCodeNotPresent` | Local vocabulary member alias | `vulnerableCodeNotPresent` | `` | `model/Security/Vocabularies/VexJustificationType.md` | CDDL-only or derived alias | `` | 1096 |
+| 1131 | `const.security_VexUnderInvestigationVulnAssessmentRelationship` | Object/class term | `VexUnderInvestigationVulnAssessmentRelationship` | `Concrete` | `model/Security/Classes/VexUnderInvestigationVulnAssessmentRelationship.md` | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Security/VexUnderInvestigationVulnAssessmentRelationship` | 1097 |
+| 1132 | `const.expandedlicensing_NoAssertionLicense` | Special singleton term | `NoAssertionLicense` | `` | `model/ExpandedLicensing/Individuals/NoAssertionLicense.md` | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/ExpandedLicensing/NoAssertionLicense` | 1098 |
+| 1133 | `const.expandedlicensing_NoneLicense` | Special singleton term | `NoneLicense` | `` | `model/ExpandedLicensing/Individuals/NoneLicense.md` | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/ExpandedLicensing/NoneLicense` | 1099 |
+| 1134 | `const.simplelicensing_LicenseExpression` | Object/class term | `LicenseExpression` | `Concrete` | `model/SimpleLicensing/Classes/LicenseExpression.md` | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/SimpleLicensing/LicenseExpression` | 1100 |
+| 1135 | `const.simplelicensing_SimpleLicensingText` | Object/class term | `SimpleLicensingText` | `Concrete` | `model/SimpleLicensing/Classes/SimpleLicensingText.md` | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/SimpleLicensing/SimpleLicensingText` | 1101 |
+| 1136 | `const.expandedlicensing_ListedLicenseException` | Object/class term | `ListedLicenseException` | `Concrete` | `model/ExpandedLicensing/Classes/ListedLicenseException.md` | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/ExpandedLicensing/ListedLicenseException` | 1102 |
+| 1137 | `const.expandedlicensing_ConjunctiveLicenseSet` | Object/class term | `ConjunctiveLicenseSet` | `Concrete` | `model/ExpandedLicensing/Classes/ConjunctiveLicenseSet.md` | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/ExpandedLicensing/ConjunctiveLicenseSet` | 1103 |
+| 1138 | `const.expandedlicensing_CustomLicenseAddition` | Object/class term | `CustomLicenseAddition` | `Concrete` | `model/ExpandedLicensing/Classes/CustomLicenseAddition.md` | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/ExpandedLicensing/CustomLicenseAddition` | 1104 |
+| 1139 | `const.expandedlicensing_DisjunctiveLicenseSet` | Object/class term | `DisjunctiveLicenseSet` | `Concrete` | `model/ExpandedLicensing/Classes/DisjunctiveLicenseSet.md` | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/ExpandedLicensing/DisjunctiveLicenseSet` | 1105 |
+| 1140 | `const.expandedlicensing_IndividualLicensingInfo` | Object/class term | `IndividualLicensingInfo` | `Concrete` | `model/ExpandedLicensing/Classes/IndividualLicensingInfo.md` | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/ExpandedLicensing/IndividualLicensingInfo` | 1106 |
+| 1141 | `const.expandedlicensing_ListedLicense` | Object/class term | `ListedLicense` | `Concrete` | `model/ExpandedLicensing/Classes/ListedLicense.md` | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/ExpandedLicensing/ListedLicense` | 1107 |
+| 1142 | `const.expandedlicensing_OrLaterOperator` | Object/class term | `OrLaterOperator` | `Concrete` | `model/ExpandedLicensing/Classes/OrLaterOperator.md` | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/ExpandedLicensing/OrLaterOperator` | 1108 |
+| 1143 | `const.expandedlicensing_WithAdditionOperator` | Object/class term | `WithAdditionOperator` | `Concrete` | `model/ExpandedLicensing/Classes/WithAdditionOperator.md` | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/ExpandedLicensing/WithAdditionOperator` | 1109 |
+| 1144 | `const.expandedlicensing_CustomLicense` | Object/class term | `CustomLicense` | `Concrete` | `model/ExpandedLicensing/Classes/CustomLicense.md` | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/ExpandedLicensing/CustomLicense` | 1110 |
+| 1145 | `const.dataset_ConfidentialityLevelType` | Vocabulary/type class | `ConfidentialityLevelType` | `` | `model/Dataset/Vocabularies/ConfidentialityLevelType.md` | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Dataset/ConfidentialityLevelType` | 1111 |
+| 1146 | `const.spdx_Dataset_ConfidentialityLevelType_amber` | Fully-qualified vocabulary member | `amber` | `` | `model/Dataset/Vocabularies/ConfidentialityLevelType.md` | CDDL-only or derived alias | `` | 1112 |
+| 1147 | `const.spdx_Dataset_ConfidentialityLevelType_clear` | Fully-qualified vocabulary member | `clear` | `` | `model/Dataset/Vocabularies/ConfidentialityLevelType.md` | CDDL-only or derived alias | `` | 1113 |
+| 1148 | `const.spdx_Dataset_ConfidentialityLevelType_green` | Fully-qualified vocabulary member | `green` | `` | `model/Dataset/Vocabularies/ConfidentialityLevelType.md` | CDDL-only or derived alias | `` | 1114 |
+| 1149 | `const.spdx_Dataset_ConfidentialityLevelType_red` | Fully-qualified vocabulary member | `red` | `` | `model/Dataset/Vocabularies/ConfidentialityLevelType.md` | CDDL-only or derived alias | `` | 1115 |
+| 1150 | `const.dataset_DatasetAvailabilityType` | Vocabulary/type class | `DatasetAvailabilityType` | `` | `model/Dataset/Vocabularies/DatasetAvailabilityType.md` | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Dataset/DatasetAvailabilityType` | 1116 |
+| 1151 | `const.spdx_Dataset_DatasetAvailabilityType_clickthrough` | Fully-qualified vocabulary member | `clickthrough` | `` | `model/Dataset/Vocabularies/DatasetAvailabilityType.md` | CDDL-only or derived alias | `` | 1117 |
+| 1152 | `const.spdx_Dataset_DatasetAvailabilityType_directDownload` | Fully-qualified vocabulary member | `directDownload` | `` | `model/Dataset/Vocabularies/DatasetAvailabilityType.md` | CDDL-only or derived alias | `` | 1118 |
+| 1153 | `const.spdx_Dataset_DatasetAvailabilityType_query` | Fully-qualified vocabulary member | `query` | `` | `model/Dataset/Vocabularies/DatasetAvailabilityType.md` | CDDL-only or derived alias | `` | 1119 |
+| 1154 | `const.spdx_Dataset_DatasetAvailabilityType_registration` | Fully-qualified vocabulary member | `registration` | `` | `model/Dataset/Vocabularies/DatasetAvailabilityType.md` | CDDL-only or derived alias | `` | 1120 |
+| 1155 | `const.spdx_Dataset_DatasetAvailabilityType_scrapingScript` | Fully-qualified vocabulary member | `scrapingScript` | `` | `model/Dataset/Vocabularies/DatasetAvailabilityType.md` | CDDL-only or derived alias | `` | 1121 |
+| 1156 | `const.dataset_DatasetType` | Vocabulary/type class | `DatasetType` | `` | `model/Dataset/Vocabularies/DatasetType.md` | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Dataset/DatasetType` | 1122 |
+| 1157 | `const.spdx_Dataset_DatasetType_audio` | Fully-qualified vocabulary member | `audio` | `` | `model/Dataset/Vocabularies/DatasetType.md` | CDDL-only or derived alias | `` | 1123 |
+| 1158 | `const.spdx_Dataset_DatasetType_categorical` | Fully-qualified vocabulary member | `categorical` | `` | `model/Dataset/Vocabularies/DatasetType.md` | CDDL-only or derived alias | `` | 1124 |
+| 1159 | `const.spdx_Dataset_DatasetType_graph` | Fully-qualified vocabulary member | `graph` | `` | `model/Dataset/Vocabularies/DatasetType.md` | CDDL-only or derived alias | `` | 1125 |
+| 1160 | `const.spdx_Dataset_DatasetType_image` | Fully-qualified vocabulary member | `image` | `` | `model/Dataset/Vocabularies/DatasetType.md` | CDDL-only or derived alias | `` | 1126 |
+| 1161 | `const.spdx_Dataset_DatasetType_noAssertion` | Fully-qualified vocabulary member | `noAssertion` | `` | `model/Dataset/Vocabularies/DatasetType.md` | CDDL-only or derived alias | `` | 1127 |
+| 1162 | `const.spdx_Dataset_DatasetType_numeric` | Fully-qualified vocabulary member | `numeric` | `` | `model/Dataset/Vocabularies/DatasetType.md` | CDDL-only or derived alias | `` | 1128 |
+| 1163 | `const.spdx_Dataset_DatasetType_other` | Fully-qualified vocabulary member | `other` | `` | `model/Dataset/Vocabularies/DatasetType.md` | CDDL-only or derived alias | `` | 1129 |
+| 1164 | `const.spdx_Dataset_DatasetType_sensor` | Fully-qualified vocabulary member | `sensor` | `` | `model/Dataset/Vocabularies/DatasetType.md` | CDDL-only or derived alias | `` | 1130 |
+| 1165 | `const.spdx_Dataset_DatasetType_structured` | Fully-qualified vocabulary member | `structured` | `` | `model/Dataset/Vocabularies/DatasetType.md` | CDDL-only or derived alias | `` | 1131 |
+| 1166 | `const.spdx_Dataset_DatasetType_syntactic` | Fully-qualified vocabulary member | `syntactic` | `` | `model/Dataset/Vocabularies/DatasetType.md` | CDDL-only or derived alias | `` | 1132 |
+| 1167 | `const.spdx_Dataset_DatasetType_text` | Fully-qualified vocabulary member | `text` | `` | `model/Dataset/Vocabularies/DatasetType.md` | CDDL-only or derived alias | `` | 1133 |
+| 1168 | `const.spdx_Dataset_DatasetType_timeseries` | Fully-qualified vocabulary member | `timeseries` | `` | `model/Dataset/Vocabularies/DatasetType.md` | CDDL-only or derived alias | `` | 1134 |
+| 1169 | `const.spdx_Dataset_DatasetType_timestamp` | Fully-qualified vocabulary member | `timestamp` | `` | `model/Dataset/Vocabularies/DatasetType.md` | CDDL-only or derived alias | `` | 1135 |
+| 1170 | `const.spdx_Dataset_DatasetType_video` | Fully-qualified vocabulary member | `video` | `` | `model/Dataset/Vocabularies/DatasetType.md` | CDDL-only or derived alias | `` | 1136 |
+| 1171 | `const.dataset_DatasetPackage` | Object/class term | `DatasetPackage` | `Concrete` | `model/Dataset/Classes/DatasetPackage.md` | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Dataset/DatasetPackage` | 1137 |
+| 1172 | `const.amber` | Local vocabulary member alias | `amber` | `` | `model/Dataset/Vocabularies/ConfidentialityLevelType.md` | CDDL-only or derived alias | `` | 1138 |
+| 1173 | `const.clear` | Local vocabulary member alias | `clear` | `` | `model/Dataset/Vocabularies/ConfidentialityLevelType.md` | CDDL-only or derived alias | `` | 1139 |
+| 1174 | `const.green` | Local vocabulary member alias | `green` | `` | `model/Dataset/Vocabularies/ConfidentialityLevelType.md` | CDDL-only or derived alias | `` | 1140 |
+| 1175 | `const.red` | Local vocabulary member alias | `red` | `` | `model/Dataset/Vocabularies/ConfidentialityLevelType.md` | CDDL-only or derived alias | `` | 1141 |
+| 1176 | `const.clickthrough` | Local vocabulary member alias | `clickthrough` | `` | `model/Dataset/Vocabularies/DatasetAvailabilityType.md` | CDDL-only or derived alias | `` | 1142 |
+| 1177 | `const.directDownload` | Local vocabulary member alias | `directDownload` | `` | `model/Dataset/Vocabularies/DatasetAvailabilityType.md` | CDDL-only or derived alias | `` | 1143 |
+| 1178 | `const.query` | Local vocabulary member alias | `query` | `` | `model/Dataset/Vocabularies/DatasetAvailabilityType.md` | CDDL-only or derived alias | `` | 1144 |
+| 1179 | `const.registration` | Local vocabulary member alias | `registration` | `` | `model/Dataset/Vocabularies/DatasetAvailabilityType.md` | CDDL-only or derived alias | `` | 1145 |
+| 1180 | `const.scrapingScript` | Local vocabulary member alias | `scrapingScript` | `` | `model/Dataset/Vocabularies/DatasetAvailabilityType.md` | CDDL-only or derived alias | `` | 1146 |
+| 1181 | `const.audio` | Local vocabulary member alias | `audio` | `` | `model/Dataset/Vocabularies/DatasetType.md` | CDDL-only or derived alias | `` | 1147 |
+| 1182 | `const.categorical` | Local vocabulary member alias | `categorical` | `` | `model/Dataset/Vocabularies/DatasetType.md` | CDDL-only or derived alias | `` | 1148 |
+| 1183 | `const.graph` | Local vocabulary member alias | `graph` | `` | `model/Dataset/Vocabularies/DatasetType.md` | CDDL-only or derived alias | `` | 1149 |
+| 1184 | `const.image` | Local vocabulary member alias | `image` | `` | `model/Dataset/Vocabularies/DatasetType.md` | CDDL-only or derived alias | `` | 1150 |
+| 1185 | `const.noAssertion` | Local vocabulary member alias | `noAssertion` | `` | `ambiguous vocabulary entry: DatasetType (model/Dataset/Vocabularies/DatasetType.md), PresenceType (model/Core/Vocabularies/PresenceType.md), RelationshipCompleteness (model/Core/Vocabularies/RelationshipCompleteness.md), SupportType (model/Core/Vocabularies/SupportType.md)` | CDDL-only or derived alias | `` | 1151 |
+| 1186 | `const.numeric` | Local vocabulary member alias | `numeric` | `` | `model/Dataset/Vocabularies/DatasetType.md` | CDDL-only or derived alias | `` | 1152 |
+| 1187 | `const.sensor` | Local vocabulary member alias | `sensor` | `` | `model/Dataset/Vocabularies/DatasetType.md` | CDDL-only or derived alias | `` | 1153 |
+| 1188 | `const.structured` | Local vocabulary member alias | `structured` | `` | `model/Dataset/Vocabularies/DatasetType.md` | CDDL-only or derived alias | `` | 1154 |
+| 1189 | `const.syntactic` | Local vocabulary member alias | `syntactic` | `` | `model/Dataset/Vocabularies/DatasetType.md` | CDDL-only or derived alias | `` | 1155 |
+| 1190 | `const.text` | Local vocabulary member alias | `text` | `` | `model/Dataset/Vocabularies/DatasetType.md` | CDDL-only or derived alias | `` | 1156 |
+| 1191 | `const.timeseries` | Local vocabulary member alias | `timeseries` | `` | `model/Dataset/Vocabularies/DatasetType.md` | CDDL-only or derived alias | `` | 1157 |
+| 1192 | `const.timestamp` | Local vocabulary member alias | `timestamp` | `` | `model/Dataset/Vocabularies/DatasetType.md` | CDDL-only or derived alias | `` | 1158 |
+| 1193 | `const.video` | Local vocabulary member alias | `video` | `` | `model/Dataset/Vocabularies/DatasetType.md` | CDDL-only or derived alias | `` | 1159 |
+| 1194 | `const.no` | Local vocabulary member alias | `no` | `` | `model/Core/Vocabularies/PresenceType.md` | CDDL-only or derived alias | `` | 1160 |
+| 1195 | `const.yes` | Local vocabulary member alias | `yes` | `` | `model/Core/Vocabularies/PresenceType.md` | CDDL-only or derived alias | `` | 1161 |
+| 1196 | `const.ai_EnergyConsumption` | Object/class term | `EnergyConsumption` | `Concrete` | `model/AI/Classes/EnergyConsumption.md` | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/AI/EnergyConsumption` | 1162 |
+| 1197 | `const.ai_EnergyConsumptionDescription` | Object/class term | `EnergyConsumptionDescription` | `Concrete` | `model/AI/Classes/EnergyConsumptionDescription.md` | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/AI/EnergyConsumptionDescription` | 1163 |
+| 1198 | `const.kilowattHour` | Local vocabulary member alias | `kilowattHour` | `` | `model/AI/Vocabularies/EnergyUnitType.md` | CDDL-only or derived alias | `` | 1164 |
+| 1199 | `const.megajoule` | Local vocabulary member alias | `megajoule` | `` | `model/AI/Vocabularies/EnergyUnitType.md` | CDDL-only or derived alias | `` | 1165 |
+| 1200 | `const.ai_EnergyUnitType` | Vocabulary/type class | `EnergyUnitType` | `` | `model/AI/Vocabularies/EnergyUnitType.md` | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/AI/EnergyUnitType` | 1166 |
+| 1201 | `const.spdx_AI_EnergyUnitType_kilowattHour` | Fully-qualified vocabulary member | `kilowattHour` | `` | `model/AI/Vocabularies/EnergyUnitType.md` | CDDL-only or derived alias | `` | 1167 |
+| 1202 | `const.spdx_AI_EnergyUnitType_megajoule` | Fully-qualified vocabulary member | `megajoule` | `` | `model/AI/Vocabularies/EnergyUnitType.md` | CDDL-only or derived alias | `` | 1168 |
+| 1203 | `const.spdx_AI_EnergyUnitType_other` | Fully-qualified vocabulary member | `other` | `` | `model/AI/Vocabularies/EnergyUnitType.md` | CDDL-only or derived alias | `` | 1169 |
+| 1204 | `const.ai_SafetyRiskAssessmentType` | Vocabulary/type class | `SafetyRiskAssessmentType` | `` | `model/AI/Vocabularies/SafetyRiskAssessmentType.md` | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/AI/SafetyRiskAssessmentType` | 1170 |
+| 1205 | `const.spdx_AI_SafetyRiskAssessmentType_high` | Fully-qualified vocabulary member | `high` | `` | `model/AI/Vocabularies/SafetyRiskAssessmentType.md` | CDDL-only or derived alias | `` | 1171 |
+| 1206 | `const.spdx_AI_SafetyRiskAssessmentType_low` | Fully-qualified vocabulary member | `low` | `` | `model/AI/Vocabularies/SafetyRiskAssessmentType.md` | CDDL-only or derived alias | `` | 1172 |
+| 1207 | `const.spdx_AI_SafetyRiskAssessmentType_medium` | Fully-qualified vocabulary member | `medium` | `` | `model/AI/Vocabularies/SafetyRiskAssessmentType.md` | CDDL-only or derived alias | `` | 1173 |
+| 1208 | `const.spdx_AI_SafetyRiskAssessmentType_serious` | Fully-qualified vocabulary member | `serious` | `` | `model/AI/Vocabularies/SafetyRiskAssessmentType.md` | CDDL-only or derived alias | `` | 1174 |
+| 1209 | `const.ai_AIPackage` | Object/class term | `AIPackage` | `Concrete` | `model/AI/Classes/AIPackage.md` | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/AI/AIPackage` | 1175 |
+| 1210 | `const.serious` | Local vocabulary member alias | `serious` | `` | `model/AI/Vocabularies/SafetyRiskAssessmentType.md` | CDDL-only or derived alias | `` | 1176 |
+| 1211 | `const.build_Build` | Object/class term | `Build` | `Concrete` | `model/Build/Classes/Build.md` | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Build/Build` | 1177 |
+| 1212 | `const.extension_CdxPropertyEntry` | Object/class term | `CdxPropertyEntry` | `Concrete` | `model/Extension/Classes/CdxPropertyEntry.md` | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Extension/CdxPropertyEntry` | 1178 |
+| 1213 | `const.extension_CdxPropertiesExtension` | Object/class term | `CdxPropertiesExtension` | `Concrete` | `model/Extension/Classes/CdxPropertiesExtension.md` | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Extension/CdxPropertiesExtension` | 1179 |
+| 1214 | `const.AnnotationType` | Vocabulary/type class | `AnnotationType` | `` | `model/Core/Vocabularies/AnnotationType.md` | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Core/AnnotationType` | 1180 |
+| 1215 | `const.spdx_Core_AnnotationType_other` | Fully-qualified vocabulary member | `other` | `` | `model/Core/Vocabularies/AnnotationType.md` | CDDL-only or derived alias | `` | 1181 |
+| 1216 | `const.spdx_Core_AnnotationType_review` | Fully-qualified vocabulary member | `review` | `` | `model/Core/Vocabularies/AnnotationType.md` | CDDL-only or derived alias | `` | 1182 |
+| 1217 | `const.CreationInfo` | Object/class term | `CreationInfo` | `Concrete` | `model/Core/Classes/CreationInfo.md` | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Core/CreationInfo` | 1183 |
+| 1218 | `const.DictionaryEntry` | Object/class term | `DictionaryEntry` | `Concrete` | `model/Core/Classes/DictionaryEntry.md` | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Core/DictionaryEntry` | 1184 |
+| 1219 | `const.NoAssertionElement` | Special singleton term | `NoAssertionElement` | `` | `model/Core/Individuals/NoAssertionElement.md` | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Core/NoAssertionElement` | 1185 |
+| 1220 | `const.NoneElement` | Special singleton term | `NoneElement` | `` | `model/Core/Individuals/NoneElement.md` | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Core/NoneElement` | 1186 |
+| 1221 | `const.SpdxOrganization` | Special singleton term | `SpdxOrganization` | `` | `model/Core/Individuals/SpdxOrganization.md` | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Core/SpdxOrganization` | 1187 |
+| 1222 | `const.ai` | Profile/namespace alias | `ai` | `` | `model/Core/Vocabularies/ProfileIdentifierType.md` | CDDL-only or derived alias | `` | 1188 |
+| 1223 | `const.core` | Profile/namespace alias | `core` | `` | `model/Core/Vocabularies/ProfileIdentifierType.md` | CDDL-only or derived alias | `` | 1189 |
+| 1224 | `const.dataset` | Profile/namespace alias | `dataset` | `` | `model/Core/Vocabularies/ProfileIdentifierType.md` | CDDL-only or derived alias | `` | 1190 |
+| 1225 | `const.expandedLicensing` | Profile/namespace alias | `expandedLicensing` | `` | `model/Core/Vocabularies/ProfileIdentifierType.md` | CDDL-only or derived alias | `` | 1191 |
+| 1226 | `const.extension` | Profile/namespace alias | `extension` | `` | `model/Core/Vocabularies/ProfileIdentifierType.md` | JSON-LD object term | `https://spdx.org/rdf/3.0.1/terms/Core/extension` | 1192 |
+| 1227 | `const.lite` | Profile/namespace alias | `lite` | `` | `model/Core/Vocabularies/ProfileIdentifierType.md` | CDDL-only or derived alias | `` | 1193 |
+| 1228 | `const.security` | Profile/namespace alias | `security` | `` | `model/Core/Vocabularies/ProfileIdentifierType.md` | CDDL-only or derived alias | `` | 1194 |
+| 1229 | `const.simpleLicensing` | Profile/namespace alias | `simpleLicensing` | `` | `model/Core/Vocabularies/ProfileIdentifierType.md` | CDDL-only or derived alias | `` | 1195 |
+| 1230 | `const.software` | Profile/namespace alias | `software` | `` | `model/Core/Vocabularies/ProfileIdentifierType.md` | CDDL-only or derived alias | `` | 1196 |
+| 1231 | `const.ExternalIdentifier` | Object/class term | `ExternalIdentifier` | `Concrete` | `model/Core/Classes/ExternalIdentifier.md` | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Core/ExternalIdentifier` | 1197 |
+| 1232 | `const.cpe22` | Local vocabulary member alias | `cpe22` | `` | `model/Core/Vocabularies/ExternalIdentifierType.md` | CDDL-only or derived alias | `` | 1198 |
+| 1233 | `const.cpe23` | Local vocabulary member alias | `cpe23` | `` | `model/Core/Vocabularies/ExternalIdentifierType.md` | CDDL-only or derived alias | `` | 1199 |
+| 1234 | `const.cve` | Local vocabulary member alias | `cve` | `` | `model/Core/Vocabularies/ExternalIdentifierType.md` | CDDL-only or derived alias | `` | 1200 |
+| 1235 | `const.email` | Local vocabulary member alias | `email` | `` | `model/Core/Vocabularies/ExternalIdentifierType.md` | CDDL-only or derived alias | `` | 1201 |
+| 1236 | `const.packageUrl` | Local vocabulary member alias | `packageUrl` | `` | `model/Core/Vocabularies/ExternalIdentifierType.md` | CDDL-only or derived alias | `` | 1202 |
+| 1237 | `const.securityOther` | Local vocabulary member alias | `securityOther` | `` | `ambiguous vocabulary entry: ExternalIdentifierType (model/Core/Vocabularies/ExternalIdentifierType.md), ExternalRefType (model/Core/Vocabularies/ExternalRefType.md)` | CDDL-only or derived alias | `` | 1203 |
+| 1238 | `const.swid` | Local vocabulary member alias | `swid` | `` | `model/Core/Vocabularies/ExternalIdentifierType.md` | CDDL-only or derived alias | `` | 1204 |
+| 1239 | `const.urlScheme` | Local vocabulary member alias | `urlScheme` | `` | `model/Core/Vocabularies/ExternalIdentifierType.md` | CDDL-only or derived alias | `` | 1205 |
+| 1240 | `const.ExternalIdentifierType` | Vocabulary/type class | `ExternalIdentifierType` | `` | `model/Core/Vocabularies/ExternalIdentifierType.md` | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Core/ExternalIdentifierType` | 1206 |
+| 1241 | `const.spdx_Core_ExternalIdentifierType_cpe22` | Fully-qualified vocabulary member | `cpe22` | `` | `model/Core/Vocabularies/ExternalIdentifierType.md` | CDDL-only or derived alias | `` | 1207 |
+| 1242 | `const.spdx_Core_ExternalIdentifierType_cpe23` | Fully-qualified vocabulary member | `cpe23` | `` | `model/Core/Vocabularies/ExternalIdentifierType.md` | CDDL-only or derived alias | `` | 1208 |
+| 1243 | `const.spdx_Core_ExternalIdentifierType_cve` | Fully-qualified vocabulary member | `cve` | `` | `model/Core/Vocabularies/ExternalIdentifierType.md` | CDDL-only or derived alias | `` | 1209 |
+| 1244 | `const.spdx_Core_ExternalIdentifierType_email` | Fully-qualified vocabulary member | `email` | `` | `model/Core/Vocabularies/ExternalIdentifierType.md` | CDDL-only or derived alias | `` | 1210 |
+| 1245 | `const.spdx_Core_ExternalIdentifierType_gitoid` | Fully-qualified vocabulary member | `gitoid` | `` | `model/Core/Vocabularies/ExternalIdentifierType.md` | CDDL-only or derived alias | `` | 1211 |
+| 1246 | `const.spdx_Core_ExternalIdentifierType_other` | Fully-qualified vocabulary member | `other` | `` | `model/Core/Vocabularies/ExternalIdentifierType.md` | CDDL-only or derived alias | `` | 1212 |
+| 1247 | `const.spdx_Core_ExternalIdentifierType_packageUrl` | Fully-qualified vocabulary member | `packageUrl` | `` | `model/Core/Vocabularies/ExternalIdentifierType.md` | CDDL-only or derived alias | `` | 1213 |
+| 1248 | `const.spdx_Core_ExternalIdentifierType_securityOther` | Fully-qualified vocabulary member | `securityOther` | `` | `model/Core/Vocabularies/ExternalIdentifierType.md` | CDDL-only or derived alias | `` | 1214 |
+| 1249 | `const.spdx_Core_ExternalIdentifierType_swhid` | Fully-qualified vocabulary member | `swhid` | `` | `model/Core/Vocabularies/ExternalIdentifierType.md` | CDDL-only or derived alias | `` | 1215 |
+| 1250 | `const.spdx_Core_ExternalIdentifierType_swid` | Fully-qualified vocabulary member | `swid` | `` | `model/Core/Vocabularies/ExternalIdentifierType.md` | CDDL-only or derived alias | `` | 1216 |
+| 1251 | `const.spdx_Core_ExternalIdentifierType_urlScheme` | Fully-qualified vocabulary member | `urlScheme` | `` | `model/Core/Vocabularies/ExternalIdentifierType.md` | CDDL-only or derived alias | `` | 1217 |
+| 1252 | `const.ExternalMap` | Object/class term | `ExternalMap` | `Concrete` | `model/Core/Classes/ExternalMap.md` | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Core/ExternalMap` | 1218 |
+| 1253 | `const.ExternalRef` | Object/class term | `ExternalRef` | `Concrete` | `model/Core/Classes/ExternalRef.md` | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Core/ExternalRef` | 1219 |
+| 1254 | `const.altDownloadLocation` | Local vocabulary member alias | `altDownloadLocation` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1220 |
+| 1255 | `const.altWebPage` | Local vocabulary member alias | `altWebPage` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1221 |
+| 1256 | `const.binaryArtifact` | Local vocabulary member alias | `binaryArtifact` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1222 |
+| 1257 | `const.bower` | Local vocabulary member alias | `bower` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1223 |
+| 1258 | `const.buildMeta` | Local vocabulary member alias | `buildMeta` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1224 |
+| 1259 | `const.buildSystem` | Local vocabulary member alias | `buildSystem` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1225 |
+| 1260 | `const.certificationReport` | Local vocabulary member alias | `certificationReport` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1226 |
+| 1261 | `const.chat` | Local vocabulary member alias | `chat` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1227 |
+| 1262 | `const.componentAnalysisReport` | Local vocabulary member alias | `componentAnalysisReport` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1228 |
+| 1263 | `const.cwe` | Local vocabulary member alias | `cwe` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1229 |
+| 1264 | `const.dynamicAnalysisReport` | Local vocabulary member alias | `dynamicAnalysisReport` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1230 |
+| 1265 | `const.eolNotice` | Local vocabulary member alias | `eolNotice` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1231 |
+| 1266 | `const.exportControlAssessment` | Local vocabulary member alias | `exportControlAssessment` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1232 |
+| 1267 | `const.funding` | Local vocabulary member alias | `funding` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1233 |
+| 1268 | `const.issueTracker` | Local vocabulary member alias | `issueTracker` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1234 |
+| 1269 | `const.license` | Local vocabulary member alias | `license` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1235 |
+| 1270 | `const.mailingList` | Local vocabulary member alias | `mailingList` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1236 |
+| 1271 | `const.mavenCentral` | Local vocabulary member alias | `mavenCentral` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1237 |
+| 1272 | `const.metrics` | Local vocabulary member alias | `metrics` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1238 |
+| 1273 | `const.npm` | Local vocabulary member alias | `npm` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1239 |
+| 1274 | `const.nuget` | Local vocabulary member alias | `nuget` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1240 |
+| 1275 | `const.privacyAssessment` | Local vocabulary member alias | `privacyAssessment` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1241 |
+| 1276 | `const.productMetadata` | Local vocabulary member alias | `productMetadata` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1242 |
+| 1277 | `const.purchaseOrder` | Local vocabulary member alias | `purchaseOrder` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1243 |
+| 1278 | `const.qualityAssessmentReport` | Local vocabulary member alias | `qualityAssessmentReport` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1244 |
+| 1279 | `const.releaseHistory` | Local vocabulary member alias | `releaseHistory` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1245 |
+| 1280 | `const.releaseNotes` | Local vocabulary member alias | `releaseNotes` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1246 |
+| 1281 | `const.riskAssessment` | Local vocabulary member alias | `riskAssessment` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1247 |
+| 1282 | `const.runtimeAnalysisReport` | Local vocabulary member alias | `runtimeAnalysisReport` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1248 |
+| 1283 | `const.secureSoftwareAttestation` | Local vocabulary member alias | `secureSoftwareAttestation` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1249 |
+| 1284 | `const.securityAdversaryModel` | Local vocabulary member alias | `securityAdversaryModel` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1250 |
+| 1285 | `const.securityAdvisory` | Local vocabulary member alias | `securityAdvisory` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1251 |
+| 1286 | `const.securityFix` | Local vocabulary member alias | `securityFix` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1252 |
+| 1287 | `const.securityPenTestReport` | Local vocabulary member alias | `securityPenTestReport` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1253 |
+| 1288 | `const.securityPolicy` | Local vocabulary member alias | `securityPolicy` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1254 |
+| 1289 | `const.securityThreatModel` | Local vocabulary member alias | `securityThreatModel` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1255 |
+| 1290 | `const.socialMedia` | Local vocabulary member alias | `socialMedia` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1256 |
+| 1291 | `const.sourceArtifact` | Local vocabulary member alias | `sourceArtifact` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1257 |
+| 1292 | `const.staticAnalysisReport` | Local vocabulary member alias | `staticAnalysisReport` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1258 |
+| 1293 | `const.support` | Local vocabulary member alias | `support` | `` | `ambiguous vocabulary entry: ContactPointRelationshipType (model/Core/Vocabularies/ContactPointRelationshipType.md), ExternalRefType (model/Core/Vocabularies/ExternalRefType.md), SupportType (model/Core/Vocabularies/SupportType.md)` | CDDL-only or derived alias | `` | 1259 |
+| 1294 | `const.vcs` | Local vocabulary member alias | `vcs` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1260 |
+| 1295 | `const.vulnerabilityDisclosureReport` | Local vocabulary member alias | `vulnerabilityDisclosureReport` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1261 |
+| 1296 | `const.vulnerabilityExploitabilityAssessment` | Local vocabulary member alias | `vulnerabilityExploitabilityAssessment` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1262 |
+| 1297 | `const.ExternalRefType` | Vocabulary/type class | `ExternalRefType` | `` | `model/Core/Vocabularies/ExternalRefType.md` | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Core/ExternalRefType` | 1263 |
+| 1298 | `const.spdx_Core_ExternalRefType_altDownloadLocation` | Fully-qualified vocabulary member | `altDownloadLocation` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1264 |
+| 1299 | `const.spdx_Core_ExternalRefType_altWebPage` | Fully-qualified vocabulary member | `altWebPage` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1265 |
+| 1300 | `const.spdx_Core_ExternalRefType_binaryArtifact` | Fully-qualified vocabulary member | `binaryArtifact` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1266 |
+| 1301 | `const.spdx_Core_ExternalRefType_bower` | Fully-qualified vocabulary member | `bower` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1267 |
+| 1302 | `const.spdx_Core_ExternalRefType_buildMeta` | Fully-qualified vocabulary member | `buildMeta` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1268 |
+| 1303 | `const.spdx_Core_ExternalRefType_buildSystem` | Fully-qualified vocabulary member | `buildSystem` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1269 |
+| 1304 | `const.spdx_Core_ExternalRefType_certificationReport` | Fully-qualified vocabulary member | `certificationReport` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1270 |
+| 1305 | `const.spdx_Core_ExternalRefType_chat` | Fully-qualified vocabulary member | `chat` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1271 |
+| 1306 | `const.spdx_Core_ExternalRefType_componentAnalysisReport` | Fully-qualified vocabulary member | `componentAnalysisReport` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1272 |
+| 1307 | `const.spdx_Core_ExternalRefType_cwe` | Fully-qualified vocabulary member | `cwe` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1273 |
+| 1308 | `const.spdx_Core_ExternalRefType_documentation` | Fully-qualified vocabulary member | `documentation` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1274 |
+| 1309 | `const.spdx_Core_ExternalRefType_dynamicAnalysisReport` | Fully-qualified vocabulary member | `dynamicAnalysisReport` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1275 |
+| 1310 | `const.spdx_Core_ExternalRefType_eolNotice` | Fully-qualified vocabulary member | `eolNotice` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1276 |
+| 1311 | `const.spdx_Core_ExternalRefType_exportControlAssessment` | Fully-qualified vocabulary member | `exportControlAssessment` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1277 |
+| 1312 | `const.spdx_Core_ExternalRefType_funding` | Fully-qualified vocabulary member | `funding` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1278 |
+| 1313 | `const.spdx_Core_ExternalRefType_issueTracker` | Fully-qualified vocabulary member | `issueTracker` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1279 |
+| 1314 | `const.spdx_Core_ExternalRefType_license` | Fully-qualified vocabulary member | `license` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1280 |
+| 1315 | `const.spdx_Core_ExternalRefType_mailingList` | Fully-qualified vocabulary member | `mailingList` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1281 |
+| 1316 | `const.spdx_Core_ExternalRefType_mavenCentral` | Fully-qualified vocabulary member | `mavenCentral` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1282 |
+| 1317 | `const.spdx_Core_ExternalRefType_metrics` | Fully-qualified vocabulary member | `metrics` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1283 |
+| 1318 | `const.spdx_Core_ExternalRefType_npm` | Fully-qualified vocabulary member | `npm` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1284 |
+| 1319 | `const.spdx_Core_ExternalRefType_nuget` | Fully-qualified vocabulary member | `nuget` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1285 |
+| 1320 | `const.spdx_Core_ExternalRefType_other` | Fully-qualified vocabulary member | `other` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1286 |
+| 1321 | `const.spdx_Core_ExternalRefType_privacyAssessment` | Fully-qualified vocabulary member | `privacyAssessment` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1287 |
+| 1322 | `const.spdx_Core_ExternalRefType_productMetadata` | Fully-qualified vocabulary member | `productMetadata` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1288 |
+| 1323 | `const.spdx_Core_ExternalRefType_purchaseOrder` | Fully-qualified vocabulary member | `purchaseOrder` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1289 |
+| 1324 | `const.spdx_Core_ExternalRefType_qualityAssessmentReport` | Fully-qualified vocabulary member | `qualityAssessmentReport` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1290 |
+| 1325 | `const.spdx_Core_ExternalRefType_releaseHistory` | Fully-qualified vocabulary member | `releaseHistory` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1291 |
+| 1326 | `const.spdx_Core_ExternalRefType_releaseNotes` | Fully-qualified vocabulary member | `releaseNotes` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1292 |
+| 1327 | `const.spdx_Core_ExternalRefType_riskAssessment` | Fully-qualified vocabulary member | `riskAssessment` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1293 |
+| 1328 | `const.spdx_Core_ExternalRefType_runtimeAnalysisReport` | Fully-qualified vocabulary member | `runtimeAnalysisReport` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1294 |
+| 1329 | `const.spdx_Core_ExternalRefType_secureSoftwareAttestation` | Fully-qualified vocabulary member | `secureSoftwareAttestation` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1295 |
+| 1330 | `const.spdx_Core_ExternalRefType_securityAdversaryModel` | Fully-qualified vocabulary member | `securityAdversaryModel` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1296 |
+| 1331 | `const.spdx_Core_ExternalRefType_securityAdvisory` | Fully-qualified vocabulary member | `securityAdvisory` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1297 |
+| 1332 | `const.spdx_Core_ExternalRefType_securityFix` | Fully-qualified vocabulary member | `securityFix` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1298 |
+| 1333 | `const.spdx_Core_ExternalRefType_securityOther` | Fully-qualified vocabulary member | `securityOther` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1299 |
+| 1334 | `const.spdx_Core_ExternalRefType_securityPenTestReport` | Fully-qualified vocabulary member | `securityPenTestReport` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1300 |
+| 1335 | `const.spdx_Core_ExternalRefType_securityPolicy` | Fully-qualified vocabulary member | `securityPolicy` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1301 |
+| 1336 | `const.spdx_Core_ExternalRefType_securityThreatModel` | Fully-qualified vocabulary member | `securityThreatModel` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1302 |
+| 1337 | `const.spdx_Core_ExternalRefType_socialMedia` | Fully-qualified vocabulary member | `socialMedia` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1303 |
+| 1338 | `const.spdx_Core_ExternalRefType_sourceArtifact` | Fully-qualified vocabulary member | `sourceArtifact` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1304 |
+| 1339 | `const.spdx_Core_ExternalRefType_staticAnalysisReport` | Fully-qualified vocabulary member | `staticAnalysisReport` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1305 |
+| 1340 | `const.spdx_Core_ExternalRefType_support` | Fully-qualified vocabulary member | `support` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1306 |
+| 1341 | `const.spdx_Core_ExternalRefType_vcs` | Fully-qualified vocabulary member | `vcs` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1307 |
+| 1342 | `const.spdx_Core_ExternalRefType_vulnerabilityDisclosureReport` | Fully-qualified vocabulary member | `vulnerabilityDisclosureReport` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1308 |
+| 1343 | `const.spdx_Core_ExternalRefType_vulnerabilityExploitabilityAssessment` | Fully-qualified vocabulary member | `vulnerabilityExploitabilityAssessment` | `` | `model/Core/Vocabularies/ExternalRefType.md` | CDDL-only or derived alias | `` | 1309 |
+| 1344 | `const.HashAlgorithm` | Vocabulary/type class | `HashAlgorithm` | `` | `model/Core/Vocabularies/HashAlgorithm.md` | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Core/HashAlgorithm` | 1310 |
+| 1345 | `const.spdx_Core_HashAlgorithm_adler32` | Fully-qualified vocabulary member | `adler32` | `` | `model/Core/Vocabularies/HashAlgorithm.md` | CDDL-only or derived alias | `` | 1311 |
+| 1346 | `const.spdx_Core_HashAlgorithm_blake2b256` | Fully-qualified vocabulary member | `blake2b256` | `` | `model/Core/Vocabularies/HashAlgorithm.md` | CDDL-only or derived alias | `` | 1312 |
+| 1347 | `const.spdx_Core_HashAlgorithm_blake2b384` | Fully-qualified vocabulary member | `blake2b384` | `` | `model/Core/Vocabularies/HashAlgorithm.md` | CDDL-only or derived alias | `` | 1313 |
+| 1348 | `const.spdx_Core_HashAlgorithm_blake2b512` | Fully-qualified vocabulary member | `blake2b512` | `` | `model/Core/Vocabularies/HashAlgorithm.md` | CDDL-only or derived alias | `` | 1314 |
+| 1349 | `const.spdx_Core_HashAlgorithm_blake3` | Fully-qualified vocabulary member | `blake3` | `` | `model/Core/Vocabularies/HashAlgorithm.md` | CDDL-only or derived alias | `` | 1315 |
+| 1350 | `const.spdx_Core_HashAlgorithm_crystalsDilithium` | Fully-qualified vocabulary member | `crystalsDilithium` | `` | `model/Core/Vocabularies/HashAlgorithm.md` | CDDL-only or derived alias | `` | 1316 |
+| 1351 | `const.spdx_Core_HashAlgorithm_crystalsKyber` | Fully-qualified vocabulary member | `crystalsKyber` | `` | `model/Core/Vocabularies/HashAlgorithm.md` | CDDL-only or derived alias | `` | 1317 |
+| 1352 | `const.spdx_Core_HashAlgorithm_falcon` | Fully-qualified vocabulary member | `falcon` | `` | `model/Core/Vocabularies/HashAlgorithm.md` | CDDL-only or derived alias | `` | 1318 |
+| 1353 | `const.spdx_Core_HashAlgorithm_md2` | Fully-qualified vocabulary member | `md2` | `` | `model/Core/Vocabularies/HashAlgorithm.md` | CDDL-only or derived alias | `` | 1319 |
+| 1354 | `const.spdx_Core_HashAlgorithm_md4` | Fully-qualified vocabulary member | `md4` | `` | `model/Core/Vocabularies/HashAlgorithm.md` | CDDL-only or derived alias | `` | 1320 |
+| 1355 | `const.spdx_Core_HashAlgorithm_md5` | Fully-qualified vocabulary member | `md5` | `` | `model/Core/Vocabularies/HashAlgorithm.md` | CDDL-only or derived alias | `` | 1321 |
+| 1356 | `const.spdx_Core_HashAlgorithm_md6` | Fully-qualified vocabulary member | `md6` | `` | `model/Core/Vocabularies/HashAlgorithm.md` | CDDL-only or derived alias | `` | 1322 |
+| 1357 | `const.spdx_Core_HashAlgorithm_other` | Fully-qualified vocabulary member | `other` | `` | `model/Core/Vocabularies/HashAlgorithm.md` | CDDL-only or derived alias | `` | 1323 |
+| 1358 | `const.spdx_Core_HashAlgorithm_sha1` | Fully-qualified vocabulary member | `sha1` | `` | `model/Core/Vocabularies/HashAlgorithm.md` | CDDL-only or derived alias | `` | 1324 |
+| 1359 | `const.spdx_Core_HashAlgorithm_sha224` | Fully-qualified vocabulary member | `sha224` | `` | `model/Core/Vocabularies/HashAlgorithm.md` | CDDL-only or derived alias | `` | 1325 |
+| 1360 | `const.spdx_Core_HashAlgorithm_sha256` | Fully-qualified vocabulary member | `sha256` | `` | `model/Core/Vocabularies/HashAlgorithm.md` | CDDL-only or derived alias | `` | 1326 |
+| 1361 | `const.spdx_Core_HashAlgorithm_sha384` | Fully-qualified vocabulary member | `sha384` | `` | `model/Core/Vocabularies/HashAlgorithm.md` | CDDL-only or derived alias | `` | 1327 |
+| 1362 | `const.spdx_Core_HashAlgorithm_sha3_224` | Fully-qualified vocabulary member | `sha3_224` | `` | `model/Core/Vocabularies/HashAlgorithm.md` | CDDL-only or derived alias | `` | 1328 |
+| 1363 | `const.spdx_Core_HashAlgorithm_sha3_256` | Fully-qualified vocabulary member | `sha3_256` | `` | `model/Core/Vocabularies/HashAlgorithm.md` | CDDL-only or derived alias | `` | 1329 |
+| 1364 | `const.spdx_Core_HashAlgorithm_sha3_384` | Fully-qualified vocabulary member | `sha3_384` | `` | `model/Core/Vocabularies/HashAlgorithm.md` | CDDL-only or derived alias | `` | 1330 |
+| 1365 | `const.spdx_Core_HashAlgorithm_sha3_512` | Fully-qualified vocabulary member | `sha3_512` | `` | `model/Core/Vocabularies/HashAlgorithm.md` | CDDL-only or derived alias | `` | 1331 |
+| 1366 | `const.spdx_Core_HashAlgorithm_sha512` | Fully-qualified vocabulary member | `sha512` | `` | `model/Core/Vocabularies/HashAlgorithm.md` | CDDL-only or derived alias | `` | 1332 |
+| 1367 | `const.IndividualElement` | Object/class term | `IndividualElement` | `Concrete` | `model/Core/Classes/IndividualElement.md` | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Core/IndividualElement` | 1333 |
+| 1368 | `const.LifecycleScopeType` | Vocabulary/type class | `LifecycleScopeType` | `` | `model/Core/Vocabularies/LifecycleScopeType.md` | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Core/LifecycleScopeType` | 1334 |
+| 1369 | `const.spdx_Core_LifecycleScopeType_build` | Fully-qualified vocabulary member | `build` | `` | `model/Core/Vocabularies/LifecycleScopeType.md` | CDDL-only or derived alias | `` | 1335 |
+| 1370 | `const.spdx_Core_LifecycleScopeType_design` | Fully-qualified vocabulary member | `design` | `` | `model/Core/Vocabularies/LifecycleScopeType.md` | CDDL-only or derived alias | `` | 1336 |
+| 1371 | `const.spdx_Core_LifecycleScopeType_development` | Fully-qualified vocabulary member | `development` | `` | `model/Core/Vocabularies/LifecycleScopeType.md` | CDDL-only or derived alias | `` | 1337 |
+| 1372 | `const.spdx_Core_LifecycleScopeType_other` | Fully-qualified vocabulary member | `other` | `` | `model/Core/Vocabularies/LifecycleScopeType.md` | CDDL-only or derived alias | `` | 1338 |
+| 1373 | `const.spdx_Core_LifecycleScopeType_runtime` | Fully-qualified vocabulary member | `runtime` | `` | `model/Core/Vocabularies/LifecycleScopeType.md` | CDDL-only or derived alias | `` | 1339 |
+| 1374 | `const.spdx_Core_LifecycleScopeType_test` | Fully-qualified vocabulary member | `test` | `` | `model/Core/Vocabularies/LifecycleScopeType.md` | CDDL-only or derived alias | `` | 1340 |
+| 1375 | `const.NamespaceMap` | Object/class term | `NamespaceMap` | `Concrete` | `model/Core/Classes/NamespaceMap.md` | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Core/NamespaceMap` | 1341 |
+| 1376 | `const.PackageVerificationCode` | Object/class term | `PackageVerificationCode` | `` | `model/Core/Classes/PackageVerificationCode.md` | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Core/PackageVerificationCode` | 1342 |
+| 1377 | `const.adler32` | Local vocabulary member alias | `adler32` | `` | `model/Core/Vocabularies/HashAlgorithm.md` | CDDL-only or derived alias | `` | 1343 |
+| 1378 | `const.blake2b256` | Local vocabulary member alias | `blake2b256` | `` | `model/Core/Vocabularies/HashAlgorithm.md` | CDDL-only or derived alias | `` | 1344 |
+| 1379 | `const.blake2b384` | Local vocabulary member alias | `blake2b384` | `` | `model/Core/Vocabularies/HashAlgorithm.md` | CDDL-only or derived alias | `` | 1345 |
+| 1380 | `const.blake2b512` | Local vocabulary member alias | `blake2b512` | `` | `model/Core/Vocabularies/HashAlgorithm.md` | CDDL-only or derived alias | `` | 1346 |
+| 1381 | `const.blake3` | Local vocabulary member alias | `blake3` | `` | `model/Core/Vocabularies/HashAlgorithm.md` | CDDL-only or derived alias | `` | 1347 |
+| 1382 | `const.crystalsDilithium` | Local vocabulary member alias | `crystalsDilithium` | `` | `model/Core/Vocabularies/HashAlgorithm.md` | CDDL-only or derived alias | `` | 1348 |
+| 1383 | `const.crystalsKyber` | Local vocabulary member alias | `crystalsKyber` | `` | `model/Core/Vocabularies/HashAlgorithm.md` | CDDL-only or derived alias | `` | 1349 |
+| 1384 | `const.falcon` | Local vocabulary member alias | `falcon` | `` | `model/Core/Vocabularies/HashAlgorithm.md` | CDDL-only or derived alias | `` | 1350 |
+| 1385 | `const.md2` | Local vocabulary member alias | `md2` | `` | `model/Core/Vocabularies/HashAlgorithm.md` | CDDL-only or derived alias | `` | 1351 |
+| 1386 | `const.md4` | Local vocabulary member alias | `md4` | `` | `model/Core/Vocabularies/HashAlgorithm.md` | CDDL-only or derived alias | `` | 1352 |
+| 1387 | `const.md5` | Local vocabulary member alias | `md5` | `` | `model/Core/Vocabularies/HashAlgorithm.md` | CDDL-only or derived alias | `` | 1353 |
+| 1388 | `const.md6` | Local vocabulary member alias | `md6` | `` | `model/Core/Vocabularies/HashAlgorithm.md` | CDDL-only or derived alias | `` | 1354 |
+| 1389 | `const.sha1` | Local vocabulary member alias | `sha1` | `` | `model/Core/Vocabularies/HashAlgorithm.md` | CDDL-only or derived alias | `` | 1355 |
+| 1390 | `const.sha224` | Local vocabulary member alias | `sha224` | `` | `model/Core/Vocabularies/HashAlgorithm.md` | CDDL-only or derived alias | `` | 1356 |
+| 1391 | `const.sha256` | Local vocabulary member alias | `sha256` | `` | `model/Core/Vocabularies/HashAlgorithm.md` | CDDL-only or derived alias | `` | 1357 |
+| 1392 | `const.sha384` | Local vocabulary member alias | `sha384` | `` | `model/Core/Vocabularies/HashAlgorithm.md` | CDDL-only or derived alias | `` | 1358 |
+| 1393 | `const.sha3_224` | Local vocabulary member alias | `sha3_224` | `` | `model/Core/Vocabularies/HashAlgorithm.md` | CDDL-only or derived alias | `` | 1359 |
+| 1394 | `const.sha3_256` | Local vocabulary member alias | `sha3_256` | `` | `model/Core/Vocabularies/HashAlgorithm.md` | CDDL-only or derived alias | `` | 1360 |
+| 1395 | `const.sha3_384` | Local vocabulary member alias | `sha3_384` | `` | `model/Core/Vocabularies/HashAlgorithm.md` | CDDL-only or derived alias | `` | 1361 |
+| 1396 | `const.sha3_512` | Local vocabulary member alias | `sha3_512` | `` | `model/Core/Vocabularies/HashAlgorithm.md` | CDDL-only or derived alias | `` | 1362 |
+| 1397 | `const.sha512` | Local vocabulary member alias | `sha512` | `` | `model/Core/Vocabularies/HashAlgorithm.md` | CDDL-only or derived alias | `` | 1363 |
+| 1398 | `const.PositiveIntegerRange` | Object/class term | `PositiveIntegerRange` | `Concrete` | `model/Core/Classes/PositiveIntegerRange.md` | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Core/PositiveIntegerRange` | 1364 |
+| 1399 | `const.PresenceType` | Vocabulary/type class | `PresenceType` | `` | `model/Core/Vocabularies/PresenceType.md` | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Core/PresenceType` | 1365 |
+| 1400 | `const.spdx_Core_PresenceType_no` | Fully-qualified vocabulary member | `no` | `` | `model/Core/Vocabularies/PresenceType.md` | CDDL-only or derived alias | `` | 1366 |
+| 1401 | `const.spdx_Core_PresenceType_noAssertion` | Fully-qualified vocabulary member | `noAssertion` | `` | `model/Core/Vocabularies/PresenceType.md` | CDDL-only or derived alias | `` | 1367 |
+| 1402 | `const.spdx_Core_PresenceType_yes` | Fully-qualified vocabulary member | `yes` | `` | `model/Core/Vocabularies/PresenceType.md` | CDDL-only or derived alias | `` | 1368 |
+| 1403 | `const.ProfileIdentifierType` | Vocabulary/type class | `ProfileIdentifierType` | `` | `model/Core/Vocabularies/ProfileIdentifierType.md` | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Core/ProfileIdentifierType` | 1369 |
+| 1404 | `const.spdx_Core_ProfileIdentifierType_ai` | Fully-qualified vocabulary member | `ai` | `` | `model/Core/Vocabularies/ProfileIdentifierType.md` | CDDL-only or derived alias | `` | 1370 |
+| 1405 | `const.spdx_Core_ProfileIdentifierType_build` | Fully-qualified vocabulary member | `build` | `` | `model/Core/Vocabularies/ProfileIdentifierType.md` | CDDL-only or derived alias | `` | 1371 |
+| 1406 | `const.spdx_Core_ProfileIdentifierType_core` | Fully-qualified vocabulary member | `core` | `` | `model/Core/Vocabularies/ProfileIdentifierType.md` | CDDL-only or derived alias | `` | 1372 |
+| 1407 | `const.spdx_Core_ProfileIdentifierType_dataset` | Fully-qualified vocabulary member | `dataset` | `` | `model/Core/Vocabularies/ProfileIdentifierType.md` | CDDL-only or derived alias | `` | 1373 |
+| 1408 | `const.spdx_Core_ProfileIdentifierType_expandedLicensing` | Fully-qualified vocabulary member | `expandedLicensing` | `` | `model/Core/Vocabularies/ProfileIdentifierType.md` | CDDL-only or derived alias | `` | 1374 |
+| 1409 | `const.spdx_Core_ProfileIdentifierType_extension` | Fully-qualified vocabulary member | `extension` | `` | `model/Core/Vocabularies/ProfileIdentifierType.md` | CDDL-only or derived alias | `` | 1375 |
+| 1410 | `const.spdx_Core_ProfileIdentifierType_lite` | Fully-qualified vocabulary member | `lite` | `` | `model/Core/Vocabularies/ProfileIdentifierType.md` | CDDL-only or derived alias | `` | 1376 |
+| 1411 | `const.spdx_Core_ProfileIdentifierType_security` | Fully-qualified vocabulary member | `security` | `` | `model/Core/Vocabularies/ProfileIdentifierType.md` | CDDL-only or derived alias | `` | 1377 |
+| 1412 | `const.spdx_Core_ProfileIdentifierType_simpleLicensing` | Fully-qualified vocabulary member | `simpleLicensing` | `` | `model/Core/Vocabularies/ProfileIdentifierType.md` | CDDL-only or derived alias | `` | 1378 |
+| 1413 | `const.spdx_Core_ProfileIdentifierType_software` | Fully-qualified vocabulary member | `software` | `` | `model/Core/Vocabularies/ProfileIdentifierType.md` | CDDL-only or derived alias | `` | 1379 |
+| 1414 | `const.Relationship` | Object/class term | `Relationship` | `Concrete` | `model/Core/Classes/Relationship.md` | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Core/Relationship` | 1380 |
+| 1415 | `const.complete` | Local vocabulary member alias | `complete` | `` | `model/Core/Vocabularies/RelationshipCompleteness.md` | CDDL-only or derived alias | `` | 1381 |
+| 1416 | `const.incomplete` | Local vocabulary member alias | `incomplete` | `` | `model/Core/Vocabularies/RelationshipCompleteness.md` | CDDL-only or derived alias | `` | 1382 |
+| 1417 | `const.affects` | Local vocabulary member alias | `affects` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1383 |
+| 1418 | `const.amendedBy` | Local vocabulary member alias | `amendedBy` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1384 |
+| 1419 | `const.ancestorOf` | Local vocabulary member alias | `ancestorOf` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1385 |
+| 1420 | `const.availableFrom` | Local vocabulary member alias | `availableFrom` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1386 |
+| 1421 | `const.configures` | Local vocabulary member alias | `configures` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1387 |
+| 1422 | `const.contains` | Local vocabulary member alias | `contains` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1388 |
+| 1423 | `const.coordinatedBy` | Local vocabulary member alias | `coordinatedBy` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1389 |
+| 1424 | `const.copiedTo` | Local vocabulary member alias | `copiedTo` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1390 |
+| 1425 | `const.delegatedTo` | Local vocabulary member alias | `delegatedTo` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1391 |
+| 1426 | `const.dependsOn` | Local vocabulary member alias | `dependsOn` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1392 |
+| 1427 | `const.descendantOf` | Local vocabulary member alias | `descendantOf` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1393 |
+| 1428 | `const.describes` | Local vocabulary member alias | `describes` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1394 |
+| 1429 | `const.doesNotAffect` | Local vocabulary member alias | `doesNotAffect` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1395 |
+| 1430 | `const.expandsTo` | Local vocabulary member alias | `expandsTo` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1396 |
+| 1431 | `const.exploitCreatedBy` | Local vocabulary member alias | `exploitCreatedBy` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1397 |
+| 1432 | `const.fixedBy` | Local vocabulary member alias | `fixedBy` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1398 |
+| 1433 | `const.fixedIn` | Local vocabulary member alias | `fixedIn` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1399 |
+| 1434 | `const.foundBy` | Local vocabulary member alias | `foundBy` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1400 |
+| 1435 | `const.generates` | Local vocabulary member alias | `generates` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1401 |
+| 1436 | `const.hasAddedFile` | Local vocabulary member alias | `hasAddedFile` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1402 |
+| 1437 | `const.hasAssessmentFor` | Local vocabulary member alias | `hasAssessmentFor` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1403 |
+| 1438 | `const.hasAssociatedVulnerability` | Local vocabulary member alias | `hasAssociatedVulnerability` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1404 |
+| 1439 | `const.hasConcludedLicense` | Local vocabulary member alias | `hasConcludedLicense` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1405 |
+| 1440 | `const.hasDataFile` | Local vocabulary member alias | `hasDataFile` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1406 |
+| 1441 | `const.hasDeclaredLicense` | Local vocabulary member alias | `hasDeclaredLicense` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1407 |
+| 1442 | `const.hasDeletedFile` | Local vocabulary member alias | `hasDeletedFile` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1408 |
+| 1443 | `const.hasDependencyManifest` | Local vocabulary member alias | `hasDependencyManifest` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1409 |
+| 1444 | `const.hasDistributionArtifact` | Local vocabulary member alias | `hasDistributionArtifact` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1410 |
+| 1445 | `const.hasDocumentation` | Local vocabulary member alias | `hasDocumentation` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1411 |
+| 1446 | `const.hasDynamicLink` | Local vocabulary member alias | `hasDynamicLink` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1412 |
+| 1447 | `const.hasEvidence` | Local vocabulary member alias | `hasEvidence` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1413 |
+| 1448 | `const.hasExample` | Local vocabulary member alias | `hasExample` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1414 |
+| 1449 | `const.hasHost` | Local vocabulary member alias | `hasHost` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1415 |
+| 1450 | `const.hasInput` | Local vocabulary member alias | `hasInput` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1416 |
+| 1451 | `const.hasMetadata` | Local vocabulary member alias | `hasMetadata` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1417 |
+| 1452 | `const.hasOptionalComponent` | Local vocabulary member alias | `hasOptionalComponent` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1418 |
+| 1453 | `const.hasOptionalDependency` | Local vocabulary member alias | `hasOptionalDependency` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1419 |
+| 1454 | `const.hasOutput` | Local vocabulary member alias | `hasOutput` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1420 |
+| 1455 | `const.hasPrerequisite` | Local vocabulary member alias | `hasPrerequisite` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1421 |
+| 1456 | `const.hasProvidedDependency` | Local vocabulary member alias | `hasProvidedDependency` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1422 |
+| 1457 | `const.hasRequirement` | Local vocabulary member alias | `hasRequirement` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1423 |
+| 1458 | `const.hasSpecification` | Local vocabulary member alias | `hasSpecification` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1424 |
+| 1459 | `const.hasStaticLink` | Local vocabulary member alias | `hasStaticLink` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1425 |
+| 1460 | `const.hasTest` | Local vocabulary member alias | `hasTest` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1426 |
+| 1461 | `const.hasTestCase` | Local vocabulary member alias | `hasTestCase` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1427 |
+| 1462 | `const.hasVariant` | Local vocabulary member alias | `hasVariant` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1428 |
+| 1463 | `const.invokedBy` | Local vocabulary member alias | `invokedBy` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1429 |
+| 1464 | `const.modifiedBy` | Local vocabulary member alias | `modifiedBy` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1430 |
+| 1465 | `const.packagedBy` | Local vocabulary member alias | `packagedBy` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1431 |
+| 1466 | `const.patchedBy` | Local vocabulary member alias | `patchedBy` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1432 |
+| 1467 | `const.publishedBy` | Local vocabulary member alias | `publishedBy` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1433 |
+| 1468 | `const.reportedBy` | Local vocabulary member alias | `reportedBy` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1434 |
+| 1469 | `const.republishedBy` | Local vocabulary member alias | `republishedBy` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1435 |
+| 1470 | `const.serializedInArtifact` | Local vocabulary member alias | `serializedInArtifact` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1436 |
+| 1471 | `const.testedOn` | Local vocabulary member alias | `testedOn` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1437 |
+| 1472 | `const.trainedOn` | Local vocabulary member alias | `trainedOn` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1438 |
+| 1473 | `const.underInvestigationFor` | Local vocabulary member alias | `underInvestigationFor` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1439 |
+| 1474 | `const.usesTool` | Local vocabulary member alias | `usesTool` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1440 |
+| 1475 | `const.RelationshipCompleteness` | Vocabulary/type class | `RelationshipCompleteness` | `` | `model/Core/Vocabularies/RelationshipCompleteness.md` | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Core/RelationshipCompleteness` | 1441 |
+| 1476 | `const.spdx_Core_RelationshipCompleteness_complete` | Fully-qualified vocabulary member | `complete` | `` | `model/Core/Vocabularies/RelationshipCompleteness.md` | CDDL-only or derived alias | `` | 1442 |
+| 1477 | `const.spdx_Core_RelationshipCompleteness_incomplete` | Fully-qualified vocabulary member | `incomplete` | `` | `model/Core/Vocabularies/RelationshipCompleteness.md` | CDDL-only or derived alias | `` | 1443 |
+| 1478 | `const.spdx_Core_RelationshipCompleteness_noAssertion` | Fully-qualified vocabulary member | `noAssertion` | `` | `model/Core/Vocabularies/RelationshipCompleteness.md` | CDDL-only or derived alias | `` | 1444 |
+| 1479 | `const.RelationshipType` | Vocabulary/type class | `RelationshipType` | `` | `model/Core/Vocabularies/RelationshipType.md` | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Core/RelationshipType` | 1445 |
+| 1480 | `const.spdx_Core_RelationshipType_affects` | Fully-qualified vocabulary member | `affects` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1446 |
+| 1481 | `const.spdx_Core_RelationshipType_amendedBy` | Fully-qualified vocabulary member | `amendedBy` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1447 |
+| 1482 | `const.spdx_Core_RelationshipType_ancestorOf` | Fully-qualified vocabulary member | `ancestorOf` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1448 |
+| 1483 | `const.spdx_Core_RelationshipType_availableFrom` | Fully-qualified vocabulary member | `availableFrom` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1449 |
+| 1484 | `const.spdx_Core_RelationshipType_configures` | Fully-qualified vocabulary member | `configures` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1450 |
+| 1485 | `const.spdx_Core_RelationshipType_contains` | Fully-qualified vocabulary member | `contains` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1451 |
+| 1486 | `const.spdx_Core_RelationshipType_coordinatedBy` | Fully-qualified vocabulary member | `coordinatedBy` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1452 |
+| 1487 | `const.spdx_Core_RelationshipType_copiedTo` | Fully-qualified vocabulary member | `copiedTo` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1453 |
+| 1488 | `const.spdx_Core_RelationshipType_delegatedTo` | Fully-qualified vocabulary member | `delegatedTo` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1454 |
+| 1489 | `const.spdx_Core_RelationshipType_dependsOn` | Fully-qualified vocabulary member | `dependsOn` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1455 |
+| 1490 | `const.spdx_Core_RelationshipType_descendantOf` | Fully-qualified vocabulary member | `descendantOf` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1456 |
+| 1491 | `const.spdx_Core_RelationshipType_describes` | Fully-qualified vocabulary member | `describes` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1457 |
+| 1492 | `const.spdx_Core_RelationshipType_doesNotAffect` | Fully-qualified vocabulary member | `doesNotAffect` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1458 |
+| 1493 | `const.spdx_Core_RelationshipType_expandsTo` | Fully-qualified vocabulary member | `expandsTo` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1459 |
+| 1494 | `const.spdx_Core_RelationshipType_exploitCreatedBy` | Fully-qualified vocabulary member | `exploitCreatedBy` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1460 |
+| 1495 | `const.spdx_Core_RelationshipType_fixedBy` | Fully-qualified vocabulary member | `fixedBy` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1461 |
+| 1496 | `const.spdx_Core_RelationshipType_fixedIn` | Fully-qualified vocabulary member | `fixedIn` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1462 |
+| 1497 | `const.spdx_Core_RelationshipType_foundBy` | Fully-qualified vocabulary member | `foundBy` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1463 |
+| 1498 | `const.spdx_Core_RelationshipType_generates` | Fully-qualified vocabulary member | `generates` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1464 |
+| 1499 | `const.spdx_Core_RelationshipType_hasAddedFile` | Fully-qualified vocabulary member | `hasAddedFile` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1465 |
+| 1500 | `const.spdx_Core_RelationshipType_hasAssessmentFor` | Fully-qualified vocabulary member | `hasAssessmentFor` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1466 |
+| 1501 | `const.spdx_Core_RelationshipType_hasAssociatedVulnerability` | Fully-qualified vocabulary member | `hasAssociatedVulnerability` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1467 |
+| 1502 | `const.spdx_Core_RelationshipType_hasConcludedLicense` | Fully-qualified vocabulary member | `hasConcludedLicense` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1468 |
+| 1503 | `const.spdx_Core_RelationshipType_hasDataFile` | Fully-qualified vocabulary member | `hasDataFile` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1469 |
+| 1504 | `const.spdx_Core_RelationshipType_hasDeclaredLicense` | Fully-qualified vocabulary member | `hasDeclaredLicense` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1470 |
+| 1505 | `const.spdx_Core_RelationshipType_hasDeletedFile` | Fully-qualified vocabulary member | `hasDeletedFile` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1471 |
+| 1506 | `const.spdx_Core_RelationshipType_hasDependencyManifest` | Fully-qualified vocabulary member | `hasDependencyManifest` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1472 |
+| 1507 | `const.spdx_Core_RelationshipType_hasDistributionArtifact` | Fully-qualified vocabulary member | `hasDistributionArtifact` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1473 |
+| 1508 | `const.spdx_Core_RelationshipType_hasDocumentation` | Fully-qualified vocabulary member | `hasDocumentation` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1474 |
+| 1509 | `const.spdx_Core_RelationshipType_hasDynamicLink` | Fully-qualified vocabulary member | `hasDynamicLink` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1475 |
+| 1510 | `const.spdx_Core_RelationshipType_hasEvidence` | Fully-qualified vocabulary member | `hasEvidence` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1476 |
+| 1511 | `const.spdx_Core_RelationshipType_hasExample` | Fully-qualified vocabulary member | `hasExample` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1477 |
+| 1512 | `const.spdx_Core_RelationshipType_hasHost` | Fully-qualified vocabulary member | `hasHost` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1478 |
+| 1513 | `const.spdx_Core_RelationshipType_hasInput` | Fully-qualified vocabulary member | `hasInput` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1479 |
+| 1514 | `const.spdx_Core_RelationshipType_hasMetadata` | Fully-qualified vocabulary member | `hasMetadata` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1480 |
+| 1515 | `const.spdx_Core_RelationshipType_hasOptionalComponent` | Fully-qualified vocabulary member | `hasOptionalComponent` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1481 |
+| 1516 | `const.spdx_Core_RelationshipType_hasOptionalDependency` | Fully-qualified vocabulary member | `hasOptionalDependency` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1482 |
+| 1517 | `const.spdx_Core_RelationshipType_hasOutput` | Fully-qualified vocabulary member | `hasOutput` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1483 |
+| 1518 | `const.spdx_Core_RelationshipType_hasPrerequisite` | Fully-qualified vocabulary member | `hasPrerequisite` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1484 |
+| 1519 | `const.spdx_Core_RelationshipType_hasProvidedDependency` | Fully-qualified vocabulary member | `hasProvidedDependency` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1485 |
+| 1520 | `const.spdx_Core_RelationshipType_hasRequirement` | Fully-qualified vocabulary member | `hasRequirement` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1486 |
+| 1521 | `const.spdx_Core_RelationshipType_hasSpecification` | Fully-qualified vocabulary member | `hasSpecification` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1487 |
+| 1522 | `const.spdx_Core_RelationshipType_hasStaticLink` | Fully-qualified vocabulary member | `hasStaticLink` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1488 |
+| 1523 | `const.spdx_Core_RelationshipType_hasTest` | Fully-qualified vocabulary member | `hasTest` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1489 |
+| 1524 | `const.spdx_Core_RelationshipType_hasTestCase` | Fully-qualified vocabulary member | `hasTestCase` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1490 |
+| 1525 | `const.spdx_Core_RelationshipType_hasVariant` | Fully-qualified vocabulary member | `hasVariant` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1491 |
+| 1526 | `const.spdx_Core_RelationshipType_invokedBy` | Fully-qualified vocabulary member | `invokedBy` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1492 |
+| 1527 | `const.spdx_Core_RelationshipType_modifiedBy` | Fully-qualified vocabulary member | `modifiedBy` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1493 |
+| 1528 | `const.spdx_Core_RelationshipType_other` | Fully-qualified vocabulary member | `other` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1494 |
+| 1529 | `const.spdx_Core_RelationshipType_packagedBy` | Fully-qualified vocabulary member | `packagedBy` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1495 |
+| 1530 | `const.spdx_Core_RelationshipType_patchedBy` | Fully-qualified vocabulary member | `patchedBy` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1496 |
+| 1531 | `const.spdx_Core_RelationshipType_publishedBy` | Fully-qualified vocabulary member | `publishedBy` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1497 |
+| 1532 | `const.spdx_Core_RelationshipType_reportedBy` | Fully-qualified vocabulary member | `reportedBy` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1498 |
+| 1533 | `const.spdx_Core_RelationshipType_republishedBy` | Fully-qualified vocabulary member | `republishedBy` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1499 |
+| 1534 | `const.spdx_Core_RelationshipType_serializedInArtifact` | Fully-qualified vocabulary member | `serializedInArtifact` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1500 |
+| 1535 | `const.spdx_Core_RelationshipType_testedOn` | Fully-qualified vocabulary member | `testedOn` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1501 |
+| 1536 | `const.spdx_Core_RelationshipType_trainedOn` | Fully-qualified vocabulary member | `trainedOn` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1502 |
+| 1537 | `const.spdx_Core_RelationshipType_underInvestigationFor` | Fully-qualified vocabulary member | `underInvestigationFor` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1503 |
+| 1538 | `const.spdx_Core_RelationshipType_usesTool` | Fully-qualified vocabulary member | `usesTool` | `` | `model/Core/Vocabularies/RelationshipType.md` | CDDL-only or derived alias | `` | 1504 |
+| 1539 | `const.SpdxDocument` | Object/class term | `SpdxDocument` | `Concrete` | `model/Core/Classes/SpdxDocument.md` | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Core/SpdxDocument` | 1505 |
+| 1540 | `const.SupportType` | Vocabulary/type class | `SupportType` | `` | `model/Core/Vocabularies/SupportType.md` | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Core/SupportType` | 1506 |
+| 1541 | `const.spdx_Core_SupportType_deployed` | Fully-qualified vocabulary member | `deployed` | `` | `model/Core/Vocabularies/SupportType.md` | CDDL-only or derived alias | `` | 1507 |
+| 1542 | `const.spdx_Core_SupportType_development` | Fully-qualified vocabulary member | `development` | `` | `model/Core/Vocabularies/SupportType.md` | CDDL-only or derived alias | `` | 1508 |
+| 1543 | `const.spdx_Core_SupportType_endOfSupport` | Fully-qualified vocabulary member | `endOfSupport` | `` | `model/Core/Vocabularies/SupportType.md` | CDDL-only or derived alias | `` | 1509 |
+| 1544 | `const.spdx_Core_SupportType_limitedSupport` | Fully-qualified vocabulary member | `limitedSupport` | `` | `model/Core/Vocabularies/SupportType.md` | CDDL-only or derived alias | `` | 1510 |
+| 1545 | `const.spdx_Core_SupportType_noAssertion` | Fully-qualified vocabulary member | `noAssertion` | `` | `model/Core/Vocabularies/SupportType.md` | CDDL-only or derived alias | `` | 1511 |
+| 1546 | `const.spdx_Core_SupportType_noSupport` | Fully-qualified vocabulary member | `noSupport` | `` | `model/Core/Vocabularies/SupportType.md` | CDDL-only or derived alias | `` | 1512 |
+| 1547 | `const.spdx_Core_SupportType_support` | Fully-qualified vocabulary member | `support` | `` | `model/Core/Vocabularies/SupportType.md` | CDDL-only or derived alias | `` | 1513 |
+| 1548 | `const.Tool` | Object/class term | `Tool` | `Concrete` | `model/Core/Classes/Tool.md` | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Core/Tool` | 1514 |
+| 1549 | `const.Agent` | Object/class term | `Agent` | `Concrete` | `model/Core/Classes/Agent.md` | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Core/Agent` | 1515 |
+| 1550 | `const.Annotation` | Object/class term | `Annotation` | `Concrete` | `model/Core/Classes/Annotation.md` | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Core/Annotation` | 1516 |
+| 1551 | `const.review` | Local vocabulary member alias | `review` | `` | `ambiguous vocabulary entry: AnnotationType (model/Core/Vocabularies/AnnotationType.md), VerificationType (model/FunctionalSafety/Vocabularies/VerificationType.md)` | CDDL-only or derived alias | `` | 1517 |
+| 1552 | `const.development` | Local vocabulary member alias | `development` | `` | `ambiguous vocabulary entry: LifecycleScopeType (model/Core/Vocabularies/LifecycleScopeType.md), SupportType (model/Core/Vocabularies/SupportType.md)` | CDDL-only or derived alias | `` | 1518 |
+| 1553 | `const.endOfSupport` | Local vocabulary member alias | `endOfSupport` | `` | `model/Core/Vocabularies/SupportType.md` | CDDL-only or derived alias | `` | 1519 |
+| 1554 | `const.limitedSupport` | Local vocabulary member alias | `limitedSupport` | `` | `model/Core/Vocabularies/SupportType.md` | CDDL-only or derived alias | `` | 1520 |
+| 1555 | `const.noSupport` | Local vocabulary member alias | `noSupport` | `` | `model/Core/Vocabularies/SupportType.md` | CDDL-only or derived alias | `` | 1521 |
+| 1556 | `const.Bundle` | Object/class term | `Bundle` | `Concrete` | `model/Core/Classes/Bundle.md` | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Core/Bundle` | 1522 |
+| 1557 | `const.Hash` | Object/class term | `Hash` | `` | `model/Core/Classes/Hash.md` | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Core/Hash` | 1523 |
+| 1558 | `const.LifecycleScopedRelationship` | Object/class term | `LifecycleScopedRelationship` | `Concrete` | `model/Core/Classes/LifecycleScopedRelationship.md` | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Core/LifecycleScopedRelationship` | 1524 |
+| 1559 | `const.Organization` | Object/class term | `Organization` | `Concrete` | `model/Core/Classes/Organization.md` | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Core/Organization` | 1525 |
+| 1560 | `const.Person` | Object/class term | `Person` | `Concrete` | `model/Core/Classes/Person.md` | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Core/Person` | 1526 |
+| 1561 | `const.SoftwareAgent` | Object/class term | `SoftwareAgent` | `Concrete` | `model/Core/Classes/SoftwareAgent.md` | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Core/SoftwareAgent` | 1527 |
+| 1562 | `const.Bom` | Object/class term | `Bom` | `Concrete` | `model/Core/Classes/Bom.md` | JSON-LD string term | `https://spdx.org/rdf/3.0.1/terms/Core/Bom` | 1528 |
